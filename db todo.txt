@@ -1,0 +1,15 @@
+db:
+-script to create table
+-install/config db
+-choose db
+
+db model:
+-connect to db
+-create predefined scripts
+	-insert/update/delete meta-data
+	-insert/update/delete songs
+-wrapper methods over the scripts
+-the ability to pass custome sql to db
+-get song from meta-tag combinations
+
+plugin interface:
