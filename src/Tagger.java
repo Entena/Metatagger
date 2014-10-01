@@ -1,11 +1,12 @@
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+
+import beatit.BPM;
 
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
@@ -40,7 +41,8 @@ public class Tagger {
 	            buildList(file.listFiles()); // Calls same method again.
 	        } else {
 	            //System.out.println("File: " + file.getName());
-	            if(file.getName().contains(".mp3"));{
+	            if(file.getName().contains(".mp3") == true){
+	            	//System.out.println(file.getName());
 	            	music.add(file);
 	            }
 	        }
@@ -51,6 +53,7 @@ public class Tagger {
 		try {
 			Mp3File mp3file;
 			for(int i=0; i < music.size(); i++){
+				System.out.println(music.get(i).getAbsoluteFile().toString());
 				mp3file = new Mp3File(music.get(i).getAbsoluteFile().toString());
 				System.out.println("Length of this mp3 is: " + mp3file.getLengthInSeconds() + " seconds");
 				System.out.println("Bitrate: " + mp3file.getLengthInSeconds() + " kbps " + (mp3file.isVbr() ? "(VBR)" : "(CBR)"));
@@ -58,6 +61,7 @@ public class Tagger {
 				System.out.println("Has ID3v1 tag?: " + (mp3file.hasId3v1Tag() ? "YES" : "NO"));
 				System.out.println("Has ID3v2 tag?: " + (mp3file.hasId3v2Tag() ? "YES" : "NO"));
 				System.out.println("Has custom tag?: " + (mp3file.hasCustomTag() ? "YES" : "NO"));
+				System.out.println("BPM "+BPM.getBPM(music.get(i).getAbsoluteFile().toString()));
 			}
 		} catch (UnsupportedTagException | InvalidDataException | IOException e) {
 			// TODO Auto-generated catch block
