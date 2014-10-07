@@ -1,7 +1,7 @@
 Goal get song from meta tags
 
 Song Table:
-song-id, name, filepath
+song-id, name, filepath, album, artist, last played, play count
 
 Meta Table:
 meta-id, song-id, value
