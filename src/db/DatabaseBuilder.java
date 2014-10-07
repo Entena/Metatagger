@@ -3,6 +3,8 @@
  */
 package db;
 
+import java.sql.SQLException;
+
 /**
  * Helper class that will initialize the database during the first time running
  * the application.
@@ -27,8 +29,20 @@ public class DatabaseBuilder {
      * something went wrong.
      */
     public boolean buildDatabase(){
-        
-        return false;
+        String sql = "CREATE TABLE COMPANY " +
+                "(ID INT PRIMARY KEY     NOT NULL," +
+                " NAME           TEXT    NOT NULL, " + 
+                " AGE            INT     NOT NULL, " + 
+                " ADDRESS        CHAR(50), " + 
+                " SALARY         REAL)"; 
+        try {
+            dbConn.executeSQL(sql);
+        } catch (SQLException e) {
+            System.err.println("The database tables could not be created.");
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
     
     /**

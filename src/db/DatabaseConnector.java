@@ -17,5 +17,5 @@ public interface DatabaseConnector {
     public void closeDBConnection() throws SQLException;
     public Connection getDBConnection();
     
-    public int executeSQL(String sql);
+    public int executeSQL(String sql) throws SQLException;
 }

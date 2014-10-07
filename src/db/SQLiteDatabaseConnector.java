@@ -27,7 +27,7 @@ public class SQLiteDatabaseConnector implements DatabaseConnector {
     @Override
     /**
      * Opens a connection to the database. This requires that the database has
-     * already been created.
+     * already been created or that the db file can be created.
      */
     public void openDBConnection() throws SQLException {
         try {
@@ -54,15 +54,9 @@ public class SQLiteDatabaseConnector implements DatabaseConnector {
     }
 
     @Override
-    public int executeSQL(String sql) {
+    public int executeSQL(String sql) throws SQLException {
         Statement stmt = null;
         stmt = connection.createStatement();
-        String sql = "CREATE TABLE COMPANY " +
-            "(ID INT PRIMARY KEY     NOT NULL," +
-            " NAME           TEXT    NOT NULL, " + 
-            " AGE            INT     NOT NULL, " + 
-            " ADDRESS        CHAR(50), " + 
-            " SALARY         REAL)"; 
         stmt.executeUpdate(sql);
         stmt.close();
         // TODO Auto-generated method stub
