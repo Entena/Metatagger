@@ -6,7 +6,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		int count = 0;//Set our counter
-		if(args.length < 1){
+		Tagger t = new Tagger(args[0]);
+		/*if(args.length < 1){
 			//No parameters is this a problem?
 		}
 		while(count < args.length){//While we have not reached the end of our arguments keep going.
@@ -34,7 +35,7 @@ public class Main {
 					System.exit(-1);					
 				break;
 			}
-		}
+		}*/
 	}
 
 }
