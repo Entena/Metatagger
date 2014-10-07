@@ -3,6 +3,7 @@
  */
 package db;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -29,12 +30,14 @@ public class DatabaseBuilder {
      * something went wrong.
      */
     public boolean buildDatabase(){
-        String sql = "CREATE TABLE COMPANY " +
-                "(ID INT PRIMARY KEY     NOT NULL," +
-                " NAME           TEXT    NOT NULL, " + 
-                " AGE            INT     NOT NULL, " + 
-                " ADDRESS        CHAR(50), " + 
-                " SALARY         REAL)"; 
+        String sql = "";
+        try {
+            sql = DatabaseHelper.SQLFromFile(DatabaseHelper.SQL_FOLDER_PATH + "create_db.sql");
+        } catch (IOException e) {
+            System.err.println("Could not load the sql script to build the database tables. Make sure that the files are accecible.");
+            e.printStackTrace();
+            return false;
+        } 
         try {
             dbConn.executeSQL(sql);
         } catch (SQLException e) {
