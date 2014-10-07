@@ -1,5 +1,8 @@
 package db;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  * This is a basic interface that all database connector classes will implement.
  * The idea is that we will create a simple abstraction layer over the db so that
@@ -9,5 +12,10 @@ package db;
  *
  */
 public interface DatabaseConnector {
-    public void getDBConnection();
+    
+    public void openDBConnection() throws SQLException;
+    public void closeDBConnection() throws SQLException;
+    public Connection getDBConnection();
+    
+    public int executeSQL(String sql);
 }

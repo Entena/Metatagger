@@ -3,12 +3,20 @@
  */
 package db;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  * @author Tim Eck
  *
  */
 public class SQLiteDatabaseConnector implements DatabaseConnector {
 
+    Connection connection = null;
+    String dbName = "test.db";
+    
     /**
      * 
      */
@@ -16,13 +24,49 @@ public class SQLiteDatabaseConnector implements DatabaseConnector {
         // TODO Auto-generated constructor stub
     }
 
+    @Override
+    /**
+     * Opens a connection to the database. This requires that the database has
+     * already been created.
+     */
+    public void openDBConnection() throws SQLException {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Could not load the SQLite driver. Please make sure that the build path is properly configured.");
+            e.printStackTrace();
+            System.exit(100);
+        }
+        connection = DriverManager.getConnection("jdbc:sqlite:" + dbName);
+    }
+
+    @Override
+    public void closeDBConnection() throws SQLException {
+        connection.close();
+    }
+    
     /* (non-Javadoc)
      * @see db.DatabaseConnector#getDBConnection()
      */
     @Override
-    public void getDBConnection() {
-        // TODO Auto-generated method stub
+    public Connection getDBConnection() {
+        return connection;
+    }
 
+    @Override
+    public int executeSQL(String sql) {
+        Statement stmt = null;
+        stmt = connection.createStatement();
+        String sql = "CREATE TABLE COMPANY " +
+            "(ID INT PRIMARY KEY     NOT NULL," +
+            " NAME           TEXT    NOT NULL, " + 
+            " AGE            INT     NOT NULL, " + 
+            " ADDRESS        CHAR(50), " + 
+            " SALARY         REAL)"; 
+        stmt.executeUpdate(sql);
+        stmt.close();
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }
