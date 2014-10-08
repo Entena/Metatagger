@@ -32,7 +32,13 @@ public class DatabaseHelper {
     public static final String LAST_PLAYED_COLUMN = "LAST_PLAYED";
     public static final String PLAY_COUNT = "PLAY_COUNT";
     
-    
+    /*
+     * MetaData table columns
+     */
+    public static final String META_DATA_TABLE = "MetaData";
+    public static final String META_ID_COLUMN = "META_ID";
+    public static final String SONG_ID_FORIEGN_KEY_COLUMN = "SONG_ID";
+    public static final String META_VALUE_COLUMN = "META_VALUE";
     
     public DatabaseHelper() { }
 
