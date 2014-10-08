@@ -62,6 +62,8 @@ public class DatabaseModel {
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
             stmt.execute(completedSQL);
+            stmt.execute("SELECT last_insert_rowid()");
+            System.out.println(stmt.getResultSet().getMetaData().getColumnName(0));
             stmt.close();
         } catch (SQLException e) {
             System.err.println("Could not insert the song into the database.");
@@ -70,5 +72,8 @@ public class DatabaseModel {
         }
         return true;
     }
-
+    
+    public boolean addMetaData( String songId, String metaTag, String value){
+        return false;
+    }
 }
