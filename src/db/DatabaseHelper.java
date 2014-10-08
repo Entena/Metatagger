@@ -20,6 +20,20 @@ public class DatabaseHelper {
      */
     public static final String SQL_FOLDER_PATH = "db/sql/";
     
+    /*
+     * Songs table columns 
+     */
+    public static final String SONGS_TABLE = "Songs";
+    public static final String SONG_ID_COLUMN = "SONG_ID";
+    public static final String NAME_COLUMN = "NAME";
+    public static final String FILEPATH_COLUMN = "FILEPATH";
+    public static final String ALBUM_COLUMN = "ALBUM";
+    public static final String ARTIST_COLUMN = "ARTIST";
+    public static final String LAST_PLAYED_COLUMN = "LAST_PLAYED";
+    public static final String PLAY_COUNT = "PLAY_COUNT";
+    
+    
+    
     public DatabaseHelper() { }
 
     /**
