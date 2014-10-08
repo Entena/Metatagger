@@ -5,6 +5,7 @@ package db;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Helper class that will initialize the database during the first time running
@@ -34,12 +35,14 @@ public class DatabaseBuilder {
         try {
             sql = DatabaseHelper.SQLFromFile(DatabaseHelper.SQL_FOLDER_PATH + "create_db.sql");
         } catch (IOException e) {
-            System.err.println("Could not load the sql script to build the database tables. Make sure that the files are accessible.");
+            System.err.println("Could not load the sql script to build the database tables. Make sure that the sql files are accessible.");
             e.printStackTrace();
             return false;
         } 
         try {
-            dbConn.executeSQL(sql);
+            Statement stmt = dbConn.getDBConnection().createStatement();
+            stmt.execute(sql);
+            stmt.close();
         } catch (SQLException e) {
             System.err.println("The database tables could not be created.");
             e.printStackTrace();
@@ -58,12 +61,14 @@ public class DatabaseBuilder {
         try {
             sql = DatabaseHelper.SQLFromFile(DatabaseHelper.SQL_FOLDER_PATH + "drop_tables.sql");
         } catch (IOException e) {
-            System.err.println("Could not load the sql script to drop the database tables. Make sure that the files are accessible.");
+            System.err.println("Could not load the sql script to drop the database tables. Make sure that the sql files are accessible.");
             e.printStackTrace();
             return false;
         } 
         try {
-            dbConn.executeSQL(sql);
+            Statement stmt = dbConn.getDBConnection().createStatement();
+            stmt.execute(sql);
+            stmt.close();
         } catch (SQLException e) {
             System.err.println("The database tables could not be dropped.");
             e.printStackTrace();

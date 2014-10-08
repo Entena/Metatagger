@@ -5,6 +5,7 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -51,16 +52,6 @@ public class SQLiteDatabaseConnector implements DatabaseConnector {
     @Override
     public Connection getDBConnection() {
         return connection;
-    }
-
-    @Override
-    public int executeSQL(String sql) throws SQLException {
-        Statement stmt = null;
-        stmt = connection.createStatement();
-        stmt.executeUpdate(sql);
-        stmt.close();
-        // TODO Auto-generated method stub
-        return 0;
     }
 
 }

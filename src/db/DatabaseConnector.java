@@ -1,6 +1,7 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -16,6 +17,4 @@ public interface DatabaseConnector {
     public void openDBConnection() throws SQLException;
     public void closeDBConnection() throws SQLException;
     public Connection getDBConnection();
-    
-    public int executeSQL(String sql) throws SQLException;
 }
