@@ -5,7 +5,7 @@
 	<classpathentry kind="lib" path="lib/sqlite-jdbc4-3.8.2-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/mp3agic-0.8.3-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/BPM.jar"/>
-	<classpathentry kind="lib" path="lib/jl1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/JavaMediaPlayer.jar"/>
+	<classpathentry kind="lib" path="lib/JLayer1.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

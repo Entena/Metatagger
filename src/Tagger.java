@@ -6,11 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-/*import beatit.BPM;
+import beatit.BPM;
 
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;*/
+import com.mpatric.mp3agic.UnsupportedTagException;
 
 
 public class Tagger {
