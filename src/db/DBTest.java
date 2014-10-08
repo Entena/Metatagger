@@ -1,5 +1,7 @@
 package db;
 
+
+
 public class DBTest {
 
     private static boolean failed = false;
@@ -10,6 +12,7 @@ public class DBTest {
      */
     public static void main(String[] args) {
         System.out.println("Starting DB Tests...");
+        System.out.println(System.getProperty("user.dir"));
         runTests();
         System.out.println("Fnished running DB Tests...");
         
