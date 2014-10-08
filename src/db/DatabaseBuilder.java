@@ -34,7 +34,7 @@ public class DatabaseBuilder {
         try {
             sql = DatabaseHelper.SQLFromFile(DatabaseHelper.SQL_FOLDER_PATH + "create_db.sql");
         } catch (IOException e) {
-            System.err.println("Could not load the sql script to build the database tables. Make sure that the files are accecible.");
+            System.err.println("Could not load the sql script to build the database tables. Make sure that the files are accessible.");
             e.printStackTrace();
             return false;
         } 
@@ -54,7 +54,22 @@ public class DatabaseBuilder {
      * something went wrong.
      */
     public boolean destroyDatabase(){
-        return false;
+        String sql = "";
+        try {
+            sql = DatabaseHelper.SQLFromFile(DatabaseHelper.SQL_FOLDER_PATH + "drop_tables.sql");
+        } catch (IOException e) {
+            System.err.println("Could not load the sql script to drop the database tables. Make sure that the files are accessible.");
+            e.printStackTrace();
+            return false;
+        } 
+        try {
+            dbConn.executeSQL(sql);
+        } catch (SQLException e) {
+            System.err.println("The database tables could not be dropped.");
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
 }
