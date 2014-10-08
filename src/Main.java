@@ -5,7 +5,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int count = 0;//Set our counter
+		//int count = 0;//Set our counter
 		new Gui();
 		//Tagger t = new Tagger(args[0]);
 		/*if(args.length < 1){

@@ -37,7 +37,7 @@ public class Gui extends JFrame{
 		
 		
 		//top will display list of songs, bottom will be current playlist
-		JSplitPane leftSide = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, songList, playlist);
+		JSplitPane leftSide = new JSplitPane(JSplitPane.VERTICAL_SPLIT, songList, playlist);
 		
 		//right side will hold playback controls (buttons, sliders, etc)
 		JPanel rightSide = new JPanel();
@@ -66,7 +66,7 @@ public class Gui extends JFrame{
 		rightSide.add(volume);
 		
 		//left side of split pane will display song list, right side will provide controls/current info
-		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, leftSide, rightSide);
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftSide, rightSide);
 		getContentPane().add(splitPane);
 		pack();
 		setVisible(true);
