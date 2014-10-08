@@ -3,6 +3,9 @@ package db;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Hashtable;
 
 /**
  * Helper class that has common functions to help with db operations.
@@ -36,4 +39,42 @@ public class DatabaseHelper {
         return sb.toString();
     }
     
+    /**
+     * Helper function to build a complete sql statement from a templated sql
+     * statement. The complete sql statement will be build by replacing keys in
+     * the sql with values specified in the parameters hashmap.<br/> 
+     * 
+     * A sql template will look like this: <br/>
+     * SELECT *column_name* FROM SomeTable WHERE id=*specified_id*;<br/>
+     * Then the parameters hashmap will look something like this:<br/>
+     * keys:value<br/>
+     * column_name:name<br/>
+     * specified_id:1<br/>
+     * 
+     * @param sqlTemplate
+     * @param parameters
+     * @return
+     */
+    public static String SQLBuilder(String sqlTemplate, HashMap<String, String> parameters){
+        StringBuilder sb = new StringBuilder(sqlTemplate);
+        
+        // Loop over ever key in the parameters hash map
+        for(String key : parameters.keySet()){
+            String value = parameters.get(key);
+            
+            // The keys in the sql will be formated *key*. And so that is what
+            // we need to search in the sql by.
+            String realKey = "*" + key + "*";
+            int keyLength = realKey.length();
+            
+            int startLocation = 0;
+            // Keep searching the sql until we there are no more keys for use to
+            // replace with their value.
+            while( (startLocation = sb.indexOf(realKey)) != -1){
+                sb.replace(startLocation, keyLength, value);
+            }
+        }
+        
+        return sb.toString();
+    }
 }
