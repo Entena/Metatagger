@@ -77,6 +77,14 @@ public class DBTest {
             return;
         }
         
+        System.out.println("Deleting song...");
+        result = dbModel.deleteSong(songId);
+        if(!result){
+            reason = "The song was not removed from the database";
+            failed = true;
+            return;
+        }
+        
         
         System.out.println("Destroying the database...");
         if(dbBuilder.destroyDatabase()){

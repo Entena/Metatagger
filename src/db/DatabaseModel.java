@@ -16,8 +16,9 @@ public class DatabaseModel {
 
     private DatabaseConnector dbConn;
     
-    private String insertSQLTemplate = "";
-    private String updateSQLTemplate = "";
+    private String insertSongSQLTemplate = "";
+    private String updateSongSQLTemplate = "";
+    private String deleteSongSQLTemplate = "";
     
     /**
      * 
@@ -27,8 +28,16 @@ public class DatabaseModel {
         
         // Load the insert sql template file
         try {
-            insertSQLTemplate = DatabaseHelper.SQLFromFile(DatabaseHelper.SQL_FOLDER_PATH + "insert_song_template.sql");
-            updateSQLTemplate = DatabaseHelper.SQLFromFile(DatabaseHelper.SQL_FOLDER_PATH + "update_song_template.sql");
+            insertSongSQLTemplate = DatabaseHelper.SQLFromFile(
+                                                DatabaseHelper.SQL_FOLDER_PATH +
+                                                "insert_song_template.sql");
+            updateSongSQLTemplate = DatabaseHelper.SQLFromFile(
+                                                DatabaseHelper.SQL_FOLDER_PATH +
+                                                "update_song_template.sql");
+            deleteSongSQLTemplate = DatabaseHelper.SQLFromFile(
+                                                DatabaseHelper.SQL_FOLDER_PATH +
+                                                "delete_song_template.sql");
+            
         } catch (IOException e) {
             System.err.println("Could not load the sql template files. Make sure that the sql files are accessible.");
             e.printStackTrace();
@@ -59,7 +68,8 @@ public class DatabaseModel {
         params.put("lastplayed", Integer.toString(lastPlayed));
         params.put("playcount", Integer.toString(playCount));
         
-        String completedSQL = DatabaseHelper.SQLBuilder(insertSQLTemplate, params);
+        String completedSQL = DatabaseHelper.SQLBuilder(insertSongSQLTemplate,
+                                                        params);
         int songId = -1;
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
@@ -88,13 +98,34 @@ public class DatabaseModel {
         params.put("playcount", Integer.toString(playCount));
         params.put("songid", Integer.toString(songId));
         
-        String completedSQL = DatabaseHelper.SQLBuilder(updateSQLTemplate, params);
+        String completedSQL = DatabaseHelper.SQLBuilder(updateSongSQLTemplate,
+                                                        params);
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
             stmt.execute(completedSQL);
             stmt.close();
         } catch (SQLException e) {
             System.err.println("Could not update the song in the database.");
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    public boolean deleteSong(int songId){
+        
+        // Build the parameters table for the template
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("songid", Integer.toString(songId));
+        
+        String completedSQL = DatabaseHelper.SQLBuilder(deleteSongSQLTemplate,
+                                                        params);
+        try {
+            Statement stmt = dbConn.getDBConnection().createStatement();
+            stmt.execute(completedSQL);
+            stmt.close();
+        } catch (SQLException e) {
+            System.err.println("Could not delete the song in the database.");
             e.printStackTrace();
             return false;
         }
