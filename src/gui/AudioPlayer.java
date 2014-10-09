@@ -1,7 +1,5 @@
 package gui;
 
-import java.io.File;
-
 import maryb.player.*;
 
 
@@ -65,6 +63,7 @@ public class AudioPlayer implements PlayerEventListener {
 	 */
 	public void setVolume(int i) {
 		player.setCurrentVolume(((float) i)/100f);
+		System.out.println(player.getCurrentVolume());
 	}
 
 	/**

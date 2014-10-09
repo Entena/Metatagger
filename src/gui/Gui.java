@@ -36,12 +36,12 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	public Gui() {
 		super("Metatagger");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		player = new AudioPlayer();
 		chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				"MP3 Files", "mp3");
 		chooser.setFileFilter(filter);
-		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		//chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		
 		//building left side of display
 		String[] columnNames = {"Song", "Artist", "Album"};
@@ -117,7 +117,8 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (chooser.showDialog(null, "Select Folder") == JFileChooser.APPROVE_OPTION) {
-					addFiles(chooser.getCurrentDirectory());
+					player.loadFile(chooser.getSelectedFile().getAbsolutePath());
+					//addFiles(chooser.getCurrentDirectory());
 				}
 			}
 		});
@@ -135,6 +136,7 @@ public class Gui extends JFrame implements Mp3PositionListener {
 
 	private void playPressed() {
 		System.out.println("play");
+		player.play();
 	}
 
 	private void ffPressed() {
@@ -158,7 +160,7 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	}
 
 	private void volChange(int i) {
-		System.out.println(i);
+		player.setVolume(i);
 	}
 
 	private String getNextSong() {
