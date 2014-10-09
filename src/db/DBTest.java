@@ -27,7 +27,8 @@ public class DBTest {
         } else {
             System.out.println("Congradulations! All the tests have passed.");
         }
-        new File(dbFile).delete();
+        File file = new File(dbFile);
+        file.delete();
     }
     
     public static void runTests(){

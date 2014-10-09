@@ -58,19 +58,18 @@ public class DatabaseModel {
         params.put("playcount", Integer.toString(playCount));
         
         String completedSQL = DatabaseHelper.SQLBuilder(insertSQLTemplate, params);
-        
+        int songId = -1;
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
             stmt.execute(completedSQL);
             stmt.execute("SELECT last_insert_rowid()");
-            System.out.println(stmt.getResultSet().getMetaData().getColumnName(0));
+            songId = stmt.getResultSet().getInt(1);
             stmt.close();
         } catch (SQLException e) {
             System.err.println("Could not insert the song into the database.");
             e.printStackTrace();
-            return -1;
         }
-        return -1;
+        return songId;
     }
     
     public boolean addMetaData( String songId, String metaTag, String value){

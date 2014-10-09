@@ -91,10 +91,9 @@ public class DatabaseHelper {
             // Keep searching the sql until we there are no more keys for use to
             // replace with their value.
             while( (startLocation = sb.indexOf(realKey)) != -1){
-                sb.replace(startLocation, keyLength, value);
+                sb.replace(startLocation, startLocation + keyLength, value);
             }
         }
-        
         return sb.toString();
     }
 }
