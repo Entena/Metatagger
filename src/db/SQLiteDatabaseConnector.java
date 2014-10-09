@@ -15,14 +15,18 @@ import java.sql.Statement;
  */
 public class SQLiteDatabaseConnector implements DatabaseConnector {
 
-    Connection connection = null;
-    String dbName = "test.db";
+    private Connection connection = null;
+    private String dbName;
     
     /**
      * 
      */
     public SQLiteDatabaseConnector() {
-        // TODO Auto-generated constructor stub
+        this("metatagger.db");
+    }
+    
+    public SQLiteDatabaseConnector(String dbName){
+        this.dbName = dbName;
     }
 
     @Override

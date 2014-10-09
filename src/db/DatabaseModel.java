@@ -42,10 +42,10 @@ public class DatabaseModel {
      * @param artist
      * @param lastPlayed
      * @param playCount
-     * @return true if the song was successfully inserted into the db or false
-     * if there was some error.
+     * @return the song id for the song that was just inserted or -1 if there
+     * was some error.
      */
-    public boolean insertSong( String name, String filepath, String album,
+    public int insertSong( String name, String filepath, String album,
                             String artist, int lastPlayed, int playCount){
         
         // Build the parameters table for the template
@@ -68,9 +68,9 @@ public class DatabaseModel {
         } catch (SQLException e) {
             System.err.println("Could not insert the song into the database.");
             e.printStackTrace();
-            return false;
+            return -1;
         }
-        return true;
+        return -1;
     }
     
     public boolean addMetaData( String songId, String metaTag, String value){
