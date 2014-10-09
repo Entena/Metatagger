@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
@@ -11,3 +12,16 @@
 	<classpathentry kind="lib" path="/home/chesire/git/Metatagger/lib/tritonus_share.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="lib/sqlite-jdbc4-3.8.2-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/mp3agic-0.8.3-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/BPM.jar"/>
+	<classpathentry kind="lib" path="lib/JavaMediaPlayer.jar"/>
+	<classpathentry kind="lib" path="lib/JLayer1.0.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
+>>>>>>> branch 'master' of https://github.com/Entena/Metatagger.git

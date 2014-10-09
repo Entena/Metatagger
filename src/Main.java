@@ -1,3 +1,5 @@
+import gui.Gui;
+
 
 public class Main {
 
@@ -5,8 +7,9 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int count = 0;//Set our counter
-		Tagger t = new Tagger(args[0]);
+		//int count = 0;//Set our counter
+		new Gui();
+		//Tagger t = new Tagger(args[0]);
 		/*if(args.length < 1){
 			//No parameters is this a problem?
 		}

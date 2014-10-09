@@ -1,0 +1,7 @@
+db model:
+-create predefined scripts
+	-insert/update/delete meta-data
+-wrapper methods over the scripts
+-get song from meta-tag combinations
+
+plugin interface:
