@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import beatit.BPM;
 
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.ID3v24Tag;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -62,6 +64,8 @@ public class Tagger {
 				System.out.println("Has ID3v2 tag?: " + (mp3file.hasId3v2Tag() ? "YES" : "NO"));
 				System.out.println("Has custom tag?: " + (mp3file.hasCustomTag() ? "YES" : "NO"));
 				System.out.println("BPM "+BPM.getBPM(music.get(i).getAbsoluteFile().toString()));
+				ID3v2 id3 = new ID3v24Tag();
+			
 			}
 		} catch (UnsupportedTagException | InvalidDataException | IOException e) {
 			// TODO Auto-generated catch block
