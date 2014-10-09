@@ -54,6 +54,7 @@ public class DatabaseHelper {
         String line;
         while((line = reader.readLine()) != null){
             sb.append(line);
+            sb.append(' ');
         }
         reader.close();
         return sb.toString();

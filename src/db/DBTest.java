@@ -15,8 +15,11 @@ public class DBTest {
      * @param args
      */
     public static void main(String[] args) {
+        File file = new File(dbFile);
+        if(file.exists())
+            file.delete();
+        
         System.out.println("Starting DB Tests...");
-        System.out.println(System.getProperty("user.dir"));
         runTests();
         System.out.println("Fnished running DB Tests...");
         
@@ -27,7 +30,7 @@ public class DBTest {
         } else {
             System.out.println("Congradulations! All the tests have passed.");
         }
-        File file = new File(dbFile);
+        
         file.delete();
     }
     
@@ -65,6 +68,14 @@ public class DBTest {
             return;
         }
         
+        System.out.println("Updating song...");
+        boolean result = dbModel.updateSong( songId, "foobar", "sdf/", "dsf",
+                                             "dfs", 1111, 11);
+        if(!result){
+            reason = "The song was not update in the database";
+            failed = true;
+            return;
+        }
         
         
         System.out.println("Destroying the database...");
