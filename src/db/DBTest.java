@@ -47,13 +47,13 @@ import java.sql.Statement;
  * Now you can use that object to do something, like say insert a song into the
  * database. In order to do that do the following:
  * <pre>
- int songId = dbModel.insertSong("Eye of the Tiger",
-                                 "c:/users/me/music/eye_of_the_tiger.mp3",
-                                 "Single Release", "Survivor", 1111, 10);
+ DBSong song = dbModel.insertSong("Eye of the Tiger",
+                                  "c:/users/me/music/eye_of_the_tiger.mp3",
+                                  "Single Release", "Survivor", 1111, 10);
  * </pre>
  * 
  * Now the from Eye of the Tiger is inserted into the database. The function
- * returns the songId. This value will be used in most other song related
+ * returns a song object. This object will be used in most other song related
  * functions to refer to the song in the database. Look at the docs for the
  * various DatabaseModel functions to figure out what else that you can do.<br/>
  * <br/>
@@ -82,9 +82,9 @@ import java.sql.Statement;
   DatabaseBuilder dbBuilder = new DatabaseBuilder(dbConn);
   dbBuilder.buildDatabase();
   
-  int songId = dbModel.insertSong("Eye of the Tiger",
-                                 "c:/users/me/music/eye_of_the_tiger.mp3",
-                                 "Single Release", "Survivor", 1111, 10);
+  DBSong song = dbModel.insertSong("Eye of the Tiger",
+                                   "c:/users/me/music/eye_of_the_tiger.mp3",
+                                   "Single Release", "Survivor", 1111, 10);
                                  
   try {
       dbConn.closeDBConnection();
@@ -160,25 +160,25 @@ public class DBTest {
         
         System.out.println("Inserting song...");
         DatabaseModel dbModel = new DatabaseModel(dbConn);
-        int songId = dbModel.insertSong("foobar", "sdf/", "dsf",
-                                        "dfs", 1111, 10);
-        if(!(songId >= 0)){
+        DBSong song = dbModel.insertSong("foobar", "sdf/", "dsf",
+                                         "dfs", 1111, 10);
+        if(song == null){
             reason = "The song was not inserted into the database";
             failed = true;
             return;
         }
         
         System.out.println("Updating song...");
-        boolean result = dbModel.updateSong( songId, "foobar", "sdf/", "dsf",
-                                             "dfs", 1111, 11);
-        if(!result){
+        song.setPlayCount(11);
+        boolean result = dbModel.updateSong(song);
+        if(!result || song.isDirty()){
             reason = "The song was not update in the database";
             failed = true;
             return;
         }
         
         System.out.println("Deleting song...");
-        result = dbModel.deleteSong(songId);
+        result = dbModel.deleteSong(song.getSongId());
         if(!result){
             reason = "The song was not removed from the database";
             failed = true;

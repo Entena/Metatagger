@@ -53,11 +53,10 @@ public class DatabaseModel {
      * @param artist
      * @param lastPlayed
      * @param playCount
-     * @return the song id for the song that was just inserted or -1 if there
-     * was some error.
+     * @return the song object or null.
      */
-    public int insertSong( String name, String filepath, String album,
-                            String artist, int lastPlayed, int playCount){
+    public DBSong insertSong( String name, String filepath, String album,
+                              String artist, int lastPlayed, int playCount){
         
         // Build the parameters table for the template
         HashMap<String, String> params = new HashMap<String, String>();
@@ -70,40 +69,29 @@ public class DatabaseModel {
         
         String completedSQL = DatabaseHelper.SQLBuilder(insertSongSQLTemplate,
                                                         params);
-        int songId = -1;
+        DBSong song = null;
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
             stmt.execute(completedSQL);
             stmt.execute("SELECT last_insert_rowid()");
-            songId = stmt.getResultSet().getInt(1);
+            song = new DBSong( stmt.getResultSet().getInt(1), name, filepath,
+                               album, artist, lastPlayed, playCount);
             stmt.close();
         } catch (SQLException e) {
             System.err.println("Could not insert the song into the database.");
             e.printStackTrace();
         }
-        return songId;
+        return song;
     }
     
-    public boolean updateSong( int songId, String name, String filepath,
-                               String album, String artist, int lastPlayed,
-                               int playCount){
-        
-        // Build the parameters table for the template
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("name", '\'' + name + '\'');
-        params.put("filepath",  '\'' + filepath + '\'');
-        params.put("album",  '\'' + album + '\'');
-        params.put("artist",  '\'' + artist + '\'');
-        params.put("lastplayed", Integer.toString(lastPlayed));
-        params.put("playcount", Integer.toString(playCount));
-        params.put("songid", Integer.toString(songId));
-        
+    public boolean updateSong(DBSong song){
         String completedSQL = DatabaseHelper.SQLBuilder(updateSongSQLTemplate,
-                                                        params);
+                                                        song.getSongParams());
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
             stmt.execute(completedSQL);
             stmt.close();
+            song.markClean();
         } catch (SQLException e) {
             System.err.println("Could not update the song in the database.");
             e.printStackTrace();
