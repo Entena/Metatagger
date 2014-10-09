@@ -4,7 +4,7 @@ CREATE TABLE Songs
  FILEPATH       TEXT              NOT NULL,
  ALBUM          CHARACTER(50),
  ARTIST         CHARACTER(50),
- LAST_PLAYED    DATE              DEFAULT GETDATE(),
+ LAST_PLAYED    INTEGER           DEFAULT 0,
  PLAY_COUNT     INTEGER           DEFAULT 0);
  
  CREATE TABLE MetaData
