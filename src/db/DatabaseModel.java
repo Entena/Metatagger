@@ -84,6 +84,13 @@ public class DatabaseModel {
         return song;
     }
     
+    /**
+     * Given a DBSong, updates it corresponding record in the database.
+     * Afterwards the song.isDirty() should return false if the operation was
+     * successful
+     * @param song The song with updated fields to be synced up in the db
+     * @return true if the song was successfully updated, false otherwise
+     */
     public boolean updateSong(DBSong song){
         String completedSQL = DatabaseHelper.SQLBuilder(updateSongSQLTemplate,
                                                         song.getSongParams());
@@ -100,6 +107,12 @@ public class DatabaseModel {
         return true;
     }
     
+    /**
+     * Given a song's id, deletes it and it's meta data from the db
+     * @param songId The id of the song to remove
+     * @return true is the song and it's meta data were removed, false
+     * otherwise.
+     */
     public boolean deleteSong(int songId){
         
         // Build the parameters table for the template
