@@ -18,7 +18,7 @@ public class DatabaseHelper {
     /**
      * Relative folder path to the folder that contains the sql scripts.
      */
-    public static final String SQL_FOLDER_PATH = "db/sql/";
+    public static final String SQL_FOLDER_PATH = "sql/";
     
     /*
      * Songs table columns 

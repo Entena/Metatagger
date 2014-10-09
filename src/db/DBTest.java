@@ -1,5 +1,7 @@
 package db;
 
+import java.sql.SQLException;
+
 
 
 public class DBTest {
@@ -26,9 +28,17 @@ public class DBTest {
     }
     
     public static void runTests(){
-        System.out.println("Creating sqlite db connector...");
+        System.out.println("Creating and opening sqlite db connector...");
         DatabaseConnector dbConn = new SQLiteDatabaseConnector();
-        System.out.println("Created sqlite db connector...");
+        try {
+            dbConn.openDBConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            reason = "Could not open the connector";
+            failed = true;
+            return;
+        }
+        System.out.println("Sqlite db connector ready to use...");
 
         System.out.println("Building db tables...");
         DatabaseBuilder dbBuilder = new DatabaseBuilder(dbConn);
@@ -45,6 +55,15 @@ public class DBTest {
             System.out.println("DB has been destroyed...");
         } else {
             reason = "Could not destroy the database";
+            failed = true;
+            return;
+        }
+        
+        try {
+            dbConn.closeDBConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            reason = "Could not close the connector";
             failed = true;
             return;
         }
