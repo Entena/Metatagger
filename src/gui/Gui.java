@@ -2,10 +2,15 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.KeyEvent;
+import java.io.File;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
@@ -13,22 +18,31 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 
-public class Gui extends JFrame{
+public class Gui extends JFrame implements Mp3PositionListener {
+	private static final long MICRO = 1000000;
 	private DefaultTableModel songsModel;
 	private DefaultTableModel playlistModel;
 	private JSlider volume;
 	private JSlider seekbar;
 	private JButton playButton, pauseButton, stopButton, ffButton, rwndButton;
-	private Player player;
+	private AudioPlayer player;
+	private JFileChooser chooser;
 
 
 	public Gui() {
 		super("Metatagger");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
+		chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(
+				"MP3 Files", "mp3");
+		chooser.setFileFilter(filter);
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		
 		//building left side of display
 		String[] columnNames = {"Song", "Artist", "Album"};
 
@@ -91,9 +105,32 @@ public class Gui extends JFrame{
 
 		//left side of split pane will display song list, right side will provide controls/current info
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftSide, rightSide);
+		
 		getContentPane().add(splitPane);
+
+		//creating the menu bar
+		JMenuBar menuBar = new JMenuBar();
+		JMenu menu = new JMenu("File");
+		menu.setMnemonic(KeyEvent.VK_F);
+		menuBar.add(menu);
+		JMenuItem menuItem = new JMenuItem("Add Folder");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (chooser.showDialog(null, "Select Folder") == JFileChooser.APPROVE_OPTION) {
+					addFiles(chooser.getCurrentDirectory());
+				}
+			}
+		});
+		menu.add(menuItem);
+
+		setJMenuBar(menuBar);
+		
 		pack();
 		setVisible(true);
+	}
+
+	private void addFiles(File directory) {
+		
 	}
 
 	private void playPressed() {
@@ -123,4 +160,20 @@ public class Gui extends JFrame{
 	private void volChange(int i) {
 		System.out.println(i);
 	}
+
+	private String getNextSong() {
+		return null;
+	}
+
+	@Override
+	public void updateSeektime(long pos) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void songFinished() {
+		player.loadFile(getNextSong());
+	}
+
 }
