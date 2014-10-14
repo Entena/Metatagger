@@ -1,9 +1,11 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -31,18 +33,20 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	private JButton playButton, pauseButton, stopButton, ffButton, rwndButton;
 	private AudioPlayer player;
 	private JFileChooser chooser;
+	private File currentSong;
 
 
 	public Gui() {
 		super("Metatagger");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		player = new AudioPlayer();
-		chooser = new JFileChooser();
+		chooser = new JFileChooser("C:\\Users\\Shayan\\Music\\iTunes\\iTunes Media\\Music\\");
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				"MP3 Files", "mp3");
 		chooser.setFileFilter(filter);
-		//chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		
+		//chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
 		//building left side of display
 		String[] columnNames = {"Song", "Artist", "Album"};
 
@@ -56,6 +60,7 @@ public class Gui extends JFrame implements Mp3PositionListener {
 
 		//top will display list of songs, bottom will be current playlist
 		JSplitPane leftSide = new JSplitPane(JSplitPane.VERTICAL_SPLIT, songList, playlist);
+		leftSide.setDividerLocation(400);
 
 		//right side will hold playback controls (buttons, sliders, etc)
 		JPanel rightSide = new JPanel();
@@ -105,7 +110,8 @@ public class Gui extends JFrame implements Mp3PositionListener {
 
 		//left side of split pane will display song list, right side will provide controls/current info
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftSide, rightSide);
-		
+		splitPane.setDividerLocation(700);
+
 		getContentPane().add(splitPane);
 
 		//creating the menu bar
@@ -117,21 +123,37 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (chooser.showDialog(null, "Select Folder") == JFileChooser.APPROVE_OPTION) {
-					player.loadFile(chooser.getSelectedFile().getAbsolutePath());
-					//addFiles(chooser.getCurrentDirectory());
+					//player.loadFile(chooser.getSelectedFile().getAbsolutePath());
+					System.out.println("adding directory " + chooser.getCurrentDirectory());
+					addFiles(chooser.getCurrentDirectory());
 				}
 			}
 		});
 		menu.add(menuItem);
 
 		setJMenuBar(menuBar);
-		
+		setPreferredSize(new Dimension(1000, 800));
 		pack();
 		setVisible(true);
 	}
 
-	private void addFiles(File directory) {
-		
+	/**
+	 * recursively goes through directory tree adding all mp3 files
+	 * 
+	 * @param f the directory currently being iterated through
+	 */
+	private void addFiles(File[] files) {
+		for (File f: files) {
+			if (f.isDirectory()) {
+				addFiles(f.listFiles()); //iterates through directories
+			}
+			else {
+				//check if it is an mp3
+				if (isMp3(f)) {
+					addSong(f);
+				}
+			}
+		}
 	}
 
 	private void playPressed() {
@@ -166,6 +188,12 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	private String getNextSong() {
 		return null;
 	}
+	
+	private boolean isMp3(File f) {
+		String filename = f.getName();
+		String extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+		return extension.toLowerCase().equals("mp3");
+	}
 
 	@Override
 	public void updateSeektime(long pos) {
@@ -176,6 +204,35 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	@Override
 	public void songFinished() {
 		player.loadFile(getNextSong());
+	}
+
+	/**
+	 * currently very general code, will need to figure out exactly what needs to be done
+	 * it will first use the algorithm to retrieve tag info about the song and then it
+	 * will add the song to the database and to the table and probably use some id to
+	 * associate the two
+	 * 
+	 * @param f the song, must be an mp3
+	 */
+	public void addSong(File f) {
+		Object[] row = buildRow(f);
+		songsModel.addRow(row);
+	}
+
+	private Object[] buildRow(File f) {
+		Object[] row = {f.getAbsoluteFile(), "", ""};
+		return row;
+	}
+
+	/**
+	 * adds all the folders and subfolders et al of the given directory recursively
+	 * 
+	 * @param directory the directory to be iterated through
+	 */
+	public void addFiles(File directory) {
+		if (directory.isDirectory()) {
+			addFiles(directory.listFiles());
+		}
 	}
 
 }
