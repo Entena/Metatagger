@@ -197,9 +197,17 @@ public class DBTest {
             return;
         }
         
-        ids = dbModel.getSongFromBPMRange(dbSong.getBPM(), 101);
+        ids = dbModel.getSongFromBPMRange(song.getBPM(), song.getBPM() + 1);
         if(ids.size() != 1){
-            reason = "The wrong amount of ids were returned";
+            reason = "The wrong amount of ids were returned in bpm range";
+            failed = true;
+            return;
+        }
+        
+        ids = dbModel.getSongFromPlayCountRange( song.getPlayCount(),
+                                                 song.getPlayCount() + 1);
+        if(ids.size() != 1){
+            reason = "The wrong amount of ids were returned in play count range";
             failed = true;
             return;
         }

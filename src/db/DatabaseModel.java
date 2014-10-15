@@ -26,6 +26,7 @@ public class DatabaseModel {
     private String selectSongIdsSQLTemplate = "";
     
     private String selectSongIdsBPMRangeTemplate = "";
+    private String selectSongIdsPlayCountRangeTemplate = "";
     
     private String deleteSongSQLTemplate = "";
     
@@ -58,6 +59,9 @@ public class DatabaseModel {
             selectSongIdsBPMRangeTemplate = DatabaseHelper.SQLFromFile(
                                             DatabaseHelper.SQL_FOLDER_PATH +
                                             "select_song_bpm_range_template.sql");
+            selectSongIdsPlayCountRangeTemplate = DatabaseHelper.SQLFromFile(
+                                    DatabaseHelper.SQL_FOLDER_PATH +
+                                    "select_song_playcount_range_template.sql");
             
             
             deleteSongSQLTemplate = DatabaseHelper.SQLFromFile(
@@ -229,6 +233,37 @@ public class DatabaseModel {
         String completedSQL = DatabaseHelper.SQLBuilder(
                                                   selectSongIdsBPMRangeTemplate,
                                                   params);
+        try {
+            Statement stmt = dbConn.getDBConnection().createStatement();
+            ResultSet result = stmt.executeQuery(completedSQL);
+            while(result.next()){
+                ids.add(result.getInt(DatabaseHelper.SONG_ID_COLUMN));
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            System.err.println("Could not select the song ids from the database.");
+            e.printStackTrace();
+        }
+        return ids;
+    }
+
+    /**
+     * Finds all the song ids of the songs that have a play count between the
+     * lower and upper bounds inclusively.
+     * @param lowerBound The lowest play count you are looking for
+     * @param upperBound The largest play count you are looking for
+     * @return
+     */
+    public ArrayList<Integer> getSongFromPlayCountRange( int lowerBound,
+                                                         int upperBound){
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("lowerbound", Integer.toString(lowerBound));
+        params.put("upperbound", Integer.toString(upperBound));
+        
+        String completedSQL = DatabaseHelper.SQLBuilder(
+                                            selectSongIdsPlayCountRangeTemplate,
+                                            params);
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
             ResultSet result = stmt.executeQuery(completedSQL);
