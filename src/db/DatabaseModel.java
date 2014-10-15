@@ -75,36 +75,32 @@ public class DatabaseModel {
      * @param playCount
      * @return the song object or null.
      */
-    public synchronized DBSong insertSong(
-                              String name, String filepath, String album,
-                              String artist, int lastPlayed, int playCount,
-                              int bpm){
-        
-        // Build the parameters table for the template
-        HashMap<String, String> params = new HashMap<String, String>();
-        params.put("name", '\'' + name + '\'');
-        params.put("filepath",  '\'' + filepath + '\'');
-        params.put("album",  '\'' + album + '\'');
-        params.put("artist",  '\'' + artist + '\'');
-        params.put("lastplayed", Integer.toString(lastPlayed));
-        params.put("playcount", Integer.toString(playCount));
-        params.put("bpm", Integer.toString(bpm));
-        
+    public synchronized DBSong insertSong( String name, String filepath,
+                                           String album, String artist,
+                                           int lastPlayed, int playCount,
+                                           int bpm){
+        return insertSong(new DBSong( 0, name, filepath, album, artist,
+                                      lastPlayed, playCount, bpm));
+    }
+    
+    public synchronized DBSong insertSong(DBSong song){
         String completedSQL = DatabaseHelper.SQLBuilder(insertSongSQLTemplate,
-                                                        params);
-        DBSong song = null;
+                                                        song.getSongParams());
+        DBSong newSong = null;
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
             stmt.execute(completedSQL);
             stmt.execute("SELECT last_insert_rowid()");
-            song = new DBSong( stmt.getResultSet().getInt(1), name, filepath,
-                               album, artist, lastPlayed, playCount, bpm);
+            newSong = new DBSong( stmt.getResultSet().getInt(1), song.getName(),
+                                  song.getFilepath(), song.getAlbum(),
+                                  song.getArtist(), song.getLastPlayed(),
+                                  song.getPlayCount(), song.getBPM());
             stmt.close();
         } catch (SQLException e) {
             System.err.println("Could not insert the song into the database.");
             e.printStackTrace();
         }
-        return song;
+        return newSong;
     }
     
     /**
