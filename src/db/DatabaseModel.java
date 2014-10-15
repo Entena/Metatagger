@@ -4,8 +4,10 @@
 package db;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -18,6 +20,11 @@ public class DatabaseModel {
     
     private String insertSongSQLTemplate = "";
     private String updateSongSQLTemplate = "";
+    
+    private String selectSongSQLTemplate = "";
+    private String selectAllSongsSQLTemplate = "";
+    private String selectSongIdsSQLTemplate = "";
+    
     private String deleteSongSQLTemplate = "";
     
     /**
@@ -34,6 +41,19 @@ public class DatabaseModel {
             updateSongSQLTemplate = DatabaseHelper.SQLFromFile(
                                                 DatabaseHelper.SQL_FOLDER_PATH +
                                                 "update_song_template.sql");
+            
+
+            selectSongSQLTemplate = DatabaseHelper.SQLFromFile(
+                                                DatabaseHelper.SQL_FOLDER_PATH +
+                                                "select_song_template.sql");
+            selectAllSongsSQLTemplate = DatabaseHelper.SQLFromFile(
+                                                DatabaseHelper.SQL_FOLDER_PATH +
+                                                "select_all_songs_template.sql");
+            selectSongIdsSQLTemplate = DatabaseHelper.SQLFromFile(
+                                                DatabaseHelper.SQL_FOLDER_PATH +
+                                                "select_song_ids_template.sql");
+            
+            
             deleteSongSQLTemplate = DatabaseHelper.SQLFromFile(
                                                 DatabaseHelper.SQL_FOLDER_PATH +
                                                 "delete_song_template.sql");
@@ -55,7 +75,8 @@ public class DatabaseModel {
      * @param playCount
      * @return the song object or null.
      */
-    public DBSong insertSong( String name, String filepath, String album,
+    public synchronized DBSong insertSong(
+                              String name, String filepath, String album,
                               String artist, int lastPlayed, int playCount){
         
         // Build the parameters table for the template
@@ -92,6 +113,10 @@ public class DatabaseModel {
      * @return true if the song was successfully updated, false otherwise
      */
     public boolean updateSong(DBSong song){
+        // Skip updating is the song is not dirty
+        if(!song.isDirty())
+            return true;
+        
         String completedSQL = DatabaseHelper.SQLBuilder(updateSongSQLTemplate,
                                                         song.getSongParams());
         try {
@@ -105,6 +130,100 @@ public class DatabaseModel {
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Queries the db asking to for all of the song ids that it currently has.
+     * @return a list of song ids that can be used to get individual songs
+     */
+    public ArrayList<Integer> getAllSongIds(){
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        try {
+            Statement stmt = dbConn.getDBConnection().createStatement();
+            ResultSet result = stmt.executeQuery(selectSongIdsSQLTemplate);
+            while(result.next()){
+                ids.add(result.getInt(DatabaseHelper.SONG_ID_COLUMN));
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            System.err.println("Could not select the song ids from the database.");
+            e.printStackTrace();
+            return ids;
+        }
+        return ids;
+    }
+    
+    /**
+     * Gets all the songs for the database and then creates their corresponding
+     * DBSong objects
+     * @return
+     */
+    public ArrayList<DBSong> getAllSongs(){
+        ArrayList<DBSong> songs = new ArrayList<DBSong>();
+        try {
+            Statement stmt = dbConn.getDBConnection().createStatement();
+            ResultSet result = stmt.executeQuery(selectAllSongsSQLTemplate);
+            while(result.next()){
+                songs.add(dbsongFromResultSet(result));
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            System.err.println("Could not select the songs from the database.");
+            e.printStackTrace();
+            return songs;
+        }
+        return songs;
+    }
+    
+    /**
+     * Given a song id, attempts to select the song from the database and create
+     * itself DBSong object.
+     * @param songId The id of the song to select from the database.
+     * @return
+     */
+    public DBSong getSong(int songId){
+        // Build the parameters table for the template
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("songid", Integer.toString(songId));
+        
+        String completedSQL = DatabaseHelper.SQLBuilder(selectSongSQLTemplate,
+                                                        params);
+        DBSong song = null;
+        try {
+            Statement stmt = dbConn.getDBConnection().createStatement();
+            stmt.execute(completedSQL);
+            ResultSet result = stmt.getResultSet();
+            song = dbsongFromResultSet(result);
+            result.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.err.println("Could not select the song from the database.");
+            e.printStackTrace();
+        }
+        return song;
+    }
+    
+    /**
+     * Helper function used by getAllSongs and getSong to transform a result
+     * from the database into a usable java object.
+     * @param result The result set that contains the information about the
+     * song from the db
+     * @return The completed song.
+     */
+    private DBSong dbsongFromResultSet(ResultSet result){
+        try {
+            return new DBSong( result.getInt(DatabaseHelper.SONG_ID_COLUMN),
+                               result.getString(DatabaseHelper.NAME_COLUMN),
+                               result.getString(DatabaseHelper.FILEPATH_COLUMN),
+                               result.getString(DatabaseHelper.ALBUM_COLUMN),
+                               result.getString(DatabaseHelper.ARTIST_COLUMN),
+                               result.getInt(DatabaseHelper.LAST_PLAYED_COLUMN),
+                               result.getInt(DatabaseHelper.PLAY_COUNT));
+        } catch (SQLException e) {
+            System.err.println("Could not parse a song from the database.");
+            e.printStackTrace();
+            return null;
+        }
     }
     
     /**

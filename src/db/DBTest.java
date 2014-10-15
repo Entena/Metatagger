@@ -3,6 +3,7 @@ package db;
 import java.io.File;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 /**
@@ -134,7 +135,7 @@ public class DBTest {
         file.delete();
     }
     
-    public static void runTests(){
+    private static void runTests(){
         System.out.println("Creating and opening sqlite db connector...");
         DatabaseConnector dbConn = new SQLiteDatabaseConnector(dbFile);
         try {
@@ -167,6 +168,35 @@ public class DBTest {
             failed = true;
             return;
         }
+        
+
+        System.out.println("Selecting songs...");
+        
+        ArrayList<Integer> ids = dbModel.getAllSongIds();
+        if(ids.size() != 1){
+            reason = "The wrong amount of ids were returned";
+            failed = true;
+            return;
+        }
+        
+        ArrayList<DBSong> songs = dbModel.getAllSongs();
+        if(songs.size() != 1){
+            reason = "The wrong amount of songs were returned";
+            failed = true;
+            return;
+        } else if (songs.get(0).getSongId() != song.getSongId()){
+            reason = "The wrong song id was returned";
+            failed = true;
+            return;
+        }
+        
+        DBSong dbSong = dbModel.getSong(song.getSongId());
+        if(dbSong.getSongId() != song.getSongId()){
+            reason = "The wrong song id was returned";
+            failed = true;
+            return;
+        }
+        
         
         System.out.println("Updating song...");
         song.setPlayCount(11);
