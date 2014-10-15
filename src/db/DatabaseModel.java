@@ -48,7 +48,7 @@ public class DatabaseModel {
                                                 "select_song_template.sql");
             selectAllSongsSQLTemplate = DatabaseHelper.SQLFromFile(
                                                 DatabaseHelper.SQL_FOLDER_PATH +
-                                                "select_all_song_template.sql");
+                                                "select_all_songs_template.sql");
             selectSongIdsSQLTemplate = DatabaseHelper.SQLFromFile(
                                                 DatabaseHelper.SQL_FOLDER_PATH +
                                                 "select_song_ids_template.sql");
@@ -140,14 +140,9 @@ public class DatabaseModel {
         ArrayList<Integer> ids = new ArrayList<Integer>();
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
-            stmt.execute(selectSongIdsSQLTemplate);
-            
-            ResultSet result = stmt.getResultSet();
-            while(result != null){
+            ResultSet result = stmt.executeQuery(selectSongIdsSQLTemplate);
+            while(result.next()){
                 ids.add(result.getInt(DatabaseHelper.SONG_ID_COLUMN));
-                result.close();
-                stmt.getMoreResults();
-                result = stmt.getResultSet();
             }
             stmt.close();
         } catch (SQLException e) {
@@ -167,14 +162,9 @@ public class DatabaseModel {
         ArrayList<DBSong> songs = new ArrayList<DBSong>();
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
-            stmt.execute(selectAllSongsSQLTemplate);
-            
-            ResultSet result = stmt.getResultSet();
-            while(result != null){
+            ResultSet result = stmt.executeQuery(selectAllSongsSQLTemplate);
+            while(result.next()){
                 songs.add(dbsongFromResultSet(result));
-                result.close();
-                stmt.getMoreResults();
-                result = stmt.getResultSet();
             }
             stmt.close();
         } catch (SQLException e) {
@@ -261,8 +251,6 @@ public class DatabaseModel {
         }
         return true;
     }
-    
-    public
     
     public boolean addMetaData( String songId, String metaTag, String value){
         return false;

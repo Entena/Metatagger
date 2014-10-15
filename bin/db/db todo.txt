@@ -2,6 +2,13 @@ db model:
 -create predefined scripts
 	-insert/update/delete meta-data
 -wrapper methods over the scripts
--get song from meta-tag combinations
+-get requirements
+    -get all ids
+    -get all songs
+    -get one song
+    -get by range play count
+    -get by range of bpm
+    -get by same meta value
+
 
 plugin interface:
