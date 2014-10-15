@@ -6,6 +6,7 @@ package db;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -55,7 +56,8 @@ public class DatabaseModel {
      * @param playCount
      * @return the song object or null.
      */
-    public DBSong insertSong( String name, String filepath, String album,
+    public synchronized DBSong insertSong(
+                              String name, String filepath, String album,
                               String artist, int lastPlayed, int playCount){
         
         // Build the parameters table for the template
@@ -107,6 +109,12 @@ public class DatabaseModel {
         return true;
     }
     
+    public ArrayList<Integer> getAllSongIds(){
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        
+        return ids;
+    }
+    
     /**
      * Given a song's id, deletes it and it's meta data from the db
      * @param songId The id of the song to remove
@@ -132,6 +140,8 @@ public class DatabaseModel {
         }
         return true;
     }
+    
+    public
     
     public boolean addMetaData( String songId, String metaTag, String value){
         return false;

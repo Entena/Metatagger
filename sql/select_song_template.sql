@@ -1,0 +1,2 @@
+SELECT * FROM Songs
+WHERE SONG_ID=*songid*;
