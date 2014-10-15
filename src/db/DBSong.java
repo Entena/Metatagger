@@ -16,15 +16,16 @@ public class DBSong {
     private String artist;
     private int lastPlayed;
     private int playCount;
+    private int bpm;
     
     
     public DBSong(int songId) {
-        this(songId, "", "", "", "", 0, 0);
+        this(songId, "", "", "", "", 0, 0, 0);
     }
     
     public DBSong( int songId, String name, String filepath,
                    String album, String artist, int lastPlayed,
-                   int playCount){
+                   int playCount, int bpm){
 
         this.songId = songId;
         this.name = name;
@@ -45,6 +46,7 @@ public class DBSong {
         songTableParams.put("lastplayed", Integer.toString(lastPlayed));
         songTableParams.put("playcount", Integer.toString(playCount));
         songTableParams.put("songid", Integer.toString(songId));
+        songTableParams.put("bpm", Integer.toString(bpm));
     }
     
     public boolean isDirty(){
@@ -121,6 +123,16 @@ public class DBSong {
         dirty = true;
         this.playCount = playCount;
         songTableParams.put("playcount", Integer.toString(playCount));
+    }
+    
+    public int getBPM(){
+        return bpm;
+    }
+    
+    public void setBPM(int bpm){
+        dirty = true;
+        this.bpm = bpm;
+        songTableParams.put("bpm", Integer.toString(bpm));
     }
 
 }

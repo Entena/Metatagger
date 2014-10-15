@@ -31,6 +31,7 @@ public class DatabaseHelper {
     public static final String ARTIST_COLUMN = "ARTIST";
     public static final String LAST_PLAYED_COLUMN = "LAST_PLAYED";
     public static final String PLAY_COUNT = "PLAY_COUNT";
+    public static final String BPM_COUNT = "BPM";
     
     /*
      * MetaData table columns

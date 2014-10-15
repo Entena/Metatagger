@@ -162,7 +162,7 @@ public class DBTest {
         System.out.println("Inserting song...");
         DatabaseModel dbModel = new DatabaseModel(dbConn);
         DBSong song = dbModel.insertSong("foobar", "sdf/", "dsf",
-                                         "dfs", 1111, 10);
+                                         "dfs", 1111, 10, 100);
         if(song == null){
             reason = "The song was not inserted into the database";
             failed = true;

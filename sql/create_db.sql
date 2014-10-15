@@ -5,7 +5,8 @@ CREATE TABLE Songs
  ALBUM          CHARACTER(50),
  ARTIST         CHARACTER(50),
  LAST_PLAYED    INTEGER               DEFAULT 0,
- PLAY_COUNT     INTEGER               DEFAULT 0);
+ PLAY_COUNT     INTEGER               DEFAULT 0,
+ BPM            INTEGER               DEFAULT 0);
  
  CREATE TABLE MetaData
 (META_ID               CHARACTER(20)               NOT NULL,

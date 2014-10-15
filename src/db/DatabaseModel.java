@@ -77,7 +77,8 @@ public class DatabaseModel {
      */
     public synchronized DBSong insertSong(
                               String name, String filepath, String album,
-                              String artist, int lastPlayed, int playCount){
+                              String artist, int lastPlayed, int playCount,
+                              int bpm){
         
         // Build the parameters table for the template
         HashMap<String, String> params = new HashMap<String, String>();
@@ -87,6 +88,7 @@ public class DatabaseModel {
         params.put("artist",  '\'' + artist + '\'');
         params.put("lastplayed", Integer.toString(lastPlayed));
         params.put("playcount", Integer.toString(playCount));
+        params.put("bpm", Integer.toString(bpm));
         
         String completedSQL = DatabaseHelper.SQLBuilder(insertSongSQLTemplate,
                                                         params);
@@ -96,7 +98,7 @@ public class DatabaseModel {
             stmt.execute(completedSQL);
             stmt.execute("SELECT last_insert_rowid()");
             song = new DBSong( stmt.getResultSet().getInt(1), name, filepath,
-                               album, artist, lastPlayed, playCount);
+                               album, artist, lastPlayed, playCount, bpm);
             stmt.close();
         } catch (SQLException e) {
             System.err.println("Could not insert the song into the database.");
@@ -218,7 +220,8 @@ public class DatabaseModel {
                                result.getString(DatabaseHelper.ALBUM_COLUMN),
                                result.getString(DatabaseHelper.ARTIST_COLUMN),
                                result.getInt(DatabaseHelper.LAST_PLAYED_COLUMN),
-                               result.getInt(DatabaseHelper.PLAY_COUNT));
+                               result.getInt(DatabaseHelper.PLAY_COUNT),
+                               result.getInt(DatabaseHelper.BPM_COUNT));
         } catch (SQLException e) {
             System.err.println("Could not parse a song from the database.");
             e.printStackTrace();
