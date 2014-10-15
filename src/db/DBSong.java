@@ -34,6 +34,7 @@ public class DBSong {
         this.artist = artist;
         this.lastPlayed = lastPlayed;
         this.playCount = playCount;
+        this.bpm = bpm;
         
         metaData = new HashMap<String, String>();
         
@@ -133,6 +134,17 @@ public class DBSong {
         dirty = true;
         this.bpm = bpm;
         songTableParams.put("bpm", Integer.toString(bpm));
+    }
+    
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ").append(name).append('\n');
+        sb.append("Filepath: ").append(filepath).append('\n');
+        sb.append("Artist: ").append(artist).append('\n');
+        sb.append("Play Count: ").append(playCount).append('\n');
+        sb.append("BPM: ").append(bpm);
+        return sb.toString();
     }
 
 }

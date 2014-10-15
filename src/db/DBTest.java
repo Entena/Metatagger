@@ -197,6 +197,13 @@ public class DBTest {
             return;
         }
         
+        ids = dbModel.getSongFromBPMRange(dbSong.getBPM(), 101);
+        if(ids.size() != 1){
+            reason = "The wrong amount of ids were returned";
+            failed = true;
+            return;
+        }
+        
         
         System.out.println("Updating song...");
         song.setPlayCount(11);

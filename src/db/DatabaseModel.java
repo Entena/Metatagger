@@ -25,6 +25,8 @@ public class DatabaseModel {
     private String selectAllSongsSQLTemplate = "";
     private String selectSongIdsSQLTemplate = "";
     
+    private String selectSongIdsBPMRangeTemplate = "";
+    
     private String deleteSongSQLTemplate = "";
     
     /**
@@ -52,6 +54,10 @@ public class DatabaseModel {
             selectSongIdsSQLTemplate = DatabaseHelper.SQLFromFile(
                                                 DatabaseHelper.SQL_FOLDER_PATH +
                                                 "select_song_ids_template.sql");
+            
+            selectSongIdsBPMRangeTemplate = DatabaseHelper.SQLFromFile(
+                                            DatabaseHelper.SQL_FOLDER_PATH +
+                                            "select_song_bpm_range_template.sql");
             
             
             deleteSongSQLTemplate = DatabaseHelper.SQLFromFile(
@@ -83,6 +89,12 @@ public class DatabaseModel {
                                       lastPlayed, playCount, bpm));
     }
     
+    /**
+     * Given a DBSong object, create a new song entry in the db using its field
+     * values. Note that the songId field is ignored.
+     * @param song
+     * @return
+     */
     public synchronized DBSong insertSong(DBSong song){
         String completedSQL = DatabaseHelper.SQLBuilder(insertSongSQLTemplate,
                                                         song.getSongParams());
@@ -199,6 +211,36 @@ public class DatabaseModel {
             e.printStackTrace();
         }
         return song;
+    }
+    
+    /**
+     * Finds all the song ids of the songs that have bpm between the lower and
+     * upper bounds inclusively.
+     * @param lowerBound The lowest bpm you are looking for
+     * @param upperBound The largest bpm you are looking for
+     * @return
+     */
+    public ArrayList<Integer> getSongFromBPMRange(int lowerBound, int upperBound){
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("lowerbound", Integer.toString(lowerBound));
+        params.put("upperbound", Integer.toString(upperBound));
+        
+        String completedSQL = DatabaseHelper.SQLBuilder(
+                                                  selectSongIdsBPMRangeTemplate,
+                                                  params);
+        try {
+            Statement stmt = dbConn.getDBConnection().createStatement();
+            ResultSet result = stmt.executeQuery(completedSQL);
+            while(result.next()){
+                ids.add(result.getInt(DatabaseHelper.SONG_ID_COLUMN));
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            System.err.println("Could not select the song ids from the database.");
+            e.printStackTrace();
+        }
+        return ids;
     }
     
     /**

@@ -3,9 +3,6 @@ db model:
 	-insert/update/delete meta-data
 -wrapper methods over the scripts
 -get requirements
-    -get all ids
-    -get all songs
-    -get one song
     -get by range play count
     -get by range of bpm
     -get by same meta value
