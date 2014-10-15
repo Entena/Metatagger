@@ -11,6 +11,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
+ * This class contains the majority of helper methods for interacting with the
+ * database. All the methods for interacting with songs are in this class. So
+ * you will find the methods to insert, update and remove songs from the
+ * database here. Additionally you will find various different ways to select
+ * songs from the database in this class.
+ * 
  * @author Tim Eck
  *
  */
@@ -36,7 +42,7 @@ public class DatabaseModel {
     public DatabaseModel(DatabaseConnector dbConn) {
         this.dbConn = dbConn;
         
-        // Load the insert sql template file
+        // Load the sql template files
         try {
             insertSongSQLTemplate = DatabaseHelper.SQLFromFile(
                                                 DatabaseHelper.SQL_FOLDER_PATH +
@@ -69,7 +75,8 @@ public class DatabaseModel {
                                                 "delete_song_template.sql");
             
         } catch (IOException e) {
-            System.err.println("Could not load the sql template files. Make sure that the sql files are accessible.");
+            System.err.println( "Could not load the sql template files. " + "" +
+            		            "Make sure that the sql files are accessible.");
             e.printStackTrace();
             System.exit(100);
         } 

@@ -2,7 +2,6 @@ package db;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 
@@ -11,7 +10,8 @@ import java.util.ArrayList;
  * This file contains all the test code for the DB code. In addition to that
  * this file can act as a tutorial on how to do certain operations on the db.
  * To save time in figuring out the simple operations I will put them here.
- * But to learn them more in depth please look below. <br/>
+ * But to learn them more in depth please look below or refer to the
+ * documentation contained in the DatabaseModel class.<br/>
  * <br/>
  * Before doing anything you need to get and DatabaseConnector, the most basic
  * one is the SQLDatabaseConnector and set it up. To do that do the following:

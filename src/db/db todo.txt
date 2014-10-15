@@ -1,10 +1,7 @@
 db model:
 -create predefined scripts
 	-insert/update/delete meta-data
--wrapper methods over the scripts
 -get requirements
-    -get by range play count
-    -get by range of bpm
     -get by same meta value
 
 
