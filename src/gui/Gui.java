@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.BoxLayout;
@@ -20,8 +22,13 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+
+import db.DatabaseModel;
+import tagger.Tagger;
 
 
 public class Gui extends JFrame implements Mp3PositionListener {
@@ -34,12 +41,16 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	private AudioPlayer player;
 	private JFileChooser chooser;
 	private File currentSong;
+	private DatabaseModel db;
+	JTable songsTable;
 
 
 	public Gui() {
 		super("Metatagger");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		player = new AudioPlayer();
+		//db = new DatabaseModel(dbConn)
+		
 		chooser = new JFileChooser("C:\\Users\\Shayan\\Music\\iTunes\\iTunes Media\\Music\\");
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				"MP3 Files", "mp3");
@@ -53,13 +64,22 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		songsModel = new DefaultTableModel(columnNames, 0);
 		playlistModel = new DefaultTableModel(columnNames, 0);
 
-		JScrollPane songList = new JScrollPane(new JTable(songsModel));
+		songsTable = new JTable(songsModel);
+		songsModel.addTableModelListener(new TableModelListener() {
+			public void tableChanged(TableModelEvent e) {
+				//DO STUFF
+			}
+		}); //used to update changes in the table in the db
+		
+		JScrollPane songList = new JScrollPane(songsTable);//new JTable(songsModel));
+		
 		JScrollPane playlist = new JScrollPane(new JTable(playlistModel));
 
 
 
 		//top will display list of songs, bottom will be current playlist
 		JSplitPane leftSide = new JSplitPane(JSplitPane.VERTICAL_SPLIT, songList, playlist);
+
 		leftSide.setDividerLocation(400);
 
 		//right side will hold playback controls (buttons, sliders, etc)
@@ -123,8 +143,8 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (chooser.showDialog(null, "Select Folder") == JFileChooser.APPROVE_OPTION) {
-					//player.loadFile(chooser.getSelectedFile().getAbsolutePath());
-					System.out.println("adding directory " + chooser.getCurrentDirectory());
+					System.out.println(chooser.getCurrentDirectory());
+					System.out.println(chooser.getSelectedFile());
 					addFiles(chooser.getCurrentDirectory());
 				}
 			}
@@ -137,27 +157,10 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		setVisible(true);
 	}
 
-	/**
-	 * recursively goes through directory tree adding all mp3 files
-	 * 
-	 * @param f the directory currently being iterated through
-	 */
-	private void addFiles(File[] files) {
-		for (File f: files) {
-			if (f.isDirectory()) {
-				addFiles(f.listFiles()); //iterates through directories
-			}
-			else {
-				//check if it is an mp3
-				if (isMp3(f)) {
-					addSong(f);
-				}
-			}
-		}
-	}
-
 	private void playPressed() {
-		System.out.println("play");
+		if (songsTable.getSelectedRow() == -1) return;
+		
+		player.loadFile((String) songsModel.getValueAt(songsTable.getSelectedRow(), 0));
 		player.play();
 	}
 
@@ -170,11 +173,11 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	}
 
 	private void pausePressed() {
-		System.out.println("pause");
+		player.pause();
 	}
 
 	private void stopPressed() {
-		System.out.println("stop");
+		player.stop();
 	}
 
 	private void seek(int i) {
@@ -220,7 +223,7 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	}
 
 	private Object[] buildRow(File f) {
-		Object[] row = {f.getAbsoluteFile(), "", ""};
+		Object[] row = {f.toURI().toString(), "", ""};
 		return row;
 	}
 
@@ -232,6 +235,27 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	public void addFiles(File directory) {
 		if (directory.isDirectory()) {
 			addFiles(directory.listFiles());
+		}
+		//Tagger tag = new Tagger(directory.getAbsolutePath());
+		//tag.
+	}
+
+	/**
+	 * recursively goes through directory tree adding all mp3 files
+	 * 
+	 * @param f the directory currently being iterated through
+	 */
+	private void addFiles(File[] files) {
+		for (File f: files) {
+			if (f.isDirectory()) {
+				addFiles(f.listFiles()); //iterates through directories
+			}
+			else {
+				//check if it is an mp3
+				if (isMp3(f)) {
+					addSong(f);
+				}
+			}
 		}
 	}
 

@@ -1,15 +1,20 @@
 package gui;
 
-import maryb.player.*;
 
 
-public class AudioPlayer implements PlayerEventListener {
-	private String currentFile;
-	private Player player;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+
+public class AudioPlayer {
+	private Media currentSong, bufferedSong;
+	private MediaPlayer player, bufferPlayer;
 
 	public AudioPlayer() {
-		player = new Player();
-		currentFile = null;
+		player = null;
+		currentSong = null;
+		new JFXPanel(); //required to use javafx media
 	}
 
 	/**
@@ -17,15 +22,16 @@ public class AudioPlayer implements PlayerEventListener {
 	 * @param s location of file
 	 */
 	public void loadFile(String s) {
-		currentFile = s;
-		player.setSourceLocation(currentFile);
+		System.out.println(s);
+		currentSong = new Media(s);
+		player = new MediaPlayer(currentSong);
 	}
 
 	/**
 	 * if there is a currently selected file, play it
 	 */
 	public void play() {
-		if (currentFile != null) {
+		if (currentSong != null) {
 			player.play();
 		}
 	}
@@ -34,7 +40,7 @@ public class AudioPlayer implements PlayerEventListener {
 	 * if there is a currently selected file, pause it
 	 */
 	public void pause() {
-		if (currentFile != null) {
+		if (currentSong != null) {
 			player.pause();
 		}
 	}
@@ -43,18 +49,18 @@ public class AudioPlayer implements PlayerEventListener {
 	 * if there is a currently selected file, stop it
 	 */
 	public void stop() {
-		if (currentFile != null) {
+		if (currentSong != null) {
 			player.stop();
 		}
 	}
 
 	/**
 	 * seeks to a position in the current file
-	 * @param i time in microseconds
+	 * @param t part of song to skip to expressed as a decimal between 0 and 1
 	 */
-	public void seek(int i) {
-		if (currentFile != null) {
-			player.seek(i);
+	public void seek(double t) {
+		if (currentSong != null) {
+			player.seek(currentSong.getDuration().multiply(t));
 		}
 	}
 
@@ -62,29 +68,24 @@ public class AudioPlayer implements PlayerEventListener {
 	 * sets the volume of the player
 	 */
 	public void setVolume(int i) {
-		player.setCurrentVolume(((float) i)/100f);
-		System.out.println(player.getCurrentVolume());
+		player.setVolume(((double) i)/100.);
 	}
 
 	/**
-	 * not used
+	 * Creates a MediaPlayer object for a buffered song 
 	 */
-	public void buffer() {}
-
-	/**
-	 * called when the current song has finished playing
-	 * not called on stop or pause
-	 */
-	public void endOfMedia() {
-		// TODO Auto-generated method stub
-
+	public void bufferSong(String s) {
+		bufferedSong = new Media(s);
+		bufferPlayer = new MediaPlayer(bufferedSong);
 	}
 
-	/**
-	 * called when state of song has changed
-	 */
-	public void stateChanged() {
-		// TODO Auto-generated method stub
-
+	public boolean loadBuffer() {
+		if (bufferedSong == null || bufferedSong == null) return false;
+		
+		currentSong = bufferedSong;
+		player = bufferPlayer;
+		bufferedSong = null;
+		bufferPlayer = null;
+		return true;
 	}
 }

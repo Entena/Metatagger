@@ -84,13 +84,16 @@ public class Tagger {
 					missingInfo.add(music.get(i));
 					music.remove(i);
 				}
-				/*System.out.println("Length of this mp3 is: " + mp3file.getLengthInSeconds() + " seconds");
+				System.out.println("Length of this mp3 is: " + mp3file.getLengthInSeconds() + " seconds");
 				System.out.println("Bitrate: " + mp3file.getLengthInSeconds() + " kbps " + (mp3file.isVbr() ? "(VBR)" : "(CBR)"));
 				System.out.println("Sample rate: " + mp3file.getSampleRate() + " Hz");
 				System.out.println("Has ID3v1 tag?: " + (mp3file.hasId3v1Tag() ? "YES" : "NO"));
 				System.out.println("Has ID3v2 tag?: " + (mp3file.hasId3v2Tag() ? "YES" : "NO"));
 				System.out.println("Has custom tag?: " + (mp3file.hasCustomTag() ? "YES" : "NO"));
-				System.out.println("BPM "+BPM.getBPM(music.get(i).getAbsoluteFile().toString()));*/
+				System.out.println("BPM "+BPM.getBPM(music.get(i).getAbsoluteFile().toString()));
+				if (mp3file.hasId3v1Tag()) {
+				System.out.println(mp3file.getId3v1Tag().getTitle() + " - " + mp3file.getId3v1Tag().getArtist() + " (" + mp3file.getId3v1Tag().getAlbum() + ")");
+				}
 			}
 			//System.out.println("HIT");
 			getTagInfo();
