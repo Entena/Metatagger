@@ -3,6 +3,7 @@ package tagger;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,20 +21,24 @@ public class PrinterGrabber {
 	}
 	
 	/**
-	 * This method returns a 
+	 * This method returns a JSONObject containing information from the echoprint command
+	 * The JSONObject will have the following keys: tag, code_count, code, metadata
+	 * code is the fingerprint
+	 * metadata is the info found in the file (i.e. artist, sample_rate)
+	 * @return a JSONObject
 	 */
 	public JSONObject fingerprint(File mp3){
 		String s = null;
 		try {
 			System.out.println(cmd+" "+mp3.getAbsolutePath()+" 10 30");			
-			Process p = Runtime.getRuntime().exec(cmd+" "+mp3.getAbsolutePath());	             
+			Process p = Runtime.getRuntime().exec(cmd+" "+mp3.getAbsolutePath()+" 10 30");	             
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));	 
             //BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));	 
             // read the output from the command
 //            System.out.println("Here is the standard output of the command:\n");
             s = stdInput.readLine();
             String output = "";
-            if(!s.equals("[") && !s.equals("]")){
+            if(!s.equals("[") && !s.equals("]") && s != null){
             	output += s;
             }
             while (s != null) {
@@ -43,14 +48,12 @@ public class PrinterGrabber {
             	}
             	//System.out.println(s);
             }
+
+            //output = output.replace("{\"metadata\":", "");
+            //output = output.replaceFirst("}", "");          
+            return new JSONObject(output);            
             //System.out.print(output);
-			try {
-				return new JSONObject(output);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return null;
-			}
+
             // read any errors from the attempted command
             /*System.out.println("Here is the standard error of the command (if any):\n");
             while ((s = stdError.readLine()) != null) {
