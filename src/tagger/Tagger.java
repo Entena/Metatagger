@@ -198,11 +198,10 @@ public class Tagger {
 	 * @param files is a list of MP3s. NOTE DO NOT PROVIDE OTHER FILES TO THIS FUNCTION
 	 * @return null if no information can be found, else an arraylist of jsonobjects from echoprint
 	 */
-	public ArrayList<JSONObject> fingerPrintList(File[] files){
-		PrinterGrabber pg = new PrinterGrabber();
+	public ArrayList<JSONObject> fingerPrint(File[] files){
 		ArrayList<JSONObject> jsonInfo = new ArrayList<JSONObject>(files.length);
 		for(int i=0; i < files.length; i++){
-			JSONObject song = pg.fingerprint(files[i]);
+			JSONObject song = fingerPrint(files[i]);
 			if(song != null){
 				jsonInfo.add(song);
 			}
@@ -213,11 +212,10 @@ public class Tagger {
 			return null;
 		}
 	}
-
-	public void getBPM(File[] files){
-		for(int i=0; i < files.length; i++){
-			getBPM(files[i]);
-		}
+	
+	public JSONObject fingerPrint(File mp3){
+		PrinterGrabber pg = new PrinterGrabber();
+		return pg.fingerprint(mp3);
 	}
 	
 	/**
