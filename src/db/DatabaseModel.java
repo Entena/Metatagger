@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import db.DBSong.DBMetaData;
+
 /**
  * This class contains the majority of helper methods for interacting with the
  * database. All the methods for interacting with songs are in this class. So
@@ -26,6 +28,9 @@ public class DatabaseModel {
     
     private String insertSongSQLTemplate = "";
     private String updateSongSQLTemplate = "";
+    
+    private String insertSongMetaSQLTemplate = "";
+    private String updateSongMetaSQLTemplate = "";
     
     private String selectSongSQLTemplate = "";
     private String selectAllSongsSQLTemplate = "";
@@ -50,6 +55,13 @@ public class DatabaseModel {
             updateSongSQLTemplate = DatabaseHelper.SQLFromFile(
                                                 DatabaseHelper.SQL_FOLDER_PATH +
                                                 "update_song_template.sql");
+            
+            insertSongMetaSQLTemplate = DatabaseHelper.SQLFromFile(
+                                               DatabaseHelper.SQL_FOLDER_PATH +
+                                               "insert_song_meta_template.sql");
+            updateSongMetaSQLTemplate = DatabaseHelper.SQLFromFile(
+                                               DatabaseHelper.SQL_FOLDER_PATH +
+                                               "update_song_meta_template.sql");
             
 
             selectSongSQLTemplate = DatabaseHelper.SQLFromFile(
@@ -118,6 +130,15 @@ public class DatabaseModel {
                                   song.getFilepath(), song.getAlbum(),
                                   song.getArtist(), song.getLastPlayed(),
                                   song.getPlayCount(), song.getBPM());
+            
+            for(DBMetaData meta : song.getDBMetaData()){
+                String insertSongMetaSQL = DatabaseHelper.SQLBuilder(
+                                                    insertSongMetaSQLTemplate,
+                                                    meta.getMetaDataParams());
+                stmt.execute(insertSongMetaSQL);
+                meta.markNotNew();
+            }
+            
             stmt.close();
         } catch (SQLException e) {
             System.err.println("Could not insert the song into the database.");
@@ -138,11 +159,29 @@ public class DatabaseModel {
         if(!song.isDirty())
             return true;
         
-        String completedSQL = DatabaseHelper.SQLBuilder(updateSongSQLTemplate,
-                                                        song.getSongParams());
+        String updateSongSQL = DatabaseHelper.SQLBuilder(updateSongSQLTemplate,
+                                                         song.getSongParams());
+        
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
-            stmt.execute(completedSQL);
+            stmt.execute(updateSongSQL);
+            
+            for(DBMetaData meta : song.getDBMetaData()){
+                if(meta.isNewField()){
+                    String insertSongMetaSQL = DatabaseHelper.SQLBuilder(
+                                                    insertSongMetaSQLTemplate,
+                                                    meta.getMetaDataParams());
+                    stmt.execute(insertSongMetaSQL);
+                    meta.markNotNew();
+                } else if(meta.isDirty()){
+                    String updateSongMetaSQL = DatabaseHelper.SQLBuilder(
+                                                    updateSongMetaSQLTemplate,
+                                                    meta.getMetaDataParams());
+                    stmt.execute(updateSongMetaSQL);
+                    meta.markClean();
+                }
+            }
+            
             stmt.close();
             song.markClean();
         } catch (SQLException e) {

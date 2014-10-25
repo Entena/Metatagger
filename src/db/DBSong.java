@@ -1,10 +1,11 @@
 package db;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class DBSong {
 
-    private HashMap<String, String> metaData;
+    private HashMap<String, DBMetaData> metaData;
     private HashMap<String, String> songTableParams;
     
     private boolean dirty = false;
@@ -36,7 +37,7 @@ public class DBSong {
         this.playCount = playCount;
         this.bpm = bpm;
         
-        metaData = new HashMap<String, String>();
+        metaData = new HashMap<String, DBMetaData>();
         
         songTableParams = new HashMap<String, String>();
         songTableParams.put("songid", Integer.toString(songId));
@@ -136,6 +137,42 @@ public class DBSong {
         songTableParams.put("bpm", Integer.toString(bpm));
     }
     
+    /**
+     * Sets a meta data field for this song. If the song does not have the field
+     * it is created, else the field is updated.
+     * @param key
+     * @param value
+     */
+    public void setMetaDataField(String key, String value){
+        dirty = true;
+        if(metaData.containsKey(key)){
+            metaData.get(key).setValue(value);
+        } else {
+            metaData.put(key, new DBMetaData(key, value, songId));
+        }
+    }
+    
+    /**
+     * Gets the value of the meta data field. If the field is not specified an
+     * empty string is returned.
+     * @param key
+     * @return
+     */
+    public String getMetaDataField(String key){
+        DBMetaData value = metaData.get(key);
+        if(value == null)
+            return "";
+        return value.getValue();
+    }
+    
+    public boolean containsMetaDataField(String key){
+        return metaData.containsKey(key);
+    }
+    
+    protected Collection<DBMetaData> getDBMetaData(){
+        return metaData.values();
+    }
+    
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
@@ -145,6 +182,66 @@ public class DBSong {
         sb.append("Play Count: ").append(playCount).append('\n');
         sb.append("BPM: ").append(bpm);
         return sb.toString();
+    }
+    
+    protected class DBMetaData{
+        private boolean dirty;
+        private boolean newField;
+        private String key;
+        private String value;
+        private HashMap<String, String> metaDataParams;
+        
+        public DBMetaData(String key, String value, int songId){
+            this(true, key, value, songId);
+        }
+        
+        public DBMetaData( boolean newField, String key, String value,
+                           int songId){
+            this.newField = newField;
+            dirty = false;
+            this.key = key;
+            this.value = value;
+            
+            metaDataParams = new HashMap<String, String>();
+            metaDataParams.put("songid", Integer.toString(songId));
+            metaDataParams.put("key", '\'' + key + '\'');
+            metaDataParams.put("value",  '\'' + value + '\'');
+        }
+        
+        public void markClean(){
+            dirty = false;
+        }
+        
+        public boolean isDirty(){
+            return dirty;
+        }
+        
+        public boolean isNewField(){
+            return newField;
+        }
+        
+        public void markNotNew(){
+            newField = false;
+            dirty = false;
+        }
+        
+        public String getValue(){
+            return value;
+        }
+        
+        public void setValue(String value){
+            dirty = true;
+            this.value = value;
+            metaDataParams.put("value",  '\'' + value + '\'');
+        }
+        
+        public String getKey(){
+            return key;
+        }
+        
+        public HashMap<String, String> getMetaDataParams(){
+            return metaDataParams;
+        }
     }
 
 }
