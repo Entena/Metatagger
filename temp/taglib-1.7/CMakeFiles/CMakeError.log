@@ -1,0 +1,40 @@
+Determining if the function __RTTI___ exists in the Crun failed with the following output:
+Change Dir: C:/College/Systems Capstone/temp/taglib-1.7/CMakeFiles/CMakeTmp
+
+Run Build Command:"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe" "cmTryCompileExec1587938275.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=11.0"
+Microsoft (R) Build Engine version 4.0.30319.33440
+[Microsoft .NET Framework, version 4.0.30319.34014]
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 10/25/2014 7:51:38 PM.
+Project "C:\College\Systems Capstone\temp\taglib-1.7\CMakeFiles\CMakeTmp\cmTryCompileExec1587938275.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "cmTryCompileExec1587938275.dir\Debug\".
+  Creating directory "C:\College\Systems Capstone\temp\taglib-1.7\CMakeFiles\CMakeTmp\Debug\".
+InitializeBuildStatus:
+  Creating "cmTryCompileExec1587938275.dir\Debug\cmTryCompileExec1587938275.unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=__RTTI___ /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTryCompileExec1587938275.dir\Debug\\" /Fd"cmTryCompileExec1587938275.dir\Debug\vc110.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CheckFunctionExists.c"
+  Microsoft (R) C/C++ Optimizing Compiler Version 17.00.61030 for x86
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=__RTTI___ /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTryCompileExec1587938275.dir\Debug\\" /Fd"cmTryCompileExec1587938275.dir\Debug\vc110.pdb" /Gd /TC /analyze- /errorReport:queue "C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CheckFunctionExists.c"
+  CheckFunctionExists.c
+  
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"C:\College\Systems Capstone\temp\taglib-1.7\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec1587938275.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib Crun.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/College/Systems Capstone/temp/taglib-1.7/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1587938275.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/College/Systems Capstone/temp/taglib-1.7/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1587938275.lib" /MACHINE:X86 /SAFESEH  /machine:X86 /debug cmTryCompileExec1587938275.dir\Debug\CheckFunctionExists.obj
+LINK : fatal error LNK1104: cannot open file 'Crun.lib' [C:\College\Systems Capstone\temp\taglib-1.7\CMakeFiles\CMakeTmp\cmTryCompileExec1587938275.vcxproj]
+Done Building Project "C:\College\Systems Capstone\temp\taglib-1.7\CMakeFiles\CMakeTmp\cmTryCompileExec1587938275.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"C:\College\Systems Capstone\temp\taglib-1.7\CMakeFiles\CMakeTmp\cmTryCompileExec1587938275.vcxproj" (default target) (1) ->
+(Link target) -> 
+  LINK : fatal error LNK1104: cannot open file 'Crun.lib' [C:\College\Systems Capstone\temp\taglib-1.7\CMakeFiles\CMakeTmp\cmTryCompileExec1587938275.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.34
+
+

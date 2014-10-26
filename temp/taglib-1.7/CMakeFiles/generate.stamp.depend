@@ -1,0 +1,38 @@
+# CMake generation dependency list for this directory.
+C:/College/Systems Capstone/temp/taglib-1.7/CMakeLists.txt
+C:/College/Systems Capstone/temp/taglib-1.7/CMakeFiles/3.0.2/CMakeSystem.cmake
+C:/College/Systems Capstone/temp/taglib-1.7/CMakeFiles/3.0.2/CMakeCCompiler.cmake
+C:/College/Systems Capstone/temp/taglib-1.7/CMakeFiles/3.0.2/CMakeCXXCompiler.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CMakeSystemSpecificInformation.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CMakeGenericSystem.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/Platform/Windows.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/Platform/WindowsPaths.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CMakeCInformation.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/Platform/Windows-MSVC-C.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/Platform/Windows-MSVC.cmake
+C:/College/Systems Capstone/temp/taglib-1.7/CMakeFiles/3.0.2/CMakeRCCompiler.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CMakeRCInformation.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CMakeCommonLanguageInclude.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CMakeCXXInformation.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/Platform/Windows-MSVC-CXX.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/Platform/Windows-MSVC.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CMakeCommonLanguageInclude.cmake
+C:/College/Systems Capstone/temp/taglib-1.7/ConfigureChecks.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CheckIncludeFile.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CheckIncludeFiles.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CheckSymbolExists.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CheckFunctionExists.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CheckLibraryExists.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CheckTypeSize.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CheckIncludeFile.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CheckCXXSourceCompiles.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/FindZLIB.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/FindPackageHandleStandardArgs.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/FindPackageMessage.cmake
+C:/Program Files (x86)/CMake/share/cmake-3.0/Modules/CMakeParseArguments.cmake
+C:/College/Systems Capstone/temp/taglib-1.7/cmake/modules/FindCppUnit.cmake
+C:/College/Systems Capstone/temp/taglib-1.7/cmake/modules/MacroEnsureVersion.cmake
+C:/College/Systems Capstone/temp/taglib-1.7/taglib-config.cmake
+C:/College/Systems Capstone/temp/taglib-1.7/config-taglib.h.cmake
+C:/College/Systems Capstone/temp/taglib-1.7/taglib/taglib_config.h.cmake
+C:/College/Systems Capstone/temp/taglib-1.7/Doxyfile.cmake

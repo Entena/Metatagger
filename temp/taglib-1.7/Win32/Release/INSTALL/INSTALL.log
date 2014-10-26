@@ -1,0 +1,34 @@
+﻿Build started 10/25/2014 7:54:07 PM.
+     1>Project "C:\College\Systems Capstone\temp\taglib-1.7\INSTALL.vcxproj" on node 2 (Build target(s)).
+     1>PostBuildEvent:
+         setlocal
+         "C:\Program Files (x86)\CMake\bin\cmake.exe" -DBUILD_TYPE=Release -P cmake_install.cmake
+         if %errorlevel% neq 0 goto :cmEnd
+         :cmEnd
+         endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+         :cmErrorLevel
+         exit /b %1
+         :cmDone
+         if %errorlevel% neq 0 goto :VCEnd
+         :VCEnd
+         -- Install configuration: "Release"
+         CMake Error at cmake_install.cmake:39 (file):
+           file cannot create directory: C:/Program Files (x86)/taglib/include/taglib.
+           Maybe need administrative privileges.
+         
+         
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(134,5): error MSB3073: The command "setlocal
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(134,5): error MSB3073: "C:\Program Files (x86)\CMake\bin\cmake.exe" -DBUILD_TYPE=Release -P cmake_install.cmake
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(134,5): error MSB3073: if %errorlevel% neq 0 goto :cmEnd
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(134,5): error MSB3073: :cmEnd
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(134,5): error MSB3073: endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(134,5): error MSB3073: :cmErrorLevel
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(134,5): error MSB3073: exit /b %1
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(134,5): error MSB3073: :cmDone
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(134,5): error MSB3073: if %errorlevel% neq 0 goto :VCEnd
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(134,5): error MSB3073: :VCEnd" exited with code 1.
+     1>Done Building Project "C:\College\Systems Capstone\temp\taglib-1.7\INSTALL.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.13

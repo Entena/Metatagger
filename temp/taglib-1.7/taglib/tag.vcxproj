@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="Windows-1252"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{FCCD88A1-A107-4599-AAFB-78CACC901180}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>tag</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\College\Systems Capstone\temp\taglib-1.7\taglib\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tag.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tagd</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\College\Systems Capstone\temp\taglib-1.7\taglib\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tag.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tag</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\College\Systems Capstone\temp\taglib-1.7\taglib\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">tag.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">tag</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\College\Systems Capstone\temp\taglib-1.7\taglib\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">tag.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">tag</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.dll</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR="Debug";MAKE_TAGLIB_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"Debug\";MAKE_TAGLIB_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 /debug %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\College\Systems Capstone\temp\zlib128-dll\lib\zdll.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>C:/College/Systems Capstone/temp/taglib-1.7/taglib/Debug/tagd.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/College/Systems Capstone/temp/taglib-1.7/taglib/Debug/tagd.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR="Release";MAKE_TAGLIB_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"Release\";MAKE_TAGLIB_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\College\Systems Capstone\temp\zlib128-dll\lib\zdll.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ImportLibrary>C:/College/Systems Capstone/temp/taglib-1.7/taglib/Release/tag.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/College/Systems Capstone/temp/taglib-1.7/taglib/Release/tag.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR="MinSizeRel";MAKE_TAGLIB_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"MinSizeRel\";MAKE_TAGLIB_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\College\Systems Capstone\temp\zlib128-dll\lib\zdll.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ImportLibrary>C:/College/Systems Capstone/temp/taglib-1.7/taglib/MinSizeRel/tag.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/College/Systems Capstone/temp/taglib-1.7/taglib/MinSizeRel/tag.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR="RelWithDebInfo";MAKE_TAGLIB_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;HAVE_CONFIG_H;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"RelWithDebInfo\";MAKE_TAGLIB_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\College\Systems Capstone\temp\taglib-1.7\taglib;C:\College\Systems Capstone\temp\taglib-1.7;C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit;C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames;C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1;C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape;C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack;C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff;C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav;C:\College\Systems Capstone\temp\taglib-1.7\taglib\..;C:\College\Systems Capstone\temp\zlib128-dll\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /machine:X86 /debug %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;C:\College\Systems Capstone\temp\zlib128-dll\lib\zdll.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>C:/College/Systems Capstone/temp/taglib-1.7/taglib/RelWithDebInfo/tag.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/College/Systems Capstone/temp/taglib-1.7/taglib/RelWithDebInfo/tag.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/College/Systems Capstone/temp/taglib-1.7/taglib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" "-HC:/College/Systems Capstone/temp/taglib-1.7" "-BC:/College/Systems Capstone/temp/taglib-1.7" --check-stamp-file "C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/College/Systems Capstone/temp/taglib-1.7/taglib/CMakeLists.txt;C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeLists.txt;C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/College/Systems Capstone/temp/taglib-1.7/taglib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" "-HC:/College/Systems Capstone/temp/taglib-1.7" "-BC:/College/Systems Capstone/temp/taglib-1.7" --check-stamp-file "C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/College/Systems Capstone/temp/taglib-1.7/taglib/CMakeLists.txt;C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeLists.txt;C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/College/Systems Capstone/temp/taglib-1.7/taglib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" "-HC:/College/Systems Capstone/temp/taglib-1.7" "-BC:/College/Systems Capstone/temp/taglib-1.7" --check-stamp-file "C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/College/Systems Capstone/temp/taglib-1.7/taglib/CMakeLists.txt;C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeLists.txt;C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/College/Systems Capstone/temp/taglib-1.7/taglib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files (x86)\CMake\bin\cmake.exe" "-HC:/College/Systems Capstone/temp/taglib-1.7" "-BC:/College/Systems Capstone/temp/taglib-1.7" --check-stamp-file "C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeFiles\generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/College/Systems Capstone/temp/taglib-1.7/taglib/CMakeLists.txt;C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeLists.txt;C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="mpeg\mpegfile.cpp"  />
+    <ClCompile Include="mpeg\mpegproperties.cpp"  />
+    <ClCompile Include="mpeg\mpegheader.cpp"  />
+    <ClCompile Include="mpeg\xingheader.cpp"  />
+    <ClCompile Include="mpeg\id3v1\id3v1tag.cpp"  />
+    <ClCompile Include="mpeg\id3v1\id3v1genres.cpp"  />
+    <ClCompile Include="mpeg\id3v2\id3v2framefactory.cpp"  />
+    <ClCompile Include="mpeg\id3v2\id3v2synchdata.cpp"  />
+    <ClCompile Include="mpeg\id3v2\id3v2tag.cpp"  />
+    <ClCompile Include="mpeg\id3v2\id3v2header.cpp"  />
+    <ClCompile Include="mpeg\id3v2\id3v2frame.cpp"  />
+    <ClCompile Include="mpeg\id3v2\id3v2footer.cpp"  />
+    <ClCompile Include="mpeg\id3v2\id3v2extendedheader.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\attachedpictureframe.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\commentsframe.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\generalencapsulatedobjectframe.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\popularimeterframe.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\privateframe.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\relativevolumeframe.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\textidentificationframe.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\uniquefileidentifierframe.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\unknownframe.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\unsynchronizedlyricsframe.cpp"  />
+    <ClCompile Include="mpeg\id3v2\frames\urllinkframe.cpp"  />
+    <ClCompile Include="ogg\oggfile.cpp"  />
+    <ClCompile Include="ogg\oggpage.cpp"  />
+    <ClCompile Include="ogg\oggpageheader.cpp"  />
+    <ClCompile Include="ogg\xiphcomment.cpp"  />
+    <ClCompile Include="ogg\vorbis\vorbisfile.cpp"  />
+    <ClCompile Include="ogg\vorbis\vorbisproperties.cpp"  />
+    <ClCompile Include="ogg\flac\oggflacfile.cpp"  />
+    <ClCompile Include="mpc\mpcfile.cpp"  />
+    <ClCompile Include="mpc\mpcproperties.cpp"  />
+    <ClCompile Include="ape\apetag.cpp"  />
+    <ClCompile Include="ape\apefooter.cpp"  />
+    <ClCompile Include="ape\apeitem.cpp"  />
+    <ClCompile Include="ape\apefile.cpp"  />
+    <ClCompile Include="ape\apeproperties.cpp"  />
+    <ClCompile Include="toolkit\tstring.cpp"  />
+    <ClCompile Include="toolkit\tstringlist.cpp"  />
+    <ClCompile Include="toolkit\tbytevector.cpp"  />
+    <ClCompile Include="toolkit\tbytevectorlist.cpp"  />
+    <ClCompile Include="toolkit\tfile.cpp"  />
+    <ClCompile Include="toolkit\tdebug.cpp"  />
+    <ClCompile Include="toolkit\unicode.cpp"  />
+    <ClCompile Include="flac\flacfile.cpp"  />
+    <ClCompile Include="flac\flacpicture.cpp"  />
+    <ClCompile Include="flac\flacproperties.cpp"  />
+    <ClCompile Include="flac\flacmetadatablock.cpp"  />
+    <ClCompile Include="flac\flacunknownmetadatablock.cpp"  />
+    <ClCompile Include="wavpack\wavpackfile.cpp"  />
+    <ClCompile Include="wavpack\wavpackproperties.cpp"  />
+    <ClCompile Include="ogg\speex\speexfile.cpp"  />
+    <ClCompile Include="ogg\speex\speexproperties.cpp"  />
+    <ClCompile Include="trueaudio\trueaudiofile.cpp"  />
+    <ClCompile Include="trueaudio\trueaudioproperties.cpp"  />
+    <ClCompile Include="riff\rifffile.cpp"  />
+    <ClCompile Include="riff\aiff\aifffile.cpp"  />
+    <ClCompile Include="riff\aiff\aiffproperties.cpp"  />
+    <ClCompile Include="riff\wav\wavfile.cpp"  />
+    <ClCompile Include="riff\wav\wavproperties.cpp"  />
+    <ClCompile Include="tag.cpp"  />
+    <ClCompile Include="tagunion.cpp"  />
+    <ClCompile Include="fileref.cpp"  />
+    <ClCompile Include="audioproperties.cpp"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/College/Systems Capstone/temp/taglib-1.7/ZERO_CHECK.vcxproj">
+      <Project>3ECDE0F0-3E3F-4BDA-9980-1B30EF6F521E</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
