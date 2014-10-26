@@ -1,0 +1,22 @@
+﻿Build started 10/25/2014 8:23:24 PM.
+     1>Project "C:\College\Systems Capstone\temp\echoprint-codegen-master\windows\codegen.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\College\Systems Capstone\temp\echoprint-codegen-master\windows\Release\codegen.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"..\..\zlib128-dll\lib" /LIBPATH:"..\..\taglib-1.7\taglib\Release" tag.lib zlib.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\College\Systems Capstone\temp\echoprint-codegen-master\windows\Release\codegen.pdb" /SUBSYSTEM:CONSOLE,"5.01" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\College\Systems Capstone\temp\echoprint-codegen-master\windows\Release\codegen.lib" /MACHINE:X86 /SAFESEH /STACK:100000000 Release\AudioBufferInput.obj
+         Release\AudioStreamInput.obj
+         Release\Base64.obj
+         Release\Codegen.obj
+         Release\Fingerprint.obj
+         Release\main.obj
+         Release\MatrixUtility.obj
+         Release\Metadata.obj
+         Release\SubbandAnalysis.obj
+         Release\Whitening.obj
+            Creating library C:\College\Systems Capstone\temp\echoprint-codegen-master\windows\Release\codegen.lib and object C:\College\Systems Capstone\temp\echoprint-codegen-master\windows\Release\codegen.exp
+         Generating code
+         Finished generating code
+         codegen.vcxproj -> C:\College\Systems Capstone\temp\echoprint-codegen-master\windows\Release\codegen.exe
+     1>Done Building Project "C:\College\Systems Capstone\temp\echoprint-codegen-master\windows\codegen.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.42

@@ -1,0 +1,557 @@
+﻿Build started 10/25/2014 8:17:08 PM.
+     1>Project "C:\College\Systems Capstone\temp\taglib-1.7\taglib\tag.vcxproj" on node 2 (Rebuild target(s)).
+     1>CustomBuild:
+         Building Custom Rule C:/College/Systems Capstone/temp/taglib-1.7/taglib/CMakeLists.txt
+         CMake does not need to re-run because C:\College\Systems Capstone\temp\taglib-1.7\taglib\CMakeFiles\generate.stamp is up-to-date.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib" /I"C:\College\Systems Capstone\temp\taglib-1.7" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\asf" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\flac" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\flac" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpc" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\mp4" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\vorbis" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\ogg\speex" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v2\frames" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\mpeg\id3v1" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\ape" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\wavpack" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\trueaudio" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\aiff" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\riff\wav" /I"C:\College\Systems Capstone\temp\taglib-1.7\taglib\.." /I"C:\College\Systems Capstone\temp\zlib128-dll\include" /nologo /W3 /WX- /O2 /Ob2 /Oy- /D WIN32 /D _WINDOWS /D NDEBUG /D HAVE_CONFIG_H /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D "CMAKE_INTDIR=\"Release\"" /D MAKE_TAGLIB_LIB /D _WINDLL /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t- /Zc:forScope /GR /Fo"tag.dir\Release\\" /Fd"tag.dir\Release\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt mpeg\mpegfile.cpp mpeg\mpegproperties.cpp mpeg\mpegheader.cpp mpeg\xingheader.cpp mpeg\id3v1\id3v1tag.cpp mpeg\id3v1\id3v1genres.cpp mpeg\id3v2\id3v2framefactory.cpp mpeg\id3v2\id3v2synchdata.cpp mpeg\id3v2\id3v2tag.cpp mpeg\id3v2\id3v2header.cpp mpeg\id3v2\id3v2frame.cpp mpeg\id3v2\id3v2footer.cpp mpeg\id3v2\id3v2extendedheader.cpp mpeg\id3v2\frames\attachedpictureframe.cpp mpeg\id3v2\frames\commentsframe.cpp mpeg\id3v2\frames\generalencapsulatedobjectframe.cpp mpeg\id3v2\frames\popularimeterframe.cpp mpeg\id3v2\frames\privateframe.cpp mpeg\id3v2\frames\relativevolumeframe.cpp mpeg\id3v2\frames\textidentificationframe.cpp mpeg\id3v2\frames\uniquefileidentifierframe.cpp mpeg\id3v2\frames\unknownframe.cpp mpeg\id3v2\frames\unsynchronizedlyricsframe.cpp mpeg\id3v2\frames\urllinkframe.cpp ogg\oggfile.cpp ogg\oggpage.cpp ogg\oggpageheader.cpp ogg\xiphcomment.cpp ogg\vorbis\vorbisfile.cpp ogg\vorbis\vorbisproperties.cpp ogg\flac\oggflacfile.cpp mpc\mpcfile.cpp mpc\mpcproperties.cpp ape\apetag.cpp ape\apefooter.cpp ape\apeitem.cpp ape\apefile.cpp ape\apeproperties.cpp toolkit\tstring.cpp toolkit\tstringlist.cpp toolkit\tbytevector.cpp toolkit\tbytevectorlist.cpp toolkit\tfile.cpp toolkit\tdebug.cpp toolkit\unicode.cpp flac\flacfile.cpp flac\flacpicture.cpp flac\flacproperties.cpp flac\flacmetadatablock.cpp flac\flacunknownmetadatablock.cpp wavpack\wavpackfile.cpp wavpack\wavpackproperties.cpp ogg\speex\speexfile.cpp ogg\speex\speexproperties.cpp trueaudio\trueaudiofile.cpp trueaudio\trueaudioproperties.cpp riff\rifffile.cpp riff\aiff\aifffile.cpp riff\aiff\aiffproperties.cpp riff\wav\wavfile.cpp riff\wav\wavproperties.cpp tag.cpp tagunion.cpp fileref.cpp audioproperties.cpp
+         mpegfile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         mpegproperties.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+     1>mpeg\mpegproperties.cpp(224): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+         mpegheader.cpp
+         xingheader.cpp
+         id3v1tag.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         id3v1genres.cpp
+         id3v2framefactory.cpp
+         id3v2synchdata.cpp
+         id3v2tag.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+     1>mpeg\id3v2\id3v2tag.cpp(438): warning C4390: ';' : empty controlled statement found; is this the intent?
+         id3v2header.cpp
+         id3v2frame.cpp
+         id3v2footer.cpp
+         id3v2extendedheader.cpp
+         attachedpictureframe.cpp
+         commentsframe.cpp
+         generalencapsulatedobjectframe.cpp
+         popularimeterframe.cpp
+         privateframe.cpp
+         relativevolumeframe.cpp
+         textidentificationframe.cpp
+         Generating Code...
+         Compiling...
+         uniquefileidentifierframe.cpp
+         unknownframe.cpp
+         unsynchronizedlyricsframe.cpp
+         urllinkframe.cpp
+         oggfile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         oggpage.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         oggpageheader.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         xiphcomment.cpp
+         vorbisfile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         vorbisproperties.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+     1>ogg\vorbis\vorbisproperties.cpp(176): warning C4244: '=' : conversion from '__int64' to 'int', possible loss of data
+         oggflacfile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+     1>ogg\flac\oggflacfile.cpp(262): warning C4390: ';' : empty controlled statement found; is this the intent?
+         mpcfile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         mpcproperties.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         apetag.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         apefooter.cpp
+         apeitem.cpp
+         apefile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         apeproperties.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         tstring.cpp
+     1>toolkit\tstring.cpp(238): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>toolkit\tstring.cpp(760): warning C4390: ';' : empty controlled statement found; is this the intent?
+         tstringlist.cpp
+         Generating Code...
+         Compiling...
+         tbytevector.cpp
+         tbytevectorlist.cpp
+         tfile.cpp
+     1>c:\college\systems capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>c:\college\systems capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+     1>toolkit\tfile.cpp(119): warning C4390: ';' : empty controlled statement found; is this the intent?
+         tdebug.cpp
+         unicode.cpp
+     1>toolkit\unicode.cpp(158): warning C4244: '=' : conversion from 'Unicode::UTF32' to 'Unicode::UTF8', possible loss of data
+     1>toolkit\unicode.cpp(256): warning C4244: '=' : conversion from 'Unicode::UTF32' to 'Unicode::UTF16', possible loss of data
+     1>toolkit\unicode.cpp(273): warning C4244: '=' : conversion from 'unsigned long' to 'Unicode::UTF16', possible loss of data
+         flacfile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+     1>flac\flacfile.cpp(199): warning C4309: '=' : truncation of constant value
+         flacpicture.cpp
+         flacproperties.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         flacmetadatablock.cpp
+         flacunknownmetadatablock.cpp
+         wavpackfile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         wavpackproperties.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         speexfile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         speexproperties.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         trueaudiofile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         trueaudioproperties.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         rifffile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         aifffile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         aiffproperties.cpp
+     1>riff\aiff\aiffproperties.cpp(150): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>riff\aiff\aiffproperties.cpp(151): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+         wavfile.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         Generating Code...
+         Compiling...
+         wavproperties.cpp
+         tag.cpp
+         tagunion.cpp
+         fileref.cpp
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(48): warning C4251: 'TagLib::FileName::m_name' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Alloc=std::allocator<char>
+                 ]
+     1>C:\College\Systems Capstone\temp\taglib-1.7\taglib\toolkit\tfile.h(49): warning C4251: 'TagLib::FileName::m_wname' : class 'std::basic_string<_Elem,_Traits,_Alloc>' needs to have dll-interface to be used by clients of class 'TagLib::FileName'
+                 with
+                 [
+                     _Elem=wchar_t,
+                     _Traits=std::char_traits<wchar_t>,
+                     _Alloc=std::allocator<wchar_t>
+                 ]
+         audioproperties.cpp
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\College\Systems Capstone\temp\taglib-1.7\taglib\Release\tag.dll" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\College\Systems Capstone\temp\zlib128-dll\lib\zdll.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:/College/Systems Capstone/temp/taglib-1.7/taglib/Release/tag.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/College/Systems Capstone/temp/taglib-1.7/taglib/Release/tag.lib" /MACHINE:X86 /SAFESEH  /machine:X86 /DLL tag.dir\Release\mpegfile.obj
+         tag.dir\Release\mpegproperties.obj
+         tag.dir\Release\mpegheader.obj
+         tag.dir\Release\xingheader.obj
+         tag.dir\Release\id3v1tag.obj
+         tag.dir\Release\id3v1genres.obj
+         tag.dir\Release\id3v2framefactory.obj
+         tag.dir\Release\id3v2synchdata.obj
+         tag.dir\Release\id3v2tag.obj
+         tag.dir\Release\id3v2header.obj
+         tag.dir\Release\id3v2frame.obj
+         tag.dir\Release\id3v2footer.obj
+         tag.dir\Release\id3v2extendedheader.obj
+         tag.dir\Release\attachedpictureframe.obj
+         tag.dir\Release\commentsframe.obj
+         tag.dir\Release\generalencapsulatedobjectframe.obj
+         tag.dir\Release\popularimeterframe.obj
+         tag.dir\Release\privateframe.obj
+         tag.dir\Release\relativevolumeframe.obj
+         tag.dir\Release\textidentificationframe.obj
+         tag.dir\Release\uniquefileidentifierframe.obj
+         tag.dir\Release\unknownframe.obj
+         tag.dir\Release\unsynchronizedlyricsframe.obj
+         tag.dir\Release\urllinkframe.obj
+         tag.dir\Release\oggfile.obj
+         tag.dir\Release\oggpage.obj
+         tag.dir\Release\oggpageheader.obj
+         tag.dir\Release\xiphcomment.obj
+         tag.dir\Release\vorbisfile.obj
+         tag.dir\Release\vorbisproperties.obj
+         tag.dir\Release\oggflacfile.obj
+         tag.dir\Release\mpcfile.obj
+         tag.dir\Release\mpcproperties.obj
+         tag.dir\Release\apetag.obj
+         tag.dir\Release\apefooter.obj
+         tag.dir\Release\apeitem.obj
+         tag.dir\Release\apefile.obj
+         tag.dir\Release\apeproperties.obj
+         tag.dir\Release\tstring.obj
+         tag.dir\Release\tstringlist.obj
+         tag.dir\Release\tbytevector.obj
+         tag.dir\Release\tbytevectorlist.obj
+         tag.dir\Release\tfile.obj
+         tag.dir\Release\tdebug.obj
+         tag.dir\Release\unicode.obj
+         tag.dir\Release\flacfile.obj
+         tag.dir\Release\flacpicture.obj
+         tag.dir\Release\flacproperties.obj
+         tag.dir\Release\flacmetadatablock.obj
+         tag.dir\Release\flacunknownmetadatablock.obj
+         tag.dir\Release\wavpackfile.obj
+         tag.dir\Release\wavpackproperties.obj
+         tag.dir\Release\speexfile.obj
+         tag.dir\Release\speexproperties.obj
+         tag.dir\Release\trueaudiofile.obj
+         tag.dir\Release\trueaudioproperties.obj
+         tag.dir\Release\rifffile.obj
+         tag.dir\Release\aifffile.obj
+         tag.dir\Release\aiffproperties.obj
+         tag.dir\Release\wavfile.obj
+         tag.dir\Release\wavproperties.obj
+         tag.dir\Release\tag.obj
+         tag.dir\Release\tagunion.obj
+         tag.dir\Release\fileref.obj
+         tag.dir\Release\audioproperties.obj
+            Creating library C:/College/Systems Capstone/temp/taglib-1.7/taglib/Release/tag.lib and object C:/College/Systems Capstone/temp/taglib-1.7/taglib/Release/tag.exp
+         tag.vcxproj -> C:\College\Systems Capstone\temp\taglib-1.7\taglib\Release\tag.dll
+     1>Done Building Project "C:\College\Systems Capstone\temp\taglib-1.7\taglib\tag.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:34.19

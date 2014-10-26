@@ -1,0 +1,5 @@
+C:/College/Systems Capstone/temp/taglib-1.7/CMakeFiles/ALL_BUILD.dir
+C:/College/Systems Capstone/temp/taglib-1.7/CMakeFiles/ZERO_CHECK.dir
+C:/College/Systems Capstone/temp/taglib-1.7/CMakeFiles/docs.dir
+C:/College/Systems Capstone/temp/taglib-1.7/taglib/CMakeFiles/tag.dir
+C:/College/Systems Capstone/temp/taglib-1.7/bindings/c/CMakeFiles/tag_c.dir

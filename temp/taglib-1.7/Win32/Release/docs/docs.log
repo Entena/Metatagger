@@ -1,0 +1,13 @@
+﻿Build started 10/25/2014 7:54:02 PM.
+     1>Project "C:\College\Systems Capstone\temp\taglib-1.7\docs.vcxproj" on node 2 (Build target(s)).
+     1>CustomBuild:
+         Building Custom Rule C:/College/Systems Capstone/temp/taglib-1.7/CMakeLists.txt
+         CMake does not need to re-run because C:\College\Systems Capstone\temp\taglib-1.7\CMakeFiles\generate.stamp is up-to-date.
+         'doxygen' is not recognized as an internal or external command,
+         operable program or batch file.
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppCommon.targets(172,5): error MSB6006: "cmd.exe" exited with code 9009.
+     1>Done Building Project "C:\College\Systems Capstone\temp\taglib-1.7\docs.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.08
