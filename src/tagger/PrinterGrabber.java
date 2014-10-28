@@ -50,7 +50,8 @@ public class PrinterGrabber {
             }
 
             //output = output.replace("{\"metadata\":", "");
-            //output = output.replaceFirst("}", "");          
+            //output = output.replaceFirst("}", ""); 
+            //System.out.println(output);
             return new JSONObject(output);            
             //System.out.print(output);
 

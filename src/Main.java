@@ -35,7 +35,9 @@ public class Main {
 						DatabaseBuilder dbBuilder = new DatabaseBuilder(dbconnect);
 						dbBuilder.buildDatabase();
 						FileHandler handler = new FileHandler(dbconnect);
-						ArrayList<File> mp3s = handler.getMP3s(new File(fileName));
+						File dir = new File(fileName);
+						System.out.println(dir.toString());
+						ArrayList<File> mp3s = handler.getMP3s(dir);
 						System.out.println("Got "+mp3s.size()+" mp3s");
 						ArrayList<File> missing = handler.getIncomplete(mp3s);
 						System.out.println("Songs missing info: "+missing.size()+" Songs not missing "+mp3s.size());
