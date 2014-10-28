@@ -14,7 +14,7 @@ public class PrinterGrabber {
 	public PrinterGrabber(){
 		if(System.getProperty("os.name").contains("Windows")){
 			//TODO add in windows binary in repo
-			cmd = "cmds"+System.getProperty("file.separator")+"echoprint-codegen-windows";
+			cmd = "cmds"+System.getProperty("file.separator")+"echoprint.exe";
 		} else {
 			cmd = "cmds"+System.getProperty("file.separator")+"echoprint-codegen-linux";
 		}
