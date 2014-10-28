@@ -54,6 +54,9 @@ public class Tagger {
 			String title, artist, bpm;
 			AudioFile f = AudioFileIO.read(mp3);
 			Tag tag = f.getTag();
+			if(tag == null){
+				return 9;//No tag what a drag.
+			}
 			artist = tag.getFirst(FieldKey.ARTIST);
 			title = tag.getFirst(FieldKey.TITLE);
 			bpm = tag.getFirst(FieldKey.BPM);
@@ -141,6 +144,15 @@ public class Tagger {
 			JSONObject meta = new JSONObject(song.get("metadata").toString());
 			EchoNestAPI en = new EchoNestAPI("B8NV7C9CDT8EYNPOM");
 			Params p = new Params();
+			/*String[] names = song.getNames(song);
+			names = meta.getNames(meta);
+			for(int i=0; i<names.length; i++){
+				System.out.println(names[i]);
+			}
+			names = meta.getNames(meta);
+			for(int i=0; i<names.length; i++){
+				System.out.println(names[i]);
+			}*/
 			p.add("code", song.getString("code"));
 			p.add("genre", meta.getString("genre"));
 			p.add("duration", meta.getString("duration"));

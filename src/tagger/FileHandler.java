@@ -62,7 +62,9 @@ public class FileHandler {
 		while(it.hasNext()){
 			File mp3 = it.next();
 			if(tagger.isMissingMeta(mp3) != 0){
-				mp3s.remove(mp3);
+				it.remove();
+				System.out.println("Removing "+mp3.toString());
+				//mp3s.remove(mp3);
 				missingInfo.add(mp3);
 			}
 		}
