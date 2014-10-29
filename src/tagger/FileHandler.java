@@ -98,7 +98,7 @@ public class FileHandler {
 						tagger.findSongInfo(songInfo);
 				case 4://bpm missing
 					tagger.calculateAndUpdateBPM(song);
-					System.out.println(tagger.getArtist(song)+" "+tagger.getBPM(song)+" "+tagger.getTitle(song)+" ");
+					System.out.println(tagger.getArtist(song)+" "+tagger.getBPM(song)+" "+tagger.getTitle(song));
 					//tagger.updateBPM(BPM.getBPM(song.getAbsolutePath()), song.getAbsolutePath());
 				break;
 				default://Unrecognized issue
