@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.net.URI;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
+import db.DBSong;
 import db.DatabaseBuilder;
 import db.DatabaseConnector;
 import db.DatabaseModel;
@@ -69,7 +71,7 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 		//building left side of display
-		String[] columnNames = {"Song", "Artist", "Album"};
+		String[] columnNames = {"ID", "Song", "Artist", "Album"};
 
 		songsModel = new DefaultTableModel(columnNames, 0);
 		playlistModel = new DefaultTableModel(columnNames, 0);
@@ -153,9 +155,7 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (chooser.showDialog(null, "Select Folder") == JFileChooser.APPROVE_OPTION) {
-					System.out.println(chooser.getCurrentDirectory());
-					System.out.println(chooser.getSelectedFile());
-					addFiles(chooser.getCurrentDirectory());
+					addFiles(chooser.getSelectedFile());
 				}
 			}
 		});
@@ -170,7 +170,9 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	private void playPressed() {
 		if (songsTable.getSelectedRow() == -1) return;
 
-		player.loadFile((String) songsModel.getValueAt(songsTable.getSelectedRow(), 0));
+		int id = Integer.parseInt((String) songsModel.getValueAt(songsTable.getSelectedRow(), 0));
+		DBSong song = dbmodel.getSong(id);
+		player.loadFile(URI.create(song.getFilepath()).toString());
 		player.play();
 	}
 
@@ -227,13 +229,13 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	 * 
 	 * @param f the song, must be an mp3
 	 */
-	public void addSong(File f) {
-		Object[] row = buildRow(f);
+	public void addSong(DBSong song) {
+		Object[] row = buildRow(song);
 		songsModel.addRow(row);
 	}
 
-	private Object[] buildRow(File f) {
-		Object[] row = {f.toURI().toString(), "", ""};
+	private Object[] buildRow(DBSong song) {
+		Object[] row = {Integer.toString(song.getSongId()), song.getName(), song.getArtist(), song.getAlbum()};
 		return row;
 	}
 
@@ -251,9 +253,9 @@ public class Gui extends JFrame implements Mp3PositionListener {
 				
 			}
 		});*/
-		handler.enterToDatabase(songs);
+		addFilesToTable(handler.enterAndReturnIDs(songs));
 		handler.identifyAndUpdateSongs(missing);
-		handler.enterToDatabase(missing);
+		addFilesToTable(handler.enterAndReturnIDs(missing));
 	}
 
 	/**
@@ -262,16 +264,8 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	 * @param f the directory currently being iterated through
 	 */
 	private void addFilesToTable(ArrayList<DBSong> songs) {
-		for (File f: files) {
-			if (f.isDirectory()) {
-				addFiles(f.listFiles()); //iterates through directories
-			}
-			else {
-				//check if it is an mp3
-				if (isMp3(f)) {
-					addSong(f);
-				}
-			}
+		for (DBSong song: songs) {
+			addSong(song);
 		}
 	}
 
