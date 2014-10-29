@@ -128,11 +128,10 @@ public class Tagger {
 			JSONObject meta = new JSONObject(song.get("metadata").toString());
 			EchoNestAPI en = new EchoNestAPI("B8NV7C9CDT8EYNPOM");
 			Params p = new Params();
-			/*String[] names = song.getNames(song);
-			names = meta.getNames(meta);
+			String[] names = song.getNames(song);		
 			for(int i=0; i<names.length; i++){
 				System.out.println(names[i]);
-			}
+			}/*
 			names = meta.getNames(meta);
 			for(int i=0; i<names.length; i++){
 				System.out.println(names[i]);

@@ -16,7 +16,11 @@ public class PrinterGrabber {
 			//TODO add in windows binary in repo
 			cmd = "cmds"+System.getProperty("file.separator")+"echoprint.exe";
 		} else {
-			cmd = "cmds"+System.getProperty("file.separator")+"echoprint-codegen-linux";
+			if(System.getProperty("os.arch").equals("amd64")){
+				cmd = "cmds"+System.getProperty("file.separator")+"echoprint-codegen-linux-64";
+			} else {
+				cmd = "cmds"+System.getProperty("file.separator")+"echoprint-codegen-linux";
+			}
 		}
 	}
 	
@@ -30,8 +34,10 @@ public class PrinterGrabber {
 	public JSONObject fingerprint(File mp3){
 		String s = null;
 		try {
-			System.out.println(cmd+" "+mp3.getAbsolutePath()+" 10 30");			
-			Process p = Runtime.getRuntime().exec(cmd+" "+mp3.getAbsolutePath()+" 10 30");	             
+			//System.out.println(cmd+" "+mp3.getAbsolutePath()+" 10 30");
+			ProcessBuilder pb = new ProcessBuilder(cmd, mp3.getAbsolutePath(), "10", "30");
+			Process p = pb.start();//Runtime.getRuntime().exec(cmd+" "+mp3.getAbsolutePath()+" 10 30");
+			//Process p = pb.start();
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));	 
             //BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));	 
             // read the output from the command
@@ -51,7 +57,6 @@ public class PrinterGrabber {
 
             //output = output.replace("{\"metadata\":", "");
             //output = output.replaceFirst("}", ""); 
-            //System.out.println(output);
             return new JSONObject(output);            
             //System.out.print(output);
 
