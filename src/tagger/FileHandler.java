@@ -1,5 +1,6 @@
 package tagger;
 
+import db.DBSong;
 import db.DatabaseConnector;
 import db.DatabaseModel;
 import java.io.File;
@@ -123,6 +124,29 @@ public class FileHandler {
 			}
 			dbmodel.insertSong(title, song.getAbsolutePath(), tagger.getAlbum(song), artist, 0, 0, Integer.parseInt(bpm));
 		}
+	}
+	
+	/**
+	 * This method enters songs to the database and returns a list of DBSongs
+	 * This should be used to add to the database, not the initial dump of songs
+	 * @param songs mp3 files to be added
+	 * @return an ArrayList of DBSongs
+	 */
+	public ArrayList<DBSong> enterAndReturnIDs(ArrayList<File> songs){
+		ArrayList<DBSong> ids = new ArrayList<DBSong>();
+		for(int i=0; i<songs.size(); i++){
+			File song = songs.get(i);
+			String artist = tagger.getArtist(song);
+			String title = tagger.getTitle(song);
+			String bpm = tagger.getBPM(song);
+			if(title.equals("")){
+				title = song.getName();//If somehow this song has no title from echonest then set
+				//it to file name
+			}
+			DBSong ret = dbmodel.insertSong(title, song.getAbsolutePath(), tagger.getAlbum(song), artist, 0, 0, Integer.parseInt(bpm));
+			ids.add(ret);
+		}
+		return ids;
 	}
 	
 }
