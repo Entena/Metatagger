@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -27,11 +29,16 @@ import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
+import db.DatabaseBuilder;
+import db.DatabaseConnector;
 import db.DatabaseModel;
+import db.SQLiteDatabaseConnector;
+import tagger.FileHandler;
 import tagger.Tagger;
 
 
 public class Gui extends JFrame implements Mp3PositionListener {
+	private static final String DBNAME = "metatag.db";
 	private static final long MICRO = 1000000;
 	private DefaultTableModel songsModel;
 	private DefaultTableModel playlistModel;
@@ -40,8 +47,10 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	private JButton playButton, pauseButton, stopButton, ffButton, rwndButton;
 	private AudioPlayer player;
 	private JFileChooser chooser;
-	private File currentSong;
-	private DatabaseModel db;
+	private FileHandler handler;
+	private int currentSong;
+	private DatabaseConnector dbconn;
+	private DatabaseModel dbmodel;
 	JTable songsTable;
 
 
@@ -49,14 +58,15 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		super("Metatagger");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		player = new AudioPlayer();
-		//db = new DatabaseModel(dbConn)
-		
+		setUpDatabase();
+		handler = new FileHandler(dbconn);
+
 		chooser = new JFileChooser("C:\\Users\\Shayan\\Music\\iTunes\\iTunes Media\\Music\\");
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				"MP3 Files", "mp3");
 		chooser.setFileFilter(filter);
-		
-		//chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 		//building left side of display
 		String[] columnNames = {"Song", "Artist", "Album"};
@@ -70,9 +80,9 @@ public class Gui extends JFrame implements Mp3PositionListener {
 				//DO STUFF
 			}
 		}); //used to update changes in the table in the db
-		
+
 		JScrollPane songList = new JScrollPane(songsTable);//new JTable(songsModel));
-		
+
 		JScrollPane playlist = new JScrollPane(new JTable(playlistModel));
 
 
@@ -159,7 +169,7 @@ public class Gui extends JFrame implements Mp3PositionListener {
 
 	private void playPressed() {
 		if (songsTable.getSelectedRow() == -1) return;
-		
+
 		player.loadFile((String) songsModel.getValueAt(songsTable.getSelectedRow(), 0));
 		player.play();
 	}
@@ -191,7 +201,7 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	private String getNextSong() {
 		return null;
 	}
-	
+
 	private boolean isMp3(File f) {
 		String filename = f.getName();
 		String extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
@@ -233,11 +243,17 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	 * @param directory the directory to be iterated through
 	 */
 	public void addFiles(File directory) {
-		if (directory.isDirectory()) {
-			addFiles(directory.listFiles());
-		}
-		//Tagger tag = new Tagger(directory.getAbsolutePath());
-		//tag.
+		ArrayList<File> songs = handler.getMP3s(directory);
+		ArrayList<File> missing = handler.getIncomplete(songs);
+		/*Thread t = new Thread(new Runnable(ArrayList<File>) {
+			public void run() {
+				// TODO Auto-generated method stub
+				
+			}
+		});*/
+		handler.enterToDatabase(songs);
+		handler.identifyAndUpdateSongs(missing);
+		handler.enterToDatabase(missing);
 	}
 
 	/**
@@ -245,7 +261,7 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	 * 
 	 * @param f the directory currently being iterated through
 	 */
-	private void addFiles(File[] files) {
+	private void addFilesToTable(ArrayList<DBSong> songs) {
 		for (File f: files) {
 			if (f.isDirectory()) {
 				addFiles(f.listFiles()); //iterates through directories
@@ -259,4 +275,24 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		}
 	}
 
+	private void setUpDatabase() {
+		dbconn = new SQLiteDatabaseConnector(DBNAME);
+		try {
+			dbconn.openDBConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Could not open Connection");
+			System.exit(0);
+		}
+		
+		File f = new File(DBNAME);
+		if (!f.exists()) {
+			DatabaseBuilder dbbuild = new DatabaseBuilder(dbconn);
+			if (!dbbuild.buildDatabase()) {
+				System.out.println("Could not bulid db");
+				System.exit(0);
+			}
+		}
+		dbmodel = new DatabaseModel(dbconn);
+	}
 }
