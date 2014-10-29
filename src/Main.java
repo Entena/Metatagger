@@ -31,9 +31,9 @@ public class Main {
 					String fileName = args[count+1];
 					DatabaseConnector dbconnect = new SQLiteDatabaseConnector("dbtest.db");
 					try{
-						dbconnect.openDBConnection();
-						DatabaseBuilder dbBuilder = new DatabaseBuilder(dbconnect);
-						dbBuilder.buildDatabase();
+						//dbconnect.openDBConnection();
+						//DatabaseBuilder dbBuilder = new DatabaseBuilder(dbconnect);
+						//dbBuilder.buildDatabase();
 						FileHandler handler = new FileHandler(dbconnect);
 						File dir = new File(fileName);
 						System.out.println(dir.toString());

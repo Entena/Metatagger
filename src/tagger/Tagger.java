@@ -1,40 +1,21 @@
 package tagger;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.DirectoryIteratorException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.AudioHeader;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
-import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
-import org.jaudiotagger.tag.TagException;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import beatit.BPM;
 
 import com.echonest.api.v4.EchoNestAPI;
 import com.echonest.api.v4.EchoNestException;
-import com.echonest.api.v4.IdentifySongParams;
 import com.echonest.api.v4.Params;
 import com.echonest.api.v4.Song;
-import com.echonest.api.v4.Track;
-import com.mpatric.mp3agic.ID3v1;
-import com.mpatric.mp3agic.ID3v2;
-import com.mpatric.mp3agic.ID3v24Tag;
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
+
 
 public class Tagger {	
 	
@@ -118,6 +99,9 @@ public class Tagger {
 		try {
 			AudioFile f = AudioFileIO.read(file);
 			Tag tag = f.getTag();
+			if(tag == null){
+				tag = f.createDefaultTag();
+			}
 			tag.setField(FieldKey.BPM, Integer.toString(bpm));
 			f.commit();
 			return bpm;
@@ -155,12 +139,12 @@ public class Tagger {
 			}*/
 			p.add("code", song.getString("code"));
 			p.add("genre", meta.getString("genre"));
-			p.add("duration", meta.getString("duration"));
+			p.add("duration", meta.get("duration").toString());
 			p.add("title", meta.getString("title"));
 			p.add("filename", meta.getString("filename"));
 			p.add("artist", meta.getString("artist"));
 			p.add("release", meta.getString("release"));
-			p.add("version", meta.getString("version"));
+			p.add("version", meta.get("version").toString());
 			List<Song> songs = en.identifySongs(p);
 			if(songs.size() > 0){
 				updateTags(songs.get(0).getArtistName(), songs.get(0).getTitle(), meta.getString("filename"));
@@ -190,13 +174,15 @@ public class Tagger {
 	 */
 	public void updateTags(String artist, String title, String filename){
 		try {
-			AudioFile f = AudioFileIO.read(new File(filename));
-			Tag tag = f.getTag();
+			File file = new File(filename);
+			AudioFile f = AudioFileIO.read(file);
+			Tag tag = f.getTagOrCreateAndSetDefault();
 			tag.setField(FieldKey.ARTIST, artist);
 			tag.setField(FieldKey.TITLE, title);
-			f.commit();
+			AudioFileIO.write(f);			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			System.out.println(filename);
 			e.printStackTrace();
 		}
 	}
@@ -209,7 +195,7 @@ public class Tagger {
 	public void updateBPM(int bpm, String filename){
 		try {
 			AudioFile f = AudioFileIO.read(new File(filename));
-			Tag tag = f.getTag();
+			Tag tag = f.getTagOrCreateAndSetDefault();			
 			tag.setField(FieldKey.BPM, Integer.toString(bpm));
 			f.commit();
 		} catch (Exception e) {
