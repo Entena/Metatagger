@@ -2,6 +2,8 @@ package gui;
 
 
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -10,11 +12,13 @@ import javafx.scene.media.MediaPlayer;
 public class AudioPlayer {
 	private Media currentSong, bufferedSong;
 	private MediaPlayer player, bufferPlayer;
+	private Mp3PositionListener listener;
 
-	public AudioPlayer() {
+	public AudioPlayer(Mp3PositionListener l) {
 		player = null;
 		currentSong = null;
 		new JFXPanel(); //required to use javafx media
+		listener = l;
 	}
 
 	/**
@@ -25,6 +29,11 @@ public class AudioPlayer {
 		System.out.println(s);
 		currentSong = new Media(s);
 		player = new MediaPlayer(currentSong);
+		player.currentTimeProperty().addListener(new InvalidationListener() {
+			public void invalidated(Observable o) {
+				listener.updateSeektime(player.getCurrentTime().toMillis()/player.getTotalDuration().toMillis());
+			}
+		});
 	}
 
 	/**
