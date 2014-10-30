@@ -270,6 +270,9 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	}
 
 	private void setUpDatabase() {
+	    File f = new File(DBNAME);
+	    boolean firstRun = f.exists();
+	    
 		dbconn = new SQLiteDatabaseConnector(DBNAME);
 		try {
 			dbconn.openDBConnection();
@@ -279,8 +282,8 @@ public class Gui extends JFrame implements Mp3PositionListener {
 			System.exit(0);
 		}
 		
-		File f = new File(DBNAME);
-		if (!f.exists()) {
+		
+		if (firstRun) {
 			DatabaseBuilder dbbuild = new DatabaseBuilder(dbconn);
 			if (!dbbuild.buildDatabase()) {
 				System.out.println("Could not bulid db");
