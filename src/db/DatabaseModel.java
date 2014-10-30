@@ -34,6 +34,7 @@ public class DatabaseModel {
     
     private String selectSongSQLTemplate = "";
     private String selectAllSongsSQLTemplate = "";
+    private String selectSongsByIdSQLTemplate = "";
     private String selectSongIdsSQLTemplate = "";
     private String selectSongByMetaTemplate = "";
     
@@ -68,6 +69,9 @@ public class DatabaseModel {
             selectSongSQLTemplate = DatabaseHelper.SQLFromFile(
                                                 DatabaseHelper.SQL_FOLDER_PATH +
                                                 "select_song_template.sql");
+            selectSongsByIdSQLTemplate = DatabaseHelper.SQLFromFile(
+                                            DatabaseHelper.SQL_FOLDER_PATH +
+                                            "select_song_by_ids_template.sql");
             selectAllSongsSQLTemplate = DatabaseHelper.SQLFromFile(
                                                 DatabaseHelper.SQL_FOLDER_PATH +
                                                 "select_all_songs_template.sql");
@@ -228,6 +232,34 @@ public class DatabaseModel {
         try {
             Statement stmt = dbConn.getDBConnection().createStatement();
             ResultSet result = stmt.executeQuery(selectAllSongsSQLTemplate);
+            while(result.next()){
+                songs.add(dbsongFromResultSet(result));
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            System.err.println("Could not select the songs from the database.");
+            e.printStackTrace();
+            return songs;
+        }
+        return songs;
+    }
+    
+    public ArrayList<DBSong> getSongsById(ArrayList<Integer> ids){
+        StringBuilder sb = new StringBuilder();
+        for(Integer id : ids){
+            sb.append(ids).append(',');
+        }
+        sb.deleteCharAt(sb.lastIndexOf(","));
+        
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("songids", sb.toString());
+
+        ArrayList<DBSong> songs = new ArrayList<DBSong>();
+        String completeSql = DatabaseHelper.SQLBuilder(
+                                            selectSongsByIdSQLTemplate, params);
+        try {
+            Statement stmt = dbConn.getDBConnection().createStatement();
+            ResultSet result = stmt.executeQuery(completeSql);
             while(result.next()){
                 songs.add(dbsongFromResultSet(result));
             }
