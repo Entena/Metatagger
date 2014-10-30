@@ -161,6 +161,7 @@ public class DBTest {
         
         System.out.println("Inserting song...");
         DatabaseModel dbModel = new DatabaseModel(dbConn);
+        int insertCount = 0;
         DBSong song = dbModel.insertSong("foobar", "sdf/", "dsf",
                                          "dfs", 1111, 10, 100);
         if(song == null){
@@ -168,19 +169,30 @@ public class DBTest {
             failed = true;
             return;
         }
+        insertCount++;
+        
+        System.out.println("Inserting song with special character...");
+        DBSong song1 = dbModel.insertSong("foobar's", "sdf/", "dsf",
+                                          "dfs", 1111, 20, 1000);
+        if(song1 == null){
+            reason = "The song was not inserted into the database";
+            failed = true;
+            return;
+        }
+        insertCount++;
         
 
         System.out.println("Selecting songs...");
         
         ArrayList<Integer> ids = dbModel.getAllSongIds();
-        if(ids.size() != 1){
+        if(ids.size() != insertCount){
             reason = "The wrong amount of ids were returned";
             failed = true;
             return;
         }
         
         ArrayList<DBSong> songs = dbModel.getAllSongs();
-        if(songs.size() != 1){
+        if(songs.size() != insertCount){
             reason = "The wrong amount of songs were returned";
             failed = true;
             return;
