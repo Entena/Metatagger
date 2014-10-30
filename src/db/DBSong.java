@@ -41,10 +41,10 @@ public class DBSong {
         
         songTableParams = new HashMap<String, String>();
         songTableParams.put("songid", Integer.toString(songId));
-        songTableParams.put("name", '\'' + name + '\'');
-        songTableParams.put("filepath",  '\'' + filepath + '\'');
-        songTableParams.put("album",  '\'' + album + '\'');
-        songTableParams.put("artist",  '\'' + artist + '\'');
+        songTableParams.put("name", name);
+        songTableParams.put("filepath",  filepath);
+        songTableParams.put("album",  album);
+        songTableParams.put("artist",  artist);
         songTableParams.put("lastplayed", Integer.toString(lastPlayed));
         songTableParams.put("playcount", Integer.toString(playCount));
         songTableParams.put("songid", Integer.toString(songId));
@@ -74,7 +74,7 @@ public class DBSong {
     public void setName(String name){
         dirty = true;
         this.name = name;
-        songTableParams.put("name", '\'' + name + '\'');
+        songTableParams.put("name", name);
     }
     
     public String getFilepath(){
@@ -84,7 +84,7 @@ public class DBSong {
     public void setFilepath(String filepath){
         dirty = true;
         this.filepath = filepath;
-        songTableParams.put("filepath", '\'' + filepath + '\'');
+        songTableParams.put("filepath", filepath);
     }
     
     public String getAlbum(){
@@ -94,7 +94,7 @@ public class DBSong {
     public void setAlbum(String album){
         dirty = true;
         this.album = album;
-        songTableParams.put("album", '\'' + album + '\'');
+        songTableParams.put("album", album);
     }
     
     public String getArtist(){
@@ -104,7 +104,7 @@ public class DBSong {
     public void setArtist(String artist){
         dirty = true;
         this.artist = artist;
-        songTableParams.put("artist", '\'' + artist + '\'');
+        songTableParams.put("artist", artist);
     }
     
     public int getLastPlayed(){
@@ -204,8 +204,8 @@ public class DBSong {
             
             metaDataParams = new HashMap<String, String>();
             metaDataParams.put("songid", Integer.toString(songId));
-            metaDataParams.put("key", '\'' + key + '\'');
-            metaDataParams.put("value",  '\'' + value + '\'');
+            metaDataParams.put("key", key);
+            metaDataParams.put("value",  value);
         }
         
         public void markClean(){
@@ -232,7 +232,7 @@ public class DBSong {
         public void setValue(String value){
             dirty = true;
             this.value = value;
-            metaDataParams.put("value",  '\'' + value + '\'');
+            metaDataParams.put("value",  value);
         }
         
         public String getKey(){
