@@ -53,13 +53,14 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	private int currentSong;
 	private DatabaseConnector dbconn;
 	private DatabaseModel dbmodel;
-	JTable songsTable;
+	private JTable songsTable;
+	private boolean allowSeeking;
 
 
 	public Gui() {
 		super("Metatagger");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		player = new AudioPlayer();
+		player = new AudioPlayer(this);
 		setUpDatabase();
 		handler = new FileHandler(dbconn);
 
@@ -165,6 +166,8 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		setPreferredSize(new Dimension(1000, 800));
 		pack();
 		setVisible(true);
+		allowSeeking = true;
+		loadInitial();
 	}
 
 	private void playPressed() {
@@ -172,7 +175,8 @@ public class Gui extends JFrame implements Mp3PositionListener {
 
 		int id = Integer.parseInt((String) songsModel.getValueAt(songsTable.getSelectedRow(), 0));
 		DBSong song = dbmodel.getSong(id);
-		player.loadFile(URI.create(song.getFilepath()).toString());
+		File f = new File(song.getFilepath());
+		player.loadFile(f.toURI().toString());
 		player.play();
 	}
 
@@ -193,7 +197,8 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	}
 
 	private void seek(int i) {
-		System.out.println(i);
+		if (allowSeeking)
+			player.seek(seekbar.getValue()/100.);
 	}
 
 	private void volChange(int i) {
@@ -211,9 +216,10 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	}
 
 	@Override
-	public void updateSeektime(long pos) {
-		// TODO Auto-generated method stub
-
+	public void updateSeektime(double pos) {
+		allowSeeking = false;
+		seekbar.setValue((int) (pos*100));
+		allowSeeking = true;
 	}
 
 	@Override
@@ -250,7 +256,7 @@ public class Gui extends JFrame implements Mp3PositionListener {
 		/*Thread t = new Thread(new Runnable(ArrayList<File>) {
 			public void run() {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});*/
 		addFilesToTable(handler.enterAndReturnIDs(songs));
@@ -270,9 +276,9 @@ public class Gui extends JFrame implements Mp3PositionListener {
 	}
 
 	private void setUpDatabase() {
-	    File f = new File(DBNAME);
-	    boolean firstRun = f.exists();
-	    
+		File f = new File(DBNAME);
+		boolean firstRun = !f.exists();
+
 		dbconn = new SQLiteDatabaseConnector(DBNAME);
 		try {
 			dbconn.openDBConnection();
@@ -281,8 +287,8 @@ public class Gui extends JFrame implements Mp3PositionListener {
 			System.out.println("Could not open Connection");
 			System.exit(0);
 		}
-		
-		
+
+
 		if (firstRun) {
 			DatabaseBuilder dbbuild = new DatabaseBuilder(dbconn);
 			if (!dbbuild.buildDatabase()) {
@@ -291,5 +297,14 @@ public class Gui extends JFrame implements Mp3PositionListener {
 			}
 		}
 		dbmodel = new DatabaseModel(dbconn);
+	}
+
+	private void loadInitial() {
+		ArrayList<Integer> ids = dbmodel.getAllSongIds();
+
+		for (Integer id: ids) {
+			DBSong song = dbmodel.getSong(id);
+			addSong(song);
+		}
 	}
 }
