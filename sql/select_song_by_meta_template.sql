@@ -1,0 +1,2 @@
+SELECT SONG_ID FROM MetaData
+WHERE META_ID='*key*' AND META_VALUE='*value*';

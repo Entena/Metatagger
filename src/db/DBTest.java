@@ -112,6 +112,14 @@ public class DBTest {
     private static String reason = "";
     private static String dbFile = "dbTest.db";
     
+    
+    private static DatabaseConnector dbConn;
+    private static DatabaseModel dbModel;
+    private static DatabaseBuilder dbBuilder;
+
+    private static int insertCount = 0;
+    private static DBSong song;
+    
     /**
      * @param args
      */
@@ -136,120 +144,55 @@ public class DBTest {
     }
     
     private static void runTests(){
+        if(!initializationTests()) return;
+        
+        if(!insertTests()) return;
+        
+        if(!selectTests()) return;
+        
+        if(!updateTests()) return;
+        
+        if(!deletionTests()) return;
+        
+        if(!shutdownTests()) return;
+    }
+    
+    private static boolean initializationTests(){
         System.out.println("Creating and opening sqlite db connector...");
-        DatabaseConnector dbConn = new SQLiteDatabaseConnector(dbFile);
+        dbConn = new SQLiteDatabaseConnector(dbFile);
         try {
             dbConn.openDBConnection();
         } catch (SQLException e) {
             e.printStackTrace();
             reason = "Could not open the connector";
             failed = true;
-            return;
+            return false;
         }
         System.out.println("Sqlite db connector ready to use...");
 
         System.out.println("Building db tables...");
-        DatabaseBuilder dbBuilder = new DatabaseBuilder(dbConn);
+        dbBuilder = new DatabaseBuilder(dbConn);
         if(dbBuilder.buildDatabase()){
             System.out.println("DB tables have been created...");
         } else {
             reason = "Could not build database";
             failed = true;
-            return;
+            return false;
         }
         
+        dbModel = new DatabaseModel(dbConn);
         
-        System.out.println("Inserting song...");
-        DatabaseModel dbModel = new DatabaseModel(dbConn);
-        int insertCount = 0;
-        DBSong song = dbModel.insertSong("foobar", "sdf/", "dsf",
-                                         "dfs", 1111, 10, 100);
-        if(song == null){
-            reason = "The song was not inserted into the database";
-            failed = true;
-            return;
-        }
-        insertCount++;
-        
-        System.out.println("Inserting song with special character...");
-        DBSong song1 = dbModel.insertSong("foobar's", "sdf/", "dsf",
-                                          "dfs", 1111, 20, 1000);
-        if(song1 == null){
-            reason = "The song was not inserted into the database";
-            failed = true;
-            return;
-        }
-        insertCount++;
-        
+        return true;
+    }
 
-        System.out.println("Selecting songs...");
-        
-        ArrayList<Integer> ids = dbModel.getAllSongIds();
-        if(ids.size() != insertCount){
-            reason = "The wrong amount of ids were returned";
-            failed = true;
-            return;
-        }
-        
-        ArrayList<DBSong> songs = dbModel.getAllSongs();
-        if(songs.size() != insertCount){
-            reason = "The wrong amount of songs were returned";
-            failed = true;
-            return;
-        } else if (songs.get(0).getSongId() != song.getSongId()){
-            reason = "The wrong song id was returned";
-            failed = true;
-            return;
-        }
-        
-        DBSong dbSong = dbModel.getSong(song.getSongId());
-        if(dbSong.getSongId() != song.getSongId()){
-            reason = "The wrong song id was returned";
-            failed = true;
-            return;
-        }
-        
-        ids = dbModel.getSongFromBPMRange(song.getBPM(), song.getBPM() + 1);
-        if(ids.size() != 1){
-            reason = "The wrong amount of ids were returned in bpm range";
-            failed = true;
-            return;
-        }
-        
-        ids = dbModel.getSongFromPlayCountRange( song.getPlayCount(),
-                                                 song.getPlayCount() + 1);
-        if(ids.size() != 1){
-            reason = "The wrong amount of ids were returned in play count range";
-            failed = true;
-            return;
-        }
-        
-        
-        System.out.println("Updating song...");
-        song.setPlayCount(11);
-        boolean result = dbModel.updateSong(song);
-        if(!result || song.isDirty()){
-            reason = "The song was not update in the database";
-            failed = true;
-            return;
-        }
-        
-        System.out.println("Deleting song...");
-        result = dbModel.deleteSong(song.getSongId());
-        if(!result){
-            reason = "The song was not removed from the database";
-            failed = true;
-            return;
-        }
-        
-        
+    private static boolean shutdownTests(){
         System.out.println("Destroying the database...");
         if(dbBuilder.destroyDatabase()){
             System.out.println("DB has been destroyed...");
         } else {
             reason = "Could not destroy the database";
             failed = true;
-            return;
+            return false;
         }
         
         try {
@@ -258,8 +201,103 @@ public class DBTest {
             e.printStackTrace();
             reason = "Could not close the connector";
             failed = true;
-            return;
+            return false;
         }
+        
+        return true;
     }
 
+    private static boolean insertTests(){
+        System.out.println("Inserting song...");
+        song = dbModel.insertSong("foobar", "sdf/", "dsf",
+                                  "dfs", 1111, 10, 100);
+        if(song == null){
+            reason = "The song was not inserted into the database";
+            failed = true;
+            return false;
+        }
+        insertCount++;
+        
+        System.out.println("Inserting song with special character...");
+        DBSong specialCharSong = dbModel.insertSong("foobar's", "sdf/", "dsf",
+                                                    "dfs", 1111, 20, 1000);
+        if(specialCharSong == null){
+            reason = "The song was not inserted into the database";
+            failed = true;
+            return false;
+        }
+        
+        insertCount++;
+        return true;
+    }
+    
+    private static boolean selectTests(){
+        System.out.println("Selecting songs...");
+        
+        ArrayList<Integer> ids = dbModel.getAllSongIds();
+        if(ids.size() != insertCount){
+            reason = "The wrong amount of ids were returned";
+            failed = true;
+            return false;
+        }
+        
+        ArrayList<DBSong> songs = dbModel.getAllSongs();
+        if(songs.size() != insertCount){
+            reason = "The wrong amount of songs were returned";
+            failed = true;
+            return false;
+        } else if (songs.get(0).getSongId() != song.getSongId()){
+            reason = "The wrong song id was returned";
+            failed = true;
+            return false;
+        }
+        
+        DBSong dbSong = dbModel.getSong(song.getSongId());
+        if(dbSong.getSongId() != song.getSongId()){
+            reason = "The wrong song id was returned";
+            failed = true;
+            return false;
+        }
+        
+        ids = dbModel.getSongFromBPMRange(song.getBPM(), song.getBPM() + 1);
+        if(ids.size() != 1){
+            reason = "The wrong amount of ids were returned in bpm range";
+            failed = true;
+            return false;
+        }
+        
+        ids = dbModel.getSongFromPlayCountRange( song.getPlayCount(),
+                                                 song.getPlayCount() + 1);
+        if(ids.size() != 1){
+            reason = "The wrong amount of ids were returned in play count range";
+            failed = true;
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private static boolean updateTests(){
+        System.out.println("Updating song...");
+        song.setPlayCount(11);
+        boolean result = dbModel.updateSong(song);
+        if(!result || song.isDirty()){
+            reason = "The song was not update in the database";
+            failed = true;
+            return false;
+        }
+        return true;
+    }
+    
+    private static boolean deletionTests(){
+        System.out.println("Deleting song...");
+        boolean result = dbModel.deleteSong(song.getSongId());
+        if(!result){
+            reason = "The song was not removed from the database";
+            failed = true;
+            return false;
+        }
+        
+        return true;
+    }
 }
