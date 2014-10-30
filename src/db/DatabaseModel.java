@@ -35,6 +35,7 @@ public class DatabaseModel {
     private String selectSongSQLTemplate = "";
     private String selectAllSongsSQLTemplate = "";
     private String selectSongIdsSQLTemplate = "";
+    private String selectSongByMetaTemplate = "";
     
     private String selectSongIdsBPMRangeTemplate = "";
     private String selectSongIdsPlayCountRangeTemplate = "";
@@ -80,6 +81,10 @@ public class DatabaseModel {
             selectSongIdsPlayCountRangeTemplate = DatabaseHelper.SQLFromFile(
                                     DatabaseHelper.SQL_FOLDER_PATH +
                                     "select_song_playcount_range_template.sql");
+            selectSongByMetaTemplate = DatabaseHelper.SQLFromFile(
+                                            DatabaseHelper.SQL_FOLDER_PATH +
+                                            "select_song_by_meta_template.sql");
+            
             
             
             deleteSongSQLTemplate = DatabaseHelper.SQLFromFile(
@@ -325,6 +330,35 @@ public class DatabaseModel {
     }
     
     /**
+     * Searches for songs that have meta tag keys that match the value provided.
+     * @param key
+     * @param value
+     * @return
+     */
+    public ArrayList<Integer> getSongFromMetaQuery(String key, String value){
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("key", key);
+        params.put("value", value);
+        
+        String completedSQL = DatabaseHelper.SQLBuilder(selectSongByMetaTemplate,
+                                                        params);
+        
+        try {
+            Statement stmt = dbConn.getDBConnection().createStatement();
+            ResultSet result = stmt.executeQuery(completedSQL);
+            while(result.next()){
+                ids.add(result.getInt(DatabaseHelper.SONG_ID_FORIEGN_KEY_COLUMN));
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            System.err.println("Could not select the song ids from the database.");
+            e.printStackTrace();
+        }
+        return ids;
+    }
+    
+    /**
      * Helper function used by getAllSongs and getSong to transform a result
      * from the database into a usable java object.
      * @param result The result set that contains the information about the
@@ -372,9 +406,5 @@ public class DatabaseModel {
             return false;
         }
         return true;
-    }
-    
-    public boolean addMetaData( String songId, String metaTag, String value){
-        return false;
     }
 }
