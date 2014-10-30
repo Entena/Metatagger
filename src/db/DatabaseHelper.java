@@ -82,7 +82,7 @@ public class DatabaseHelper {
         
         // Loop over ever key in the parameters hash map
         for(String key : parameters.keySet()){
-            String value = parameters.get(key);
+            String value = parameters.get(key).replaceAll("'", "''");
             
             // The keys in the sql will be formated *key*. And so that is what
             // we need to search in the sql by.
