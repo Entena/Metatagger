@@ -4,7 +4,7 @@ package gui;
  * Listens for changes
  */
 
-public interface Mp3PositionListener {
+public interface Mp3Listener {
 	
 	/*
 	 * called when the position of the song has changed
@@ -18,4 +18,18 @@ public interface Mp3PositionListener {
 	 * when stopped or paused)
 	 */
 	void songFinished();
+	
+	/*
+	 * called when the song starts playing
+	 */
+	void playStarted();
+	
+	/*
+	 * called when song is paused
+	 */
+	void paused();
+	
+	/*
+	 * 
+	 */
 }
