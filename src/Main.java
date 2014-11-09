@@ -48,6 +48,7 @@ public class Main {
 					count = count+2;
 				break;
 				case "-g":
+					count++;
 					new Gui();
 				break;
 				default://If none of your cases match then this is an unrecognized parameter and we will exit.
