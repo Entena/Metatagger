@@ -1,5 +1,8 @@
 package gui;
 
+import gui.plugin.LearningPlugin;
+import gui.plugin.PluginLoader;
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -18,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
@@ -53,6 +58,9 @@ public class Gui extends JFrame implements Mp3Listener {
 	private DatabaseModel dbmodel;
 	private JTable songsTable;
 	private boolean allowSeeking;
+	
+	ArrayList<LearningPlugin> loadedPlugins;
+	private LearningPlugin currentPlugin;
 
 
 	public Gui() {
@@ -177,9 +185,64 @@ public class Gui extends JFrame implements Mp3Listener {
 		});
 		menu.add(menuItem);
 		
+		//creatubg the pluging menu
 		JMenu pluginMenu = new JMenu("Plugins");
 		menuBar.add(pluginMenu);
 		
+		JMenuItem loadedPluginsMenu = new JMenuItem("Loaded Plugins");
+		loadedPlugins = new ArrayList<LearningPlugin>();
+		loadedPluginsMenu.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                LoadedPluginDialog dialog = new LoadedPluginDialog(
+                                                  loadedPlugins, currentPlugin);
+                dialog.setVisible(true);
+                
+                if(dialog.getSelected() != currentPlugin){
+                    currentPlugin = dialog.getSelected();
+                }
+            }
+        });
+		
+		pluginMenu.add(loadedPluginsMenu);
+		
+		JMenuItem loadPlugins = new JMenuItem("Load Plugins");
+		loadPlugins.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                JFileChooser jarChooser = new JFileChooser(".");
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                                                 "Jar Plugins", "jar");
+                jarChooser.setFileFilter(filter);
+
+                jarChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                
+                if (jarChooser.showDialog(null, "Select Plugin") == JFileChooser.APPROVE_OPTION) {
+                    PluginLoader loader = new PluginLoader();
+                    try {
+                        loadedPlugins.addAll(
+                                loader.loadPlugin(
+                                        jarChooser.getSelectedFile()
+                                                           .getAbsolutePath()));
+                    } catch (InstantiationException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+		pluginMenu.add(loadPlugins);
 
 		setJMenuBar(menuBar);
 		setPreferredSize(new Dimension(1000, 800));
