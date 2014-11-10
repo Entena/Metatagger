@@ -8,5 +8,7 @@ package gui.plugin;
  */
 public enum FinishedSongStatus {
     COMPLETED,
-    SKIPPED
+    SKIPPED,
+    FIRST_SONG,
+    USER_SELECTED
 }
