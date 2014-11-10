@@ -176,6 +176,10 @@ public class Gui extends JFrame implements Mp3Listener {
 			}
 		});
 		menu.add(menuItem);
+		
+		JMenu pluginMenu = new JMenu("Plugins");
+		menuBar.add(pluginMenu);
+		
 
 		setJMenuBar(menuBar);
 		setPreferredSize(new Dimension(1000, 800));
