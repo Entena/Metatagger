@@ -3,6 +3,7 @@ package gui;
 import gui.plugin.LearningPlugin;
 import gui.plugin.PluginLoader;
 
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +25,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
@@ -34,6 +37,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+
 import db.DBSong;
 import db.DatabaseBuilder;
 import db.DatabaseConnector;
@@ -48,7 +52,7 @@ public class Gui extends JFrame implements Mp3Listener {
 	private DefaultTableModel playlistModel;
 	private JSlider volume;
 	private JSlider seekbar;
-	private JLabel songPosition;
+	private JLabel songPosition, currentSongTitle, currentSongArtist;
 	private JButton playButton, ffButton, rwndButton;
 	private AudioPlayer player;
 	private JFileChooser chooser;
@@ -57,11 +61,12 @@ public class Gui extends JFrame implements Mp3Listener {
 	private DatabaseConnector dbconn;
 	private DatabaseModel dbmodel;
 	private JTable songsTable;
+	private JProgressBar progressBar;
 	private boolean allowSeeking;
-	
+	private JLabel progressBarLabel;
+
 	ArrayList<LearningPlugin> loadedPlugins;
 	private LearningPlugin currentPlugin;
-
 
 	public Gui() {
 		super("Metatagger");
@@ -85,9 +90,7 @@ public class Gui extends JFrame implements Mp3Listener {
 
 		songsTable = new JTable(songsModel) {
 			public boolean isCellEditable(int row, int column) {
-				if (column == 0)
-					return false;
-				return super.isCellEditable(row, column);
+				return false;
 			}
 		}; //makes the ID column uneditable
 		songsModel.addTableModelListener(new TableModelListener() {
@@ -163,6 +166,25 @@ public class Gui extends JFrame implements Mp3Listener {
 			public void stateChanged(ChangeEvent e) {updateVolume();}
 		});
 		rightSide.add(volume);
+
+		JPanel songInfoPanel = new JPanel();
+		songInfoPanel.setLayout(new BoxLayout(songInfoPanel, BoxLayout.PAGE_AXIS));
+		JLabel curSongLabel = new JLabel("Currently Playing:");
+		currentSongTitle = new JLabel("\0");
+		currentSongArtist = new JLabel("\0");
+		songInfoPanel.add(curSongLabel);
+		songInfoPanel.add(currentSongTitle);
+		songInfoPanel.add(currentSongArtist);
+		rightSide.add(songInfoPanel);
+
+		rightSide.add(new JSeparator());
+
+		progressBar = new JProgressBar();
+		progressBar.setIndeterminate(true);
+		progressBar.setVisible(false);
+		progressBarLabel = new JLabel();
+		rightSide.add(progressBarLabel);
+		rightSide.add(progressBar);
 
 		//left side of split pane will display song list, right side will provide controls/current info
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftSide, rightSide);
@@ -279,6 +301,12 @@ public class Gui extends JFrame implements Mp3Listener {
 		currentSong = song;
 		player.playPause();
 		updateVolume();
+		setSongInfoLabel(song);
+	}
+
+	private void setSongInfoLabel(DBSong song ) {
+		currentSongTitle.setText(song.getName());
+		currentSongArtist.setText(song.getArtist() + " - " + song.getAlbum());
 	}
 
 	private void ffPressed() {
@@ -339,13 +367,18 @@ public class Gui extends JFrame implements Mp3Listener {
 	public void addFiles(final File directory) {
 		Thread t = new Thread(new Runnable() {
 			public void run() {
-				// TODO Auto-generated method stub
+				progressBar.setVisible(true);
+				progressBarLabel.setText("Analyzing Songs...");
 				ArrayList<File> songs = handler.getMP3s(directory);
 				ArrayList<File> missing = handler.getIncomplete(songs);
+				progressBarLabel.setText("Adding Tagged Songs...");
 				addFilesToTable(handler.enterAndReturnIDs(songs));
+				progressBarLabel.setText("Getting Missing Info...");
 				handler.identifyAndUpdateSongs(missing);
+				progressBarLabel.setText("Adding Songs with Missing Info...");
 				addFilesToTable(handler.enterAndReturnIDs(missing));
-
+				progressBar.setVisible(false);
+				progressBarLabel.setText("");
 			}
 		});
 		t.start();
