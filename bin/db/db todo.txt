@@ -1,8 +1,0 @@
-db model:
--create predefined scripts
-	-insert/update/delete meta-data
--get requirements
-    -get by same meta value
-
-
-plugin interface:
