@@ -207,6 +207,28 @@ public class DBTest {
         return true;
     }
 
+    private static boolean shutdownTests(){
+        System.out.println("Destroying the database...");
+        if(dbBuilder.destroyDatabase()){
+            System.out.println("DB has been destroyed...");
+        } else {
+            reason = "Could not destroy the database";
+            failed = true;
+            return false;
+        }
+        
+        try {
+            dbConn.closeDBConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            reason = "Could not close the connector";
+            failed = true;
+            return false;
+        }
+        
+        return true;
+    }
+
     private static boolean insertTests(){
         System.out.println("Inserting song...");
         song = dbModel.insertSong("foobar", "sdf/", "dsf",
