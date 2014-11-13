@@ -118,11 +118,35 @@ public class FileHandler {
 			String artist = tagger.getArtist(song);
 			String title = tagger.getTitle(song);
 			String bpm = tagger.getBPM(song);
+			String album = tagger.getAlbum(song);
+			boolean badartist = true;
+			boolean badtitle = true;
+			boolean badbpm = true;
+			boolean badalbum = true;
 			if(title.equals("")){
 				title = song.getName();//If somehow this song has no title from echonest then set
 				//it to file name
+				badtitle = false;
 			}
-			dbmodel.insertSong(title, song.getAbsolutePath(), tagger.getAlbum(song), artist, 0, 0, Integer.parseInt(bpm));
+			if(artist.equals("")){
+				badartist = false;
+			}
+			if(bpm.equals("") || bpm.equals("-1")){
+				badbpm = false;
+			}
+			if(album.equals("")){
+				badalbum = false;
+			}
+			DBSong newSong = new DBSong(0, title, badtitle, 
+					song.getAbsolutePath(), true, 
+					album, badalbum, 
+					artist, badartist, 
+					0, true, 
+					0, true, 
+					Integer.parseInt(bpm), badbpm);
+			dbmodel.insertSong(newSong);
+			//dbmodel.insertSong(title, song.getAbsolutePath(), tagger.getAlbum(song), artist, 0, 0, Integer.parseInt(bpm));
+			
 		}
 	}
 	
@@ -139,11 +163,34 @@ public class FileHandler {
 			String artist = tagger.getArtist(song);
 			String title = tagger.getTitle(song);
 			String bpm = tagger.getBPM(song);
+			String album = tagger.getAlbum(song);
+			boolean badartist = true;
+			boolean badtitle = true;
+			boolean badbpm = true;
+			boolean badalbum = true;
 			if(title.equals("")){
 				title = song.getName();//If somehow this song has no title from echonest then set
 				//it to file name
+				badtitle = false;
 			}
-			DBSong ret = dbmodel.insertSong(title, song.getAbsolutePath(), tagger.getAlbum(song), artist, 0, 0, Integer.parseInt(bpm));
+			if(artist.equals("")){
+				badartist = false;
+			}
+			if(bpm.equals("") || bpm.equals("-1")){
+				badbpm = false;
+			}
+			if(album.equals("")){
+				badalbum = false;
+			}
+			DBSong newSong = new DBSong(0, title, badtitle, 
+					song.getAbsolutePath(), true, 
+					album, badalbum, 
+					artist, badartist, 
+					0, true, 
+					0, true, 
+					Integer.parseInt(bpm), badbpm);
+			DBSong ret = dbmodel.insertSong(newSong);
+			//DBSong ret = dbmodel.insertSong(title, song.getAbsolutePath(), tagger.getAlbum(song), artist, 0, 0, Integer.parseInt(bpm));
 			ids.add(ret);
 		}
 		return ids;
