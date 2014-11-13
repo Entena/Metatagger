@@ -209,8 +209,10 @@ public class DBTest {
 
     private static boolean insertTests(){
         System.out.println("Inserting song...");
-        song = dbModel.insertSong("foobar", "sdf/", "dsf",
-                                  "dfs", 1111, 10, 100);
+        DatabaseModel dbModel = new DatabaseModel(dbConn);
+        int insertCount = 0;
+        DBSong song = dbModel.insertSong("foobar", "sdf/", "dsf",
+                                         "dfs", 1111, 10, 100);
         if(song == null){
             reason = "The song was not inserted into the database";
             failed = true;
