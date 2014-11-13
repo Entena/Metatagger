@@ -27,7 +27,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
@@ -169,15 +168,14 @@ public class Gui extends JFrame implements Mp3Listener {
 
 		JPanel songInfoPanel = new JPanel();
 		songInfoPanel.setLayout(new BoxLayout(songInfoPanel, BoxLayout.PAGE_AXIS));
-		JLabel curSongLabel = new JLabel("Currently Playing:");
-		currentSongTitle = new JLabel("\0");
-		currentSongArtist = new JLabel("\0");
+		JLabel curSongLabel = new JLabel("Currently Playing:",JLabel.LEFT);
+		curSongLabel.setHorizontalAlignment(JLabel.LEFT);
+		currentSongTitle = new JLabel("test");
+		currentSongArtist = new JLabel("test");
 		songInfoPanel.add(curSongLabel);
 		songInfoPanel.add(currentSongTitle);
 		songInfoPanel.add(currentSongArtist);
 		rightSide.add(songInfoPanel);
-
-		rightSide.add(new JSeparator());
 
 		progressBar = new JProgressBar();
 		progressBar.setIndeterminate(true);
@@ -275,6 +273,13 @@ public class Gui extends JFrame implements Mp3Listener {
 		
 		currentPlugin = new RandomSongPlugin();
 		currentPlugin.initialize(dbmodel);
+		
+
+		//format song info display area
+		Dimension d = new Dimension(songInfoPanel.getWidth(), songInfoPanel.getHeight());
+		songInfoPanel.setMinimumSize(d);
+		songInfoPanel.setPreferredSize(d);
+		songInfoPanel.setMaximumSize(d);
 	}
 
 	/**
