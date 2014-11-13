@@ -1,10 +1,10 @@
 package gui;
 
+import gui.plugin.FinishedSongStatus;
 import gui.plugin.LearningPlugin;
 import gui.plugin.PluginLoader;
-<<<<<<< HEAD
+import gui.plugin.RandomSongPlugin;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -65,7 +64,6 @@ public class Gui extends JFrame implements Mp3Listener {
 	private JProgressBar progressBar;
 	private boolean allowSeeking;
 	private JLabel progressBarLabel;
-	private boolean allowSeeking;
 
 	ArrayList<LearningPlugin> loadedPlugins;
 	private LearningPlugin currentPlugin;
@@ -274,6 +272,9 @@ public class Gui extends JFrame implements Mp3Listener {
 		setVisible(true);
 		allowSeeking = true;
 		loadInitial();
+		
+		currentPlugin = new RandomSongPlugin();
+		currentPlugin.initialize(dbmodel);
 	}
 
 	/**
@@ -316,6 +317,7 @@ public class Gui extends JFrame implements Mp3Listener {
 
 		int nextId = (currentSong.getSongId() % songsModel.getRowCount()) + 1;
 		playSong(dbmodel.getSong(nextId));
+		playSong(getPluginSong(getStatus()));
 	}
 
 	private void rwdPressed() {
@@ -437,7 +439,9 @@ public class Gui extends JFrame implements Mp3Listener {
 	}
 
 	public void songFinished() {
-		ffPressed();
+		//notify algorithm
+		playSong(getPluginSong(getStatus()));
+		//ffPressed();
 	}
 
 	public void playStarted() {
@@ -446,5 +450,25 @@ public class Gui extends JFrame implements Mp3Listener {
 
 	public void paused() {
 		playButton.setText(">");
+	}
+	
+	public FinishedSongStatus getStatus() {
+		if (currentSong == null) {
+			return FinishedSongStatus.FIRST_SONG;
+		}
+		double totalTime = player.getTotalTime();
+		double curTime = player.getCurrentTime();
+		
+		if (curTime/totalTime > 0.85) {
+			return FinishedSongStatus.COMPLETED;
+		}
+		else {
+			return FinishedSongStatus.SKIPPED;
+		}
+	}
+	
+	public DBSong getPluginSong(FinishedSongStatus status) {
+		return currentPlugin.getNextSong(status);
+		
 	}
 }
