@@ -25,13 +25,27 @@ public class DatabaseHelper {
      */
     public static final String SONGS_TABLE = "Songs";
     public static final String SONG_ID_COLUMN = "SONG_ID";
+    
     public static final String NAME_COLUMN = "NAME";
+    public static final String NAME_FLAG_COLUMN = "NAME_FLAG";
+    
     public static final String FILEPATH_COLUMN = "FILEPATH";
+    public static final String FILEPATH_FLAG_COLUMN = "FILEPATH_FLAG";
+    
     public static final String ALBUM_COLUMN = "ALBUM";
+    public static final String ALBUM_FLAG_COLUMN = "ALBUM_FLAG";
+    
     public static final String ARTIST_COLUMN = "ARTIST";
+    public static final String ARTIST_FLAG_COLUMN = "ARTIST_FLAG";
+    
     public static final String LAST_PLAYED_COLUMN = "LAST_PLAYED";
+    public static final String LAST_PLAYED_FLAG_COLUMN = "LAST_PLAYED_FLAG";
+    
     public static final String PLAY_COUNT = "PLAY_COUNT";
+    public static final String PLAY_COUNT_FLAG = "PLAY_COUNT_FLAG";
+    
     public static final String BPM_COUNT = "BPM";
+    public static final String BPM_COUNT_FLAG = "BPM_FLAG";
     
     /*
      * MetaData table columns
@@ -97,5 +111,14 @@ public class DatabaseHelper {
             }
         }
         return sb.toString();
+    }
+    
+    /**
+     * Given a boolean value, returns the string "1" or "0".
+     * @param val
+     * @return
+     */
+    public static String booleanToString(boolean val){
+        return val ? "1" : "0";
     }
 }

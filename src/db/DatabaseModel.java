@@ -117,8 +117,10 @@ public class DatabaseModel {
                                            String album, String artist,
                                            int lastPlayed, int playCount,
                                            int bpm){
-        return insertSong(new DBSong( 0, name, filepath, album, artist,
-                                      lastPlayed, playCount, bpm));
+        return insertSong(new DBSong( 0, name, false, filepath, false,
+                                      album, false, artist, false, 
+                                      lastPlayed, false, playCount, false,
+                                      bpm, false));
     }
     
     /**
@@ -135,10 +137,14 @@ public class DatabaseModel {
             Statement stmt = dbConn.getDBConnection().createStatement();
             stmt.execute(completedSQL);
             stmt.execute("SELECT last_insert_rowid()");
-            newSong = new DBSong( stmt.getResultSet().getInt(1), song.getName(),
-                                  song.getFilepath(), song.getAlbum(),
-                                  song.getArtist(), song.getLastPlayed(),
-                                  song.getPlayCount(), song.getBPM());
+            newSong = new DBSong( stmt.getResultSet().getInt(1),
+                                  song.getName(), song.isNameValid(),
+                                  song.getFilepath(), song.isFilepathValid(),
+                                  song.getAlbum(), song.isAlbumValid(),
+                                  song.getArtist(), song.isArtistValid(),
+                                  song.getLastPlayed(), song.isLastPlayedValid(),
+                                  song.getPlayCount(), song.isPlayCountValid(),
+                                  song.getBPM(), song.isBPMValid());
             
             for(DBMetaData meta : song.getDBMetaData()){
                 String insertSongMetaSQL = DatabaseHelper.SQLBuilder(
@@ -247,7 +253,7 @@ public class DatabaseModel {
     public ArrayList<DBSong> getSongsById(ArrayList<Integer> ids){
         StringBuilder sb = new StringBuilder();
         for(Integer id : ids){
-            sb.append(ids).append(',');
+            sb.append(id).append(',');
         }
         sb.deleteCharAt(sb.lastIndexOf(","));
         
@@ -401,12 +407,19 @@ public class DatabaseModel {
         try {
             return new DBSong( result.getInt(DatabaseHelper.SONG_ID_COLUMN),
                                result.getString(DatabaseHelper.NAME_COLUMN),
+                               result.getBoolean(DatabaseHelper.NAME_FLAG_COLUMN),
                                result.getString(DatabaseHelper.FILEPATH_COLUMN),
+                               result.getBoolean(DatabaseHelper.FILEPATH_FLAG_COLUMN),
                                result.getString(DatabaseHelper.ALBUM_COLUMN),
+                               result.getBoolean(DatabaseHelper.ALBUM_FLAG_COLUMN),
                                result.getString(DatabaseHelper.ARTIST_COLUMN),
+                               result.getBoolean(DatabaseHelper.ARTIST_FLAG_COLUMN),
                                result.getInt(DatabaseHelper.LAST_PLAYED_COLUMN),
+                               result.getBoolean(DatabaseHelper.LAST_PLAYED_FLAG_COLUMN),
                                result.getInt(DatabaseHelper.PLAY_COUNT),
-                               result.getInt(DatabaseHelper.BPM_COUNT));
+                               result.getBoolean(DatabaseHelper.PLAY_COUNT_FLAG),
+                               result.getInt(DatabaseHelper.BPM_COUNT),
+                               result.getBoolean(DatabaseHelper.BPM_COUNT_FLAG));
         } catch (SQLException e) {
             System.err.println("Could not parse a song from the database.");
             e.printStackTrace();

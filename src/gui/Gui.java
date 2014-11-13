@@ -2,6 +2,7 @@ package gui;
 
 import gui.plugin.LearningPlugin;
 import gui.plugin.PluginLoader;
+<<<<<<< HEAD
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -64,6 +65,7 @@ public class Gui extends JFrame implements Mp3Listener {
 	private JProgressBar progressBar;
 	private boolean allowSeeking;
 	private JLabel progressBarLabel;
+	private boolean allowSeeking;
 
 	ArrayList<LearningPlugin> loadedPlugins;
 	private LearningPlugin currentPlugin;
