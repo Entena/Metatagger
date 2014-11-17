@@ -11,7 +11,7 @@ import java.util.jar.JarFile;
 public class PluginLoader {
     
     @SuppressWarnings("unchecked")
-    public ArrayList<LearningPlugin> loadPlugin(String filePath) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
+    public static ArrayList<LearningPlugin> loadPlugin(String filePath) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
         ArrayList<LearningPlugin> plugins = new ArrayList<LearningPlugin>();
         
         URLClassLoader loader = new URLClassLoader(new URL[] {new URL(filePath)});
@@ -29,6 +29,14 @@ public class PluginLoader {
         
         loader.close();
         jarFile.close();
+        
+        return plugins;
+    }
+    
+    public static ArrayList<LearningPlugin> loadDefaultPlugins(){
+        ArrayList<LearningPlugin> plugins = new ArrayList<LearningPlugin>();
+        
+        plugins.add(new RandomSongPlugin());
         
         return plugins;
     }

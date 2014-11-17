@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -58,14 +59,14 @@ public class Gui extends JFrame implements Mp3Listener {
 	private FileHandler handler;
 	private DBSong currentSong;
 	private DatabaseConnector dbconn;
-	private DatabaseModel dbmodel;
+	DatabaseModel dbmodel;
 	private JTable songsTable;
 	private JProgressBar progressBar;
 	private boolean allowSeeking;
 	private JLabel progressBarLabel;
 
 	ArrayList<LearningPlugin> loadedPlugins;
-	private LearningPlugin currentPlugin;
+	LearningPlugin currentPlugin;
 
 	public Gui() {
 		super("Metatagger");
@@ -240,12 +241,15 @@ public class Gui extends JFrame implements Mp3Listener {
                 jarChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 
                 if (jarChooser.showDialog(null, "Select Plugin") == JFileChooser.APPROVE_OPTION) {
-                    PluginLoader loader = new PluginLoader();
                     try {
-                        loadedPlugins.addAll(
-                                loader.loadPlugin(
+                        List<LearningPlugin> newPlugins = 
+                                PluginLoader.loadPlugin(
                                         jarChooser.getSelectedFile()
-                                                           .getAbsolutePath()));
+                                                           .getAbsolutePath());
+                        for(LearningPlugin plugin : newPlugins){
+                            loadedPlugins.add(plugin);
+                            plugin.initialize(dbmodel);
+                        }
                     } catch (InstantiationException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -271,7 +275,13 @@ public class Gui extends JFrame implements Mp3Listener {
 		allowSeeking = true;
 		loadInitial();
 		
-		currentPlugin = new RandomSongPlugin();
+		
+		List<LearningPlugin> defaultPlugins = PluginLoader.loadDefaultPlugins();
+		for(LearningPlugin plugin : defaultPlugins){
+		    plugin.initialize(dbmodel);
+		    loadedPlugins.add(plugin);
+		}
+		currentPlugin = loadedPlugins.get(0);
 		currentPlugin.initialize(dbmodel);
 		
 
