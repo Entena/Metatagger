@@ -47,7 +47,7 @@ public class LoadedPluginDialog extends JDialog  {
     }
     
     public LearningPlugin getSelected(){
-        return null;
+        return currentSelected;
     }
 
 }
