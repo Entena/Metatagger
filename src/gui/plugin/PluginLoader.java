@@ -36,6 +36,7 @@ public class PluginLoader {
     public static ArrayList<LearningPlugin> loadDefaultPlugins(){
         ArrayList<LearningPlugin> plugins = new ArrayList<LearningPlugin>();
         
+        // The first plugin added to this list is the default plugin used
         plugins.add(new RandomSongPlugin());
         
         return plugins;
