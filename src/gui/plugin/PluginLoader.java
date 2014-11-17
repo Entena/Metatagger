@@ -12,6 +12,7 @@ public class PluginLoader {
     
     @SuppressWarnings("unchecked")
     public static ArrayList<LearningPlugin> loadPlugin(String filePath) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException{
+
         ArrayList<LearningPlugin> plugins = new ArrayList<LearningPlugin>();
         
         URLClassLoader loader = new URLClassLoader(new URL[] {new URL(filePath)});

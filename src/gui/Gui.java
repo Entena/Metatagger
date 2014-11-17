@@ -275,7 +275,6 @@ public class Gui extends JFrame implements Mp3Listener {
 		allowSeeking = true;
 		loadInitial();
 		
-		
 		List<LearningPlugin> defaultPlugins = PluginLoader.loadDefaultPlugins();
 		for(LearningPlugin plugin : defaultPlugins){
 		    plugin.initialize(dbmodel);
