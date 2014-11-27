@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -33,11 +34,21 @@ public class DBStressTest {
         
         System.out.println("Starting DB Stess Tests...");
         results = new ArrayList<Result>();
+        long start = System.currentTimeMillis();
         runTests();
-        System.out.println("Fnished running DB Stess Tests...");
+        long end = System.currentTimeMillis();
+        long elapse = end - start;
+        System.out.println("\n\nFnished running DB Stess Tests...");
+        System.out.format("It took the tests %02d:%02d:%02d to run\n", 
+        		TimeUnit.MILLISECONDS.toHours(elapse),
+        	    TimeUnit.MILLISECONDS.toMinutes(elapse) % TimeUnit.HOURS.toMinutes(1),
+        	    TimeUnit.MILLISECONDS.toSeconds(elapse) % TimeUnit.MINUTES.toSeconds(1));
         System.out.println("Results:");
+        System.out.printf("%-64s%s\n", "Test Name", "Elapse Time");
+        System.out.println(String.format("%74s", "").replace(' ', '-'));
         for(Result result : results) {
-        	System.out.printf("%s\t%d\n", result.name, result.elapse);
+        	String name = result.name + String.format("%" + (64 - result.name.length()) + "s", "").replace(' ', '.');
+        	System.out.format("%s%-10d\n", name, result.elapse);
         }
         file.delete();
     }
@@ -205,7 +216,7 @@ public class DBStressTest {
         }
         long end = System.currentTimeMillis();
         results.add(new Result(testName + ": update all songs (s)", (end - start) / 1000));
-        results.add(new Result(testName + ": average update time", (end - start) / 100));
+        results.add(new Result(testName + ": average update time", (end - start) / setSize));
         
         shutdownTests();
     }
@@ -256,20 +267,25 @@ public class DBStressTest {
     }
     
     private static void insertSongs(int count) {
-    	for(int i = 0; i < count; i++) {
-	        DBSong song = dbModel.insertSong( "foobars" + count,
-	        								  "sdf/" + count, "dsf", "dfs",
-	        								  1111 + count, 20 + count,
-	        								  1000 + count);
-	        if(song == null){
-	            System.err.printf(
-	                 "There was an error inserting on the %dth song.\n", i + 1);
-	            System.exit(1);
-	        }
-        }
+    	int processors = Runtime.getRuntime().availableProcessors();
+    	Thread[] threads = new Thread[processors];
+		int size = count / 2;
+    	for(int i = 0; i < processors; i++) {
+    		threads[i] = new InsertThread(size, size * i);
+    		threads[i].start();
+    	}
+    	
+    	for(Thread t : threads) {
+    		try {
+				t.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
     }
     
-    public static class Result{
+    static class Result{
         public String name;
         public long elapse;
         
@@ -277,5 +293,34 @@ public class DBStressTest {
             this.name = name;
             this.elapse = elapse;
         }
+    }
+    
+    static class InsertThread extends Thread {
+    	
+    	public int count;
+    	public int baseVal;
+    	
+    	public InsertThread(int count, int baseVal) {
+    		this.count = count;
+    		this.baseVal = baseVal;
+    	}
+
+		@Override
+		public void run() {
+			for(int i = 0; i < count; i++) {
+		        DBSong song = dbModel.insertSong( "foobars" + count + baseVal,
+		        								  "sdf/" + count  + baseVal,
+		        								  "dsf", "dfs",
+		        								  1111 + count + baseVal,
+		        								  20 + count + baseVal,
+		        								  1000 + count + baseVal);
+		        if(song == null){
+		            System.err.printf(
+		                 "There was an error inserting on the %dth song.\n", i + 1);
+		            System.exit(1);
+		        }
+	        }
+		}
+    	
     }
 }
