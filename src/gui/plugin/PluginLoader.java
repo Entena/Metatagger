@@ -39,6 +39,7 @@ public class PluginLoader {
         
         // The first plugin added to this list is the default plugin used
         plugins.add(new RandomSongPlugin());
+        plugins.add(new SaltNPepperPlugin());
         
         return plugins;
     }
