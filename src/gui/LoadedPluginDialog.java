@@ -5,6 +5,7 @@ package gui;
 
 import gui.plugin.LearningPlugin;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
@@ -26,6 +28,8 @@ public class LoadedPluginDialog extends JDialog  {
     
     ArrayList<LearningPlugin> loadedPlugins;
     LearningPlugin currentSelected;
+    
+    JLabel currentLabel;
 
     /**
      * 
@@ -37,7 +41,11 @@ public class LoadedPluginDialog extends JDialog  {
         this.currentSelected = currentSelected;
         
         Container pane = this.getContentPane();
-        pane.setPreferredSize(new Dimension(128, 64));
+        pane.setPreferredSize(new Dimension(320, 180));
+        
+        currentLabel = new JLabel();
+        updateLabel();
+        pane.add(currentLabel, BorderLayout.PAGE_START);
         
         DefaultListModel<String> pluginNames = new DefaultListModel<String>();
         for(LearningPlugin plugin : loadedPlugins){
@@ -49,12 +57,18 @@ public class LoadedPluginDialog extends JDialog  {
         pluginList.addMouseListener(new Listener());
         
         
-        pane.add(pluginList);
+        pane.add(pluginList, BorderLayout.CENTER);
         pack();
     }
     
     public LearningPlugin getSelected(){
         return currentSelected;
+    }
+    
+    private void updateLabel(){
+        if(currentSelected == null) return;
+        
+        currentLabel.setText("Current Plugin: " + currentSelected.getName());
     }
     
     class Listener implements MouseListener {
@@ -96,6 +110,7 @@ public class LoadedPluginDialog extends JDialog  {
                 for(LearningPlugin plugin : loadedPlugins){
                     if(plugin.getName().equals(item)){
                         currentSelected = plugin;
+                        updateLabel();
                     }
                 }
             }
