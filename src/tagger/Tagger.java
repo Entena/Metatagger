@@ -131,8 +131,10 @@ public class Tagger {
 			String[] names = song.getNames(song);		
 			for(int i=0; i<names.length; i++){
 				System.out.println(names[i]);
-			}/*
-			names = meta.getNames(meta);
+			}
+			System.out.println(song);
+			System.out.println(meta);
+			/*names = meta.getNames(meta);
 			for(int i=0; i<names.length; i++){
 				System.out.println(names[i]);
 			}*/

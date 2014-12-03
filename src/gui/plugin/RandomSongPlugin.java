@@ -48,4 +48,10 @@ public class RandomSongPlugin implements LearningPlugin {
 		return dbModel.getSong(songIDs.get(index));
 	}
 
+	@Override
+	public void setPrevSong(DBSong song) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

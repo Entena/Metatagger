@@ -49,4 +49,11 @@ public interface LearningPlugin {
      * @return
      */
     public DBSong getNextSong(FinishedSongStatus status);
+    
+    /**
+     * This function should be used to update the previous song otherwise we won't have a workable
+     * song history. Plugins that don't use it won't care, so call it anyway.
+     * @param song
+     */
+    public void setPrevSong(DBSong song);
 }

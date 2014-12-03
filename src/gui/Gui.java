@@ -482,6 +482,9 @@ public class Gui extends JFrame implements Mp3Listener {
 	}
 	
 	public DBSong getPluginSong(FinishedSongStatus status) {
+		if(status != FinishedSongStatus.SKIPPED && status != FinishedSongStatus.FIRST_SONG){
+			currentPlugin.setPrevSong(currentSong);
+		}
 		return currentPlugin.getNextSong(status);
 		
 	}

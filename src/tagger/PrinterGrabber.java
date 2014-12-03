@@ -14,7 +14,7 @@ public class PrinterGrabber {
 	public PrinterGrabber(){
 		if(System.getProperty("os.name").contains("Windows")){
 			//TODO add in windows binary in repo
-			cmd = "cmds"+System.getProperty("file.separator")+"echoprint.exe";
+			cmd = "cmds"+System.getProperty("file.separator")+"codegen.exe";
 		} else {
 			if(System.getProperty("os.arch").equals("amd64")){
 				cmd = "cmds"+System.getProperty("file.separator")+"echoprint-codegen-linux-64";
@@ -36,6 +36,11 @@ public class PrinterGrabber {
 		try {
 			//System.out.println(cmd+" "+mp3.getAbsolutePath()+" 10 30");
 			ProcessBuilder pb = new ProcessBuilder(cmd, mp3.getAbsolutePath(), "10", "30");
+			//File workdir = new File((new java.io.File(".").getCanonicalPath())+System.getProperty("file.separator")+"cmds"+System.getProperty("file.separator"));
+			File workdir = new File(".");
+			pb.directory(workdir);
+			//Thread.sleep(60*1000);
+			System.out.println(pb.command() + " "+pb.directory());			
 			Process p = pb.start();//Runtime.getRuntime().exec(cmd+" "+mp3.getAbsolutePath()+" 10 30");
 			//Process p = pb.start();
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));	 
@@ -54,7 +59,8 @@ public class PrinterGrabber {
             	}
             	//System.out.println(s);
             }
-
+            System.out.println(output);
+            //Thread.sleep(60*1000);
             //output = output.replace("{\"metadata\":", "");
             //output = output.replaceFirst("}", ""); 
             return new JSONObject(output);            

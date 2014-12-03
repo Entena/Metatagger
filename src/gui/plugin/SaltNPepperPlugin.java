@@ -76,4 +76,10 @@ public class SaltNPepperPlugin implements LearningPlugin {
 	    }
 	}
 
+	@Override
+	public void setPrevSong(DBSong song) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
