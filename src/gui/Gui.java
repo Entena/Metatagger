@@ -218,6 +218,7 @@ public class Gui extends JFrame implements Mp3Listener {
             public void actionPerformed(ActionEvent arg0) {
                 LoadedPluginDialog dialog = new LoadedPluginDialog(
                                                   loadedPlugins, currentPlugin);
+                dialog.setModal(true);
                 dialog.setVisible(true);
                 
                 if(dialog.getSelected() != currentPlugin){
