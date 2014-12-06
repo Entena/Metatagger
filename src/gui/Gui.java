@@ -75,7 +75,7 @@ public class Gui extends JFrame implements Mp3Listener {
 		setUpDatabase();
 		handler = new FileHandler(dbconn);
 
-		chooser = new JFileChooser("C:\\Users\\Shayan\\Music\\iTunes\\iTunes Media\\Music\\");
+		chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				"MP3 Files", "mp3");
 		chooser.setFileFilter(filter);
