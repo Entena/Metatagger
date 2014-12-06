@@ -54,40 +54,50 @@ public class BetterRandom implements LearningPlugin {
 		lowerBound = prevSongPlayed.getBPM() - 15;
 		upperBound = prevSongPlayed.getBPM() + 15;
 		songIDs = dbModel.getSongFromBPMRange(lowerBound, upperBound);
-		int testID = -1;
-		double [][] songs;
+		double [][] songs; int songNum = 0;
 		if(songIDs.size() != 0){
 			songs = new double[songIDs.size()][2];
-			//int dist = Math.abs(prevSongPlayed.getBPM() - dbModel.getSong(songIDs.get(0)).getBPM());			
-			/*for(int i=1; i < songIDs.size(); i++){
-				if(Math.abs(prevSongPlayed.getBPM() - dbModel.getSong(songIDs.get(i)).getBPM()) < dist){
-					dist = Math.abs(prevSongPlayed.getBPM() - dbModel.getSong(songIDs.get(i)).getBPM());
-					testID = songIDs.get(i);
-				}
-			}*/
+			songNum = songIDs.size();
 			for(int i=0; i < songIDs.size(); i++){
 				int dist = Math.abs(prevSongPlayed.getBPM() - dbModel.getSong(songIDs.get(i)).getBPM());
 				songs[i][0] = songIDs.get(i);
 				songs[i][1] = ((double)dist/15) * 75;
-			}
-			
-			//return dbModel.getSong(songIDs.get(0));
+			}			
 		} else {
 			songs = null;
 		}
 		songIDs = dbModel.getSongFromMetaQuery("artist", prevSongPlayed.getArtist());
+		int max;
 		if(songIDs.size() != 0){
 			if(songs == null){//No songs in the BPM range so just return the first artist.
 				return dbModel.getSong(songIDs.get(0));
+			} else {
+				for(int j=0; j < songNum; j++){
+					if(songIDs.contains((int)songs[j][0])){
+						songs[j][1] += 25;
+					}
+				}
 			}
-			if(songIDs.contains(new Integer(testID))){
-				score += 25;
-			}
-			//return dbModel.getSong(songIDs.get(0));
 		}
-		return dbModel.getSong(songIDs.get(testID));
+		max = getMax(songs,songNum);
+		if((int)songs[max][0] == prevSongPlayed.getSongId()){
+			songs[max][1] = 0;
+			max = getMax(songs, songNum);
+		}
+		System.out.println("You want "+dbModel.getSong((int)songs[max][0]).getName()+" with a score of:"+max);
+		return dbModel.getSong((int)songs[max][0]);
 	}
-
+	
+	private int getMax(double[][] songs, int rows){
+		int biggest = 0;
+		for(int i=1; i < rows; i++){
+			if(songs[biggest][1] < songs[i][1]){
+				biggest = i;
+			}
+		}
+		return biggest;
+	}
+	
 	@Override
 	public void setPrevSong(DBSong song) {
 		prevSongPlayed = song;	
