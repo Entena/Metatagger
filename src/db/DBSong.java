@@ -328,4 +328,11 @@ public class DBSong {
         }
     }
 
+    public boolean equals(Object o){
+    	if(this.songId == ((DBSong)o).getSongId()){
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
 }

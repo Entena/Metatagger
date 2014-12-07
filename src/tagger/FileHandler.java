@@ -44,7 +44,7 @@ public class FileHandler {
 	        if (file.isDirectory()) {	      
 	            buildList(file.listFiles(), mp3s); // Calls same method again.
 	        } else {
-	            if(file.getName().contains(".mp3") == true){
+	            if(file.getName().endsWith(".mp3") == true){
 	            	mp3s.add(file);
 	            }
 	        }
@@ -177,6 +177,7 @@ public class FileHandler {
 				badartist = false;
 			}
 			if(bpm.equals("") || bpm.equals("-1")){
+				bpm = "-1";
 				badbpm = false;
 			}
 			if(album.equals("")){

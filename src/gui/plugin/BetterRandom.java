@@ -1,6 +1,7 @@
 package gui.plugin;
 
 import java.util.ArrayList;
+import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,6 +12,8 @@ import db.DatabaseModel;
 public class BetterRandom implements LearningPlugin {
 	private DatabaseModel dbModel;
 	private DBSong prevSongPlayed;
+	private DBSong lastrec;
+	private ArrayBlockingQueue<DBSong> history = new ArrayBlockingQueue<DBSong>(10);
 	
 	@Override
 	public String getName() {
@@ -62,18 +65,47 @@ public class BetterRandom implements LearningPlugin {
 				int dist = Math.abs(prevSongPlayed.getBPM() - dbModel.getSong(songIDs.get(i)).getBPM());
 				songs[i][0] = songIDs.get(i);
 				songs[i][1] = ((double)dist/15) * 75;
+				//System.out.println("Song "+dbModel.getSong((int)songs[i][0]).getName()+" scored "+songs[i][1]);
 			}			
 		} else {
 			songs = null;
 		}
-		songIDs = dbModel.getSongFromMetaQuery("artist", prevSongPlayed.getArtist());
+		DBSong song;
+		for(int j=0; j < songNum; j++){
+			song = dbModel.getSong((int)songs[j][0]);
+			if(song.getArtist().equals(prevSongPlayed.getArtist())){
+				songs[j][1] += 25;
+			}
+		}
+		int max = getMax(songs, songNum);
+		song = dbModel.getSong((int)songs[max][0]);
+		int count = 1;
+		System.out.println("Song Rec "+song.getName());
+		System.out.println("History "+history.toString());
+		while(history.contains(song)){
+			if(count > history.size()){
+				System.out.println("Too much collision returning "+dbModel.getSong(index).getName());
+				return dbModel.getSong(index);
+			}
+			System.out.println("History contains "+song.getName());
+			songs[max][1] = 0;
+			max = getMax(songs, songNum);
+			song = dbModel.getSong((int)songs[max][0]);
+			count++;
+		}
+		history.add(song);
+		System.out.println("Recommending "+song.getName()+" with a score of "+songs[max][0]);
+		return song;
+		/*//songIDs = dbModel.getSongFromMetaQuery("artist", prevSongPlayed.getArtist());
 		int max;
 		if(songIDs.size() != 0){
 			if(songs == null){//No songs in the BPM range so just return the first artist.
 				return dbModel.getSong(songIDs.get(0));
 			} else {
 				for(int j=0; j < songNum; j++){
-					if(songIDs.contains((int)songs[j][0])){
+					DBSong song = dbModel.getSong((int)songs[j][0]);
+					if(song.getArtist().equals(prevSongPlayed.getArtist())){
+					//if(songIDs.contains((int)songs[j][0])){
 						songs[j][1] += 25;
 					}
 				}
@@ -84,8 +116,20 @@ public class BetterRandom implements LearningPlugin {
 			songs[max][1] = 0;
 			max = getMax(songs, songNum);
 		}
-		System.out.println("You want "+dbModel.getSong((int)songs[max][0]).getName()+" with a score of:"+max);
-		return dbModel.getSong((int)songs[max][0]);
+		if(lastrec != null){
+			if((int)songs[max][0] == lastrec.getSongId()){
+				songs[max][1] = 0;
+				max = getMax(songs, songNum);
+				lastrec = dbModel.getSong((int)songs[max][0]);
+			} else {
+				lastrec = dbModel.getSong((int)songs[max][0]);
+			}
+		} else {
+			lastrec = dbModel.getSong((int)songs[max][0]);
+		}
+		System.out.println("Lastrec "+lastrec.getName());
+		System.out.println("You want "+dbModel.getSong((int)songs[max][0]).getName()+" with a score of:"+songs[max][1]);
+		return dbModel.getSong((int)songs[max][0]);*/
 	}
 	
 	private int getMax(double[][] songs, int rows){
@@ -100,6 +144,7 @@ public class BetterRandom implements LearningPlugin {
 	
 	@Override
 	public void setPrevSong(DBSong song) {
+		history.add(song);
 		prevSongPlayed = song;	
 	}
 
