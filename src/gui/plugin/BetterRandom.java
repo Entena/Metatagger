@@ -64,8 +64,10 @@ public class BetterRandom implements LearningPlugin {
 			for(int i=0; i < songIDs.size(); i++){
 				int dist = Math.abs(prevSongPlayed.getBPM() - dbModel.getSong(songIDs.get(i)).getBPM());
 				songs[i][0] = songIDs.get(i);
-				songs[i][1] = ((double)dist/15) * 75;
-				//System.out.println("Song "+dbModel.getSong((int)songs[i][0]).getName()+" scored "+songs[i][1]);
+				songs[i][1] = (Math.abs(dist - 14.99)/15) * 75;//((double)dist/15) * 75;
+				double rand = (Math.random()*15);
+				songs[i][1] = songs[i][1] + rand;
+				//System.out.println("Song "+dbModel.getSong((int)songs[i][0]).getName()+" "+songs[i][1]+" "+rand+" "+(songs[i][1]-rand));
 			}			
 		} else {
 			songs = null;
@@ -74,7 +76,7 @@ public class BetterRandom implements LearningPlugin {
 		for(int j=0; j < songNum; j++){
 			song = dbModel.getSong((int)songs[j][0]);
 			if(song.getArtist().equals(prevSongPlayed.getArtist())){
-				songs[j][1] += 25;
+				songs[j][1] += 10;
 			}
 		}
 		int max = getMax(songs, songNum);
@@ -91,8 +93,16 @@ public class BetterRandom implements LearningPlugin {
 			song = dbModel.getSong((int)songs[max][0]);
 			count++;
 		}
+		if(history.remainingCapacity() == 0){
+			try {
+				history.take();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		history.add(song);
-		System.out.println("Recommending "+song.getName()+" with a score of "+songs[max][0]);
+		System.out.println("Recommending "+song.getName()+" with a score of "+songs[max][1]);
 		return song;
 	}
 	
