@@ -33,6 +33,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -46,7 +48,7 @@ import db.SQLiteDatabaseConnector;
 import tagger.FileHandler;
 
 
-public class Gui extends JFrame implements Mp3Listener {
+public class Gui extends JFrame implements Mp3Listener, SongEditListener {
 	private static final String DBNAME = "metatag.db";
 	private DefaultTableModel songsModel;
 	private DefaultTableModel playlistModel;
@@ -64,6 +66,7 @@ public class Gui extends JFrame implements Mp3Listener {
 	private JProgressBar progressBar;
 	private boolean allowSeeking;
 	private JLabel progressBarLabel;
+	private SongEditPanel editPanel;
 
 	ArrayList<LearningPlugin> loadedPlugins;
 	LearningPlugin currentPlugin;
@@ -112,14 +115,25 @@ public class Gui extends JFrame implements Mp3Listener {
 			}
 		}); //plays a song when double clicked
 
+		songsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				int row = songsTable.getSelectedRow();
+				if (row > -1) {
+					DBSong s = dbmodel.getSong(Integer.parseInt(songsModel.getValueAt(row, 0).toString()));
+					editPanel.setSong(s);
+				}
+				else {
+					editPanel.setSong(null);
+				}
+			}
+		});
+
 		JScrollPane songList = new JScrollPane(songsTable);//new JTable(songsModel));
 
-		JScrollPane playlist = new JScrollPane(new JTable(playlistModel));
-
-
+		editPanel = new SongEditPanel(this);
 
 		//top will display list of songs, bottom will be current playlist
-		JSplitPane leftSide = new JSplitPane(JSplitPane.VERTICAL_SPLIT, songList, playlist);
+		JSplitPane leftSide = new JSplitPane(JSplitPane.VERTICAL_SPLIT, songList, editPanel);
 
 		leftSide.setDividerLocation(400);
 
@@ -171,8 +185,8 @@ public class Gui extends JFrame implements Mp3Listener {
 		songInfoPanel.setLayout(new BoxLayout(songInfoPanel, BoxLayout.PAGE_AXIS));
 		JLabel curSongLabel = new JLabel("Currently Playing:",JLabel.LEFT);
 		curSongLabel.setHorizontalAlignment(JLabel.LEFT);
-		currentSongTitle = new JLabel("test");
-		currentSongArtist = new JLabel("test");
+		currentSongTitle = new JLabel("");
+		currentSongArtist = new JLabel("");
 		songInfoPanel.add(curSongLabel);
 		songInfoPanel.add(currentSongTitle);
 		songInfoPanel.add(currentSongArtist);
@@ -205,68 +219,68 @@ public class Gui extends JFrame implements Mp3Listener {
 			}
 		});
 		menu.add(menuItem);
-		
+
 		//creatubg the pluging menu
 		JMenu pluginMenu = new JMenu("Plugins");
 		menuBar.add(pluginMenu);
-		
+
 		JMenuItem loadedPluginsMenu = new JMenuItem("Loaded Plugins");
 		loadedPlugins = new ArrayList<LearningPlugin>();
 		loadedPluginsMenu.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                LoadedPluginDialog dialog = new LoadedPluginDialog(
-                                                  loadedPlugins, currentPlugin);
-                dialog.setModal(true);
-                dialog.setVisible(true);
-                
-                if(dialog.getSelected() != currentPlugin){
-                    currentPlugin = dialog.getSelected();
-                }
-            }
-        });
-		
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				LoadedPluginDialog dialog = new LoadedPluginDialog(
+						loadedPlugins, currentPlugin);
+				dialog.setModal(true);
+				dialog.setVisible(true);
+
+				if(dialog.getSelected() != currentPlugin){
+					currentPlugin = dialog.getSelected();
+				}
+			}
+		});
+
 		pluginMenu.add(loadedPluginsMenu);
-		
+
 		JMenuItem loadPlugins = new JMenuItem("Load Plugins");
 		loadPlugins.addActionListener(new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                JFileChooser jarChooser = new JFileChooser(".");
-                FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                                                 "Jar Plugins", "jar");
-                jarChooser.setFileFilter(filter);
 
-                jarChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                
-                if (jarChooser.showDialog(null, "Select Plugin") == JFileChooser.APPROVE_OPTION) {
-                    try {
-                        List<LearningPlugin> newPlugins = 
-                                PluginLoader.loadPlugin(
-                                        jarChooser.getSelectedFile()
-                                                           .getAbsolutePath());
-                        for(LearningPlugin plugin : newPlugins){
-                            loadedPlugins.add(plugin);
-                            plugin.initialize(dbmodel);
-                        }
-                    } catch (InstantiationException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser jarChooser = new JFileChooser(".");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(
+						"Jar Plugins", "jar");
+				jarChooser.setFileFilter(filter);
+
+				jarChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+				if (jarChooser.showDialog(null, "Select Plugin") == JFileChooser.APPROVE_OPTION) {
+					try {
+						List<LearningPlugin> newPlugins = 
+								PluginLoader.loadPlugin(
+										jarChooser.getSelectedFile()
+										.getAbsolutePath());
+						for(LearningPlugin plugin : newPlugins){
+							loadedPlugins.add(plugin);
+							plugin.initialize(dbmodel);
+						}
+					} catch (InstantiationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		});
 		pluginMenu.add(loadPlugins);
 
 		setJMenuBar(menuBar);
@@ -275,15 +289,15 @@ public class Gui extends JFrame implements Mp3Listener {
 		setVisible(true);
 		allowSeeking = true;
 		loadInitial();
-		
+
 		List<LearningPlugin> defaultPlugins = PluginLoader.loadDefaultPlugins();
 		for(LearningPlugin plugin : defaultPlugins){
-		    plugin.initialize(dbmodel);
-		    loadedPlugins.add(plugin);
+			plugin.initialize(dbmodel);
+			loadedPlugins.add(plugin);
 		}
 		currentPlugin = loadedPlugins.get(0);
 		currentPlugin.initialize(dbmodel);
-		
+
 
 		//format song info display area
 		Dimension d = new Dimension(songInfoPanel.getWidth(), songInfoPanel.getHeight());
@@ -466,14 +480,14 @@ public class Gui extends JFrame implements Mp3Listener {
 	public void paused() {
 		playButton.setText(">");
 	}
-	
+
 	public FinishedSongStatus getStatus() {
 		if (currentSong == null) {
 			return FinishedSongStatus.FIRST_SONG;
 		}
 		double totalTime = player.getTotalTime();
 		double curTime = player.getCurrentTime();
-		
+
 		if (curTime/totalTime > 0.85) {
 			return FinishedSongStatus.COMPLETED;
 		}
@@ -481,12 +495,32 @@ public class Gui extends JFrame implements Mp3Listener {
 			return FinishedSongStatus.SKIPPED;
 		}
 	}
-	
+
 	public DBSong getPluginSong(FinishedSongStatus status) {
 		if(status != FinishedSongStatus.SKIPPED && status != FinishedSongStatus.FIRST_SONG){
 			currentPlugin.setPrevSong(currentSong);
 		}
 		return currentPlugin.getNextSong(status);
-		
+
+	}
+
+	@Override
+	public void savePressed(DBSong song) {
+		dbmodel.updateSong(song);
+		int r = songsTable.getSelectedRow();
+		Object[] row = buildRow(song);
+		for (int i=0; i<row.length; i++)
+			songsModel.setValueAt(row[i], r, i);
+	}
+
+	@Override
+	public void deletePressed(DBSong song) {
+		dbmodel.deleteSong(song.getSongId());
+		int r = songsTable.getSelectedRow();
+		songsModel.removeRow(r);
+		if (r == songsTable.getRowCount())
+			r = songsTable.getRowCount() - 1;
+		if (r > -1)
+			songsTable.getSelectionModel().setSelectionInterval(r, r);
 	}
 }
